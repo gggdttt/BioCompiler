@@ -1,11 +1,11 @@
-﻿namespace MicrofluidSimulator.SimulatorCode
+﻿namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
     public class Outputs
     {
         //string name;
         //int ID, outputID = -1, positionX, positionY;
 
-        
+
         public Outputs(string name, int ID, int outputID, int positionX, int positionY)
         {
             this.name = name;

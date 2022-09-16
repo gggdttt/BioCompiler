@@ -1,6 +1,5 @@
-﻿using MicrofluidSimulator.SimulatorCode.DataTypes;
-using System.Collections;
-namespace MicrofluidSimulator.SimulatorCode
+﻿using System.Collections;
+namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
     public class Electrode
     {
@@ -8,7 +7,7 @@ namespace MicrofluidSimulator.SimulatorCode
         //int ID, electrodeID, driverID, shape, positionX, positionY, sizeX, sizeY, status;
         //int[,] corners;
 
-        
+
 
         //ArrayList subscriptions;
         //ArrayList neighbours;
@@ -28,8 +27,8 @@ namespace MicrofluidSimulator.SimulatorCode
             this.corners = corners;
 
             // additional additions
-            this.subscriptions = new ArrayList();
-            this.neighbours = new ArrayList();
+            subscriptions = new ArrayList();
+            neighbours = new ArrayList();
         }
 
         public string name { get; set; }
@@ -46,6 +45,6 @@ namespace MicrofluidSimulator.SimulatorCode
         public ArrayList subscriptions { get; set; }
         public ArrayList neighbours { get; set; }
 
-       
+
     }
 }

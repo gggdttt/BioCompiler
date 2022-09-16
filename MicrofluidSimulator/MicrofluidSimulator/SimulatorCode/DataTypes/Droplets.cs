@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-namespace MicrofluidSimulator.SimulatorCode
+
+namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
     public class Droplets
     {
-        
+
 
 
         public Droplets(string name, int ID, string substance_name, int positionX, int positionY, int sizeX, int sizeY, string color, float temperature, float volume, int electrodeID, int group, decimal accumulatingBubbleEscapeVolume)
@@ -20,11 +21,11 @@ namespace MicrofluidSimulator.SimulatorCode
             this.volume = volume;
             this.group = group;
             this.electrodeID = electrodeID;
-            this.subscriptions = new ArrayList();
+            subscriptions = new ArrayList();
             this.accumulatingBubbleEscapeVolume = accumulatingBubbleEscapeVolume;
             nextModel = 0;
             beginOfTimeSensitiveModels = 3;
-            modelOrder = new string[] {"split", "merge", "split", "color", "temperature", "makeBubble"};
+            modelOrder = new string[] { "split", "merge", "split", "color", "temperature", "makeBubble" };
         }
 
         public Droplets()
@@ -52,7 +53,7 @@ namespace MicrofluidSimulator.SimulatorCode
 
         public override string ToString()
         {
-            String concat = "Name: " + name + "\nID: " + ID.ToString() + "\nPositionX: " + positionX.ToString() + "\nPositionY: "
+            string concat = "Name: " + name + "\nID: " + ID.ToString() + "\nPositionX: " + positionX.ToString() + "\nPositionY: "
                 + positionY.ToString() + "\nSizeX: " + sizeX.ToString() + "\nSizeY: " + sizeY.ToString();
             return concat;
         }

@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-namespace MicrofluidSimulator.SimulatorCode
+
+namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
     public class Bubbles
     {
-        
+
         // bubbles not currently in use
         public Bubbles(string name, int ID, int positionX, int positionY, int sizeX, int sizeY)
         {
@@ -13,10 +14,10 @@ namespace MicrofluidSimulator.SimulatorCode
             this.positionY = positionY;
             this.sizeX = sizeX;
             this.sizeY = sizeY;
-            
-            this.toRemove = false;
 
-            this.subscriptions = new ArrayList();
+            toRemove = false;
+
+            subscriptions = new ArrayList();
 
             nextModel = 0;
             modelOrder = new string[] { "move", "merge", "move" };
@@ -25,7 +26,7 @@ namespace MicrofluidSimulator.SimulatorCode
         public Bubbles()
         {
         }
-        
+
         public string name { get; set; }
         public int ID { get; set; }
         public int positionX { get; set; }

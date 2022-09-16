@@ -1,5 +1,6 @@
 ﻿using System.Collections;
-namespace MicrofluidSimulator.SimulatorCode
+
+namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
     public class GroupDroplets
     {
@@ -20,7 +21,7 @@ namespace MicrofluidSimulator.SimulatorCode
             this.color = color;
             this.temperature = temperature;
             this.volume = volume;
-            this.droplets = new List<int>();
+            droplets = new List<int>();
         }
 
         public GroupDroplets()

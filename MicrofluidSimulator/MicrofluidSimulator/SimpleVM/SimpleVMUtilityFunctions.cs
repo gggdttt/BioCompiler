@@ -1,5 +1,4 @@
-﻿using MicrofluidSimulator.SimulatorCode;
-using MicrofluidSimulator.SimulatorCode.DataTypes;
+﻿using MicrofluidSimulator.SimulatorCode.DataTypes;
 using MicrofluidSimulator.SimulatorCode.Models;
 
 namespace MicrofluidSimulator.SimpleVM

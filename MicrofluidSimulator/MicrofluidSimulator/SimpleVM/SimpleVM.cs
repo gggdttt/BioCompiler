@@ -6,7 +6,6 @@ using System.Drawing;
 using MicrofluidSimulator.SimulatorCode.Models;
 using MicrofluidSimulator.SimulatorCode.DataTypes;
 using MicrofluidSimulator.SimulatorCode.Simulator;
-using MicrofluidSimulator.SimulatorCode;
 
 namespace MicrofluidSimulator.SimpleVM
 {

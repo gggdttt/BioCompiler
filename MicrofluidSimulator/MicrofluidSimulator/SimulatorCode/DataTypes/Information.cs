@@ -1,5 +1,4 @@
-﻿
-namespace MicrofluidSimulator.SimulatorCode
+﻿namespace MicrofluidSimulator.SimulatorCode.DataTypes
 {
 
     public class Information
@@ -7,7 +6,7 @@ namespace MicrofluidSimulator.SimulatorCode
         //string platform_name, platform_type;
         //int sizeX, sizeY, platform_ID;
 
-        
+
 
         public Information(string platform_name, string platform_type, int platform_ID, int sizeX, int sizeY)
         {
@@ -35,5 +34,5 @@ namespace MicrofluidSimulator.SimulatorCode
     }
 }
 
-    
+
 
