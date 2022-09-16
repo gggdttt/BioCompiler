@@ -1,0 +1,389 @@
+﻿@page "/SimulatorPage"
+@using MicrofluidSimulator.Components
+@using MicrofluidSimulator.SimulatorCode.DataTypes
+@using Microsoft.JSInterop
+@using SimulatorCode
+@using System.Text.Json.Serialization
+@using MicrofluidSimulator.SimulatorCode.Simulator
+@inject IJSInProcessRuntime JSInProcessRuntime
+@inject IJSUnmarshalledRuntime JSUnmarshalledRuntime
+@inject HttpClient Http
+@using MicrofluidSimulator.SimulatorCode.View
+@using System.Diagnostics
+@using System.Text.Json
+@using System.Text
+@using System.Reflection
+
+@using System.Net
+
+
+@if(ModalOpen){
+    <DownloadModal  @ref=downloadModal Title="Information editor" Text = "INSERT" OnClose="@CloseDownloadModal" OnSubmit="@SubmitDownloadModal"/>
+}
+
+
+<div id="simulatorGUI">
+    <div id="simulatorContainer">
+
+        <div id="sketchPanel">
+            <div id="simulatorView">
+                <div id="simulatorHeader">
+                    <span>BOARD NAME</span>
+                    <div><span>Simulation Time: </span><span id="simulatorTime"></span></div>
+                </div>
+                <div id='container'></div>
+            </div>
+        </div>
+        
+        <div id="controlPanel">
+            <div id="button_div">
+                <div>
+                    <button id="nextStep" class="btn btn-primary" @onclick="NextStep">Next Step</button>
+                    <button class="btn btn-primary" @onclick="Play">@PlayButtonText</button>
+                    <button class="btn btn-primary" @onclick="Restart">Restart</button>
+                    <button id="" class="btn btn-primary" @onclick="DownloadDataButton">Download</button>
+                </div>
+                <div>
+                    <span>TimeStep amount:</span>
+                    <RadzenNumeric @bind-Value="timeStepAmount" TValue="decimal" Step="0.1" Placeholder="Enter or clear value" Change="onTimeStepChange"></RadzenNumeric>
+                </div>
+            </div>
+            <div id="slider_div">
+                <RadzenSlider id="time_slider" @bind-Value=@sliderValue TValue="int" Min="0" Max=@GlobalVariables.maxSliderValue></RadzenSlider>
+                <button class="btn btn-primary" @onclick="GotoSliderTime">Goto Time: @sliderValue</button>
+            </div>
+        </div>
+        
+
+        <div id="informationPanelContainer">
+            <div id="informationPanel">
+                <div id="informationTitle">
+                    <span>Information Panel</span>
+                </div>
+
+                <div id="information">
+                    <button id="edit_button" class="btn btn-primary" style="visibility: hidden">Edit</button>
+                    <div id="saveclose_button_div"><button id="save_button" class="btn btn-primary">Save</button><button id="cancel_button" class="btn btn-primary">Cancel</button></div>
+                    <div id="informationElements"></div>
+                </div>
+            </div>
+
+            <div id="selectionPanel">
+                <span>Selection Panel</span>
+                <form name="layer">
+
+                </form>
+            </div>
+        </div>
+
+
+        
+    </div>
+</div>
+
+<a id="downloadAnchorElem" style="display:none"></a>
+
+
+@code {
+
+
+    // Download Modal Code START
+    DownloadModal downloadModal;
+    public bool ModalOpen { get; set; }
+
+    /// <summary>
+    /// Used to close the download modal
+    /// </summary>
+    /// <param name="accepted"></param>
+    /// <returns></returns>
+    private async Task CloseDownloadModal(bool accepted)
+    {
+        ModalOpen = false;
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Used to open the download modal
+    /// </summary>
+    private async void OpenDownloadModal()
+    {
+        ModalOpen = true;
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Used to submit the download modal
+    /// </summary>
+    /// <param name="accepted"></param>
+    /// <returns></returns>
+    private async Task SubmitDownloadModal(bool accepted)
+    {
+        ModalOpen = false;
+        DownloadData(downloadModal.Time, downloadModal.TimeStep);
+        StateHasChanged();
+    }
+
+    /// <summary>
+    /// Download button handler
+    /// </summary>
+    private void DownloadDataButton()
+    {
+        OpenDownloadModal();
+    }
+
+    /// <summary>
+    /// Download simulation data
+    /// </summary>
+    [JSInvokable]
+    public static void DownloadData(decimal endTime, decimal timeStep)
+    {
+        // Get the current time
+        decimal timeBeforeDownload = simulator.container.currentTime;
+
+        if(timeStep <= 0 && timeStep != -1)
+        {
+            timeStep = 0.1m;
+        }
+
+        // Restart simulation
+        Restart();
+
+        // Run the simulation and send the simulation data
+        while(simulator.container.currentTime <= endTime)
+        {
+            string jsonStringForDownload = Utf8Json.JsonSerializer.ToJsonString(simulator.container);
+
+            guibroker.send_download_data(jsonStringForDownload);
+
+            nextStepTime(timeStep);
+        }
+
+        // Flag data ready for download
+        guibroker.download_data();
+
+        // Go back to previous time
+        Restart();
+        gotoSimulatorTimeStep(timeBeforeDownload);
+    }
+
+    // Download Modal Code END
+
+
+
+
+    int sliderValue = 0;
+    static decimal timeStepAmount = -1;
+    static float actualTimeStepAmount = 0;
+
+    /// <summary>
+    /// Called when the time step input is altered, 
+    /// forced the value to be -1 when less than or equal to 0
+    /// </summary>
+    public void onTimeStepChange()
+    {
+        if(timeStepAmount <= 0)
+        {
+            timeStepAmount = -1;
+        }
+    }
+
+
+    // Get the GUIBroker object reference
+    static GUIBroker guibroker = new GUIBroker();
+
+    /// <summary>
+    /// Goes to the next time step using gotoTime
+    /// </summary>
+    private void NextStep() {
+        gotoTime(timeStepAmount);
+    }
+
+    public static string PlayButtonText { get; set; } = "Play";
+    /// <summary>
+    /// Play button handler
+    /// </summary>
+    public void Play() {
+        PlayButtonText = PlayButtonText.Equals("Play") ? "Pause" : "Play";
+        InvokeAsync(() => StateHasChanged());
+        guibroker.change_play_status();
+        guibroker.start_simulator_time();
+    }
+
+    /// <summary>
+    /// Invokable from JavaScript, used to go to the next simulator action
+    /// </summary>
+    [JSInvokable]
+    public static void JSSimulatorNextStep() {
+        guibroker.start_update_timer();
+        simulator.simulatorStep(-1);
+        simpleVM.doApiCall();
+        if(PlayButtonText == "Play") { guibroker.animate_once(); }
+        guibroker.update_board(simulator.container);
+    }
+
+    /// <summary>
+    /// Invokable from JavaScript, used to go delta time forward in the simulation
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    [JSInvokable]
+    public static void nextStepTime(decimal deltaTime)
+    {
+        decimal tempTimeStep = timeStepAmount;
+        timeStepAmount = deltaTime;
+        gotoTime(timeStepAmount);
+        timeStepAmount = tempTimeStep;
+    }
+
+    /// <summary>
+    /// Invokable from JavaScript, used to go to a specific time
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    [JSInvokable]
+    public static void gotoSimulatorTimeStep(decimal deltaTime)
+    {
+        simulator.restartSimulator();
+        simulator.simulatorStep(deltaTime);
+        guibroker.update_board(simulator.container);
+    }
+
+    /// <summary>
+    /// Used to go to a specific time point in the simulation
+    /// </summary>
+    /// <param name="timeStepAmount"></param>
+    public static void gotoTime(decimal timeStepAmount)
+    {
+        decimal startSimulatorTime = simulator.container.currentTime;
+
+        while(simulator.container.currentTime < timeStepAmount + startSimulatorTime)
+        {
+
+            decimal simulatorTimeStep = 0;
+            if(simulator.actionQueue.Count != 0) {
+                simulatorTimeStep = simulator.actionQueue.Peek().time;
+            }
+
+
+            if(((startSimulatorTime + timeStepAmount) - simulator.container.currentTime) < (simulatorTimeStep - simulator.container.currentTime))
+            {
+                simulator.simulatorStep((startSimulatorTime + timeStepAmount) - simulator.container.currentTime);
+                simpleVM.doApiCall();
+            } else
+            {
+                simulator.simulatorStep(-1);
+                simpleVM.doApiCall();
+            }
+
+        }
+
+        if(timeStepAmount <= 0)
+        {
+            simulator.simulatorStep(-1);
+            simpleVM.doApiCall();
+        }
+
+        guibroker.update_board(simulator.container);
+    }
+
+    /// <summary>
+    /// Used to go to the time on the slider
+    /// </summary>
+    public void GotoSliderTime()
+    {
+        Restart();
+
+        gotoTime((decimal)sliderValue);
+
+        guibroker.update_board(simulator.container);
+        simulator.simulatorStep(-2);
+        guibroker.update_board(simulator.container);
+    }
+
+    /// <summary>
+    /// Restarts the simulation
+    /// </summary>
+    public static void Restart()
+    {
+        simulator.restartSimulator();
+        guibroker.update_board(simulator.container);
+        guibroker.restart_board();
+    }
+
+    /// <summary>
+    /// The function updateSimulatorContainer is used to update the simulator elements,
+    /// based on edited values from the GUI.
+    /// </summary>
+    /// <param name="Type"></param>
+    /// <param name="JSONString"></param>
+    [JSInvokable]
+    public static void updateSimulatorContainer(string Type, string JSONString)
+    {
+        guibroker.updateSimulatorContainer(Type, JSONString, simulator);
+    }
+
+
+
+
+    /// <summary>
+    /// The following is used to initialize every component in the simulation framework
+    /// </summary>
+    /// 
+    private Container? container;
+    private static Simulator? simulator;
+    private static MicrofluidSimulator.SimpleVM.SimpleVM? simpleVM;
+    private MicrofluidSimulator.SimulatorCode.DataTypes.ElectrodesWithNeighbours[]? electrodesWithNeighbours;
+    /// <summary>
+    /// When choosing what configuration to run, you can set the integer "chosenConfiguration" in the 
+    /// function "OnAfterRender" to one of the following indexes:
+    /// 0) platform640v2 with the SimplePaths given by Luca
+    /// 1) platform640vCenterPath is a single droplet moving across the board
+    /// 2) platform640vCenterPathForVideo is similar to center path, but the droplet is further up on the board
+    /// 3) platform640vColorSorting uses the sensor and the virtual machine to sort droplets of different colours
+    /// 4) platform640vSplitMerge is a test case where two droplets are merged and split multiple times
+    /// 5) platform640vThreePaths is a test case where three droplets are moved around on the board
+    /// </summary>
+    private string[,] configurationArray = new string[6, 2]{{"sample-data/configurations-paths-original/platform640v2.json", "sample-data/configurations-paths-original/SimplePaths.txt"}
+                                                           , {"sample-data/configurations-paths-from-luca/platform640vCenterPath.json", "sample-data/configurations-paths-from-luca/center_path.txt"}
+                                                           , {"sample-data/configurations-paths-for-videos/platform640vCenterPathForVideo.json", "sample-data/configurations-paths-for-videos/center_path_for_video.txt"}
+                                                           , {"sample-data/configurations-paths-for-videos/platform640vColorSorting.json", null}
+                                                           , {"sample-data/configurations-paths-from-luca/platform640vSplitMerge.json","sample-data/configurations-paths-from-luca/split_merge.txt" }
+                                                           , {"sample-data/configurations-paths-from-luca/platform640vThreePaths.json", "sample-data/configurations-paths-from-luca/three_paths.txt"}};
+
+    /// <summary>
+    /// OnAfterRender is triggered when a render change is happening, we initialize on first render.
+    /// </summary>
+    /// <param name="firstRender"></param>
+    protected override async void OnAfterRender(bool firstRender) {
+        if (firstRender) {
+            // choose the index of the configuration you would like to run
+            int chosenConfiguration = 1;
+
+            // Get the language of the current browser
+            var browserLanguage = JSInProcessRuntime.Invoke<String>("get_browser_language");
+
+            // Initializes the program chosen
+            container = await Http.GetFromJsonAsync<Container>(configurationArray[chosenConfiguration, 0]);
+            electrodesWithNeighbours = await Http.GetFromJsonAsync<MicrofluidSimulator.SimulatorCode.DataTypes.ElectrodesWithNeighbours[]>("sample-data/neighbours.json");
+            string actionQueueInstructions;
+            if(configurationArray[chosenConfiguration,1] != null)
+            {
+                actionQueueInstructions = await Http.GetStringAsync(configurationArray[chosenConfiguration,1]);
+            }
+            else
+            {
+                actionQueueInstructions = null;
+            }
+
+
+            simulator = new Simulator(null, container, electrodesWithNeighbours, actionQueueInstructions, browserLanguage);
+            simpleVM = new MicrofluidSimulator.SimpleVM.SimpleVM(simulator);
+
+            // Setup the GUI Broker on the C# side
+            guibroker.set_jsprocess(JSInProcessRuntime);
+            guibroker.set_unmarshall(JSUnmarshalledRuntime);
+            guibroker.setP5();
+            guibroker.start_update_timer();
+            guibroker.update_board(simulator.container);
+            guibroker.initialize_board(container.information);
+        }
+    }
+}
