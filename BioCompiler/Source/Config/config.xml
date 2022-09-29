@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+	<Runtime>
+		<ip-address>192.168.0.1</ip-address>
+		<platform> true </platform>
+	</Runtime>
+	
+	<Compiler>
+	</Compiler>
+</System>

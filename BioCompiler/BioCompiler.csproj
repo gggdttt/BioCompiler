@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Init\" />
+    <Folder Include="Compiler\" />
+    <Folder Include="ExecutionEngine\" />
+    <Folder Include="Source\InputProgram\" />
+  </ItemGroup>
+
 </Project>
