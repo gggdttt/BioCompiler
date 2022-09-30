@@ -20,6 +20,9 @@ Once this is completed, we will add computer vision feedback to our solution.
 >
 > Output: xml file ??? c# file????  (Just generating xml file which including droplet information and destination)
 
+> * We need to consider the order of execution
+> * 
+
 input demo:
 
 ``` 
@@ -27,12 +30,11 @@ droplet1 = Droplet(19,29,2,2);
 droplet2 = Droplet(1,2,2,2);
 move(droplet1,17,18);
 move(droplet2,11,9);
+droplet3 = 
+move(droplet3)
 merge(droplet1, droplet2, 1, 2);
+
 ```
-
-
-
-
 
 output demo:
 
@@ -84,27 +86,67 @@ output demo:
 
 ### Syntax 
 
+:question: Should we assume the chip is blank before every script?
+
 * Define a droplet
 
   ``` 
-  {name} = Droplet(x,y,width, length);
+  Droplet(name,x,y,width, length);
   ```
 
+* `move` operation
+
+  ``` 
+  move(droplet_name,x,y);
+  ```
+
+* `merge` operation
+
+  ```
+  merge(new_droplet_name,droplet_name1,droplet_name2,x,y);
   
+  merge(dp3, dp2,dp1, x, y )
+  ```
 
-* 
+* `split` operation
 
+  ```
+  split_by_size(droplet_name,size_of_the_left_droplet,name_left_droplet,name_right_droplet);
+  
+  split_average(droplet_name,name_left_droplet,name_right_droplet);
+  ```
 
+* `dispose` operation
+
+  ```
+  dispose(droplet_name)
+  ```
+
+* `mix` operation
+
+  ```
+  mix(droplet_name)// change the parameters
+  ```
 
 ### Exception/Errors
 
+> The exception is not throwed by compiler, it is throwed by executor
 
-
-
+* Error001: droplet out of bound
+* Error002: can not split droplet for there is not enough space
+* Error003: can not mix droplet for there is not enough space (maybe merged with error02)
 
 ### Rules check
+
+> By compiler
+
+* Invalid 1: droplet is not defined before
+* Invalid 2: position is out of bound *(should this be handled as exception?)*
 
 
 
 ### Route-finding algorithm
 
+> I will use a* firstly.
+>
+> This step will be done in executor.
