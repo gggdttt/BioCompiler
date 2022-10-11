@@ -21,7 +21,11 @@ Once this is completed, we will add computer vision feedback to our solution.
 > Output: xml file ??? c# file????  (Just generating xml file which including droplet information and destination)
 
 > * We need to consider the order of execution
-> * 
+> * Look at JSON
+
+> Why not generate C# code/ advantage of using JOSN/XML
+>
+> Generating strcuture file instead of "STring" and writing  as `.cs` file
 
 input demo:
 
@@ -86,6 +90,12 @@ output demo:
 
 ### Syntax 
 
+> if , when, for
+>
+> support +,-
+>
+> sensing function
+
 :question: Should we assume the chip is blank before every script?
 
 * Define a droplet
@@ -103,6 +113,7 @@ output demo:
 * `merge` operation
 
   ```
+  
   merge(new_droplet_name,droplet_name1,droplet_name2,x,y);
   
   merge(dp3, dp2,dp1, x, y )
@@ -111,6 +122,7 @@ output demo:
 * `split` operation
 
   ```
+  // think about the list [a,b] = splitxxxx.
   split_by_size(droplet_name,size_of_the_left_droplet,name_left_droplet,name_right_droplet);
   
   split_average(droplet_name,name_left_droplet,name_right_droplet);
@@ -135,6 +147,7 @@ output demo:
 * Error001: droplet out of bound
 * Error002: can not split droplet for there is not enough space
 * Error003: can not mix droplet for there is not enough space (maybe merged with error02)
+* Error004 : can not find a route
 
 ### Rules check
 

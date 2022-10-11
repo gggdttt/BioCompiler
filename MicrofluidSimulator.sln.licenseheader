@@ -1,0 +1,17 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+// Copyright (c) 2022 Wenjie Fan
+// Department of Applied Mathematics
+// Technical University of Denmark
+extensions: .aspx .ascx
+<%-- 
+Copyright (c) 2022 Wenjie Fan
+Department of Applied Mathematics
+Technical University of Denmark
+--%>
+extensions: .vb
+'Sample license text.
+extensions:  .xml .config .xsd
+<!--
+Sample license text.
+-->

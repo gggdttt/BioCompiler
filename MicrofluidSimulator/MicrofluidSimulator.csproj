@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
