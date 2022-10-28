@@ -1,0 +1,5 @@
+{"name":"d1","xValue":1,"yValue":1,"width":2,"length":2,"_order_id":0,"execResult":null,"Droplet":null}
+{"name":"d2","xValue":1,"yValue":2,"width":3,"length":3,"_order_id":0,"execResult":null,"Droplet":null}
+{"name":"d3","xValue":1,"yValue":3,"width":4,"length":4,"_order_id":0,"execResult":null,"Droplet":null}
+{"name":"d1","xValue":3,"yValue":3}
+{"originDropletName":"d4","droplet1Name":"d5","droplet1XValue":1,"droplet1YValue":3,"droplet1Width":0,"droplet1Length":0,"droplet2Name":"d3","droplet2XValue":2,"droplet2YValue":2,"droplet2Width":0,"droplet2Length":0,"_order_id":0,"result1":null,"result2":null}
