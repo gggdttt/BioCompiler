@@ -1,114 +1,124 @@
-[Open Iconic v1.1.1](http://useiconic.com/open)
-===========
+## Preview
 
-### Open Iconic is the open source sibling of [Iconic](http://useiconic.com). It is a hyper-legible collection of 223 icons with a tiny footprint&mdash;ready to use with Bootstrap and Foundation. [View the collection](http://useiconic.com/open#icons)
+In our research group, we currently work on the software, firmware, and hardware development related to digital microfluidic biochips. 
 
+Digital microfluidic biochips allow the execution of biological and chemical protocols on a chip-scaled device delivering cost and performance advantages over the traditional benchtop wet lab processes. Building reconfigurable and programmable digital biochips that can be used for a broad range of laboratory protocols inevitably shows the need for an easy and structured process to capture a protocol and translate it into a sequence of steps that can be run on a DMF biochip. This process can be captured with the classical software tool-chain consisting of a programming language, a compiler, and an execution platform. This project aims at defining a domain-specific language to capture biochemical protocols and to develop the necessary front-end compilation tools for such a language. Besides capturing the biochemical protocol, the language should allow the programmer to define behavior when special conditions arise due to droplet missed-movements events and other phenomena that may disrupt the protocol's normal execution. 
 
-
-## What's in Open Iconic?
-
-* 223 icons designed to be legible down to 8 pixels
-* Super-light SVG files - 61.8 for the entire set 
-* SVG sprite&mdash;the modern replacement for icon fonts
-* Webfont (EOT, OTF, SVG, TTF, WOFF), PNG and WebP formats
-* Webfont stylesheets (including versions for Bootstrap and Foundation) in CSS, LESS, SCSS and Stylus formats
-* PNG and WebP raster images in 8px, 16px, 24px, 32px, 48px and 64px.
+If time allows, the project may also include the development and implementation of back-end techniques for scheduling and routing of droplets and generation of low-level commands.
 
 
-## Getting Started
 
-#### For code samples and everything else you need to get started with Open Iconic, check out our [Icons](http://useiconic.com/open#icons) and [Reference](http://useiconic.com/open#reference) sections.
+## Design
 
-### General Usage
+Our project's basic structure looks like: 
 
-#### Using Open Iconic's SVGs
+**DESIGN->WRITE  CDMF-> COMPILE TO C# CODE -> FIND PATH -> GENERATING INSTRUCT FOR CHIP**
 
-We like SVGs and we think they're the way to display icons on the web. Since Open Iconic are just basic SVGs, we suggest you display them like you would any other image (don't forget the `alt` attribute).
+|=====User=========|=======Compiler======|=============Executor======================|
 
-```
-<img src="/open-iconic/svg/icon-name.svg" alt="icon name">
-```
 
-#### Using Open Iconic's SVG Sprite
 
-Open Iconic also comes in a SVG sprite which allows you to display all the icons in the set with a single request. It's like an icon font, without being a hack.
+<img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202210282155579.png" alt="image-20220929225512913" style="zoom:67%;" />
 
-Adding an icon from an SVG sprite is a little different than what you're used to, but it's still a piece of cake. *Tip: To make your icons easily style able, we suggest adding a general class to the* `<svg>` *tag and a unique class name for each different icon in the* `<use>` *tag.*  
+##  Compiler
+
+Input : Source code of `cdmf` file.
+
+Output: JSON format 
+
+> input demo:
+
+``` 
 
 ```
-<svg class="icon">
-  <use xlink:href="open-iconic.svg#account-login" class="icon-account-login"></use>
-</svg>
-```
 
-Sizing icons only needs basic CSS. All the icons are in a square format, so just set the `<svg>` tag with equal width and height dimensions.
+output demo:
+
+```xml
 
 ```
-.icon {
-  width: 16px;
-  height: 16px;
-}
+
+### Syntax 
+
+#### Declaration 
+
+``` java
+droplet <name>;
+// 		string
 ```
 
-Coloring icons is even easier. All you need to do is set the `fill` rule on the `<use>` tag.
+#### Input/Output
 
-```
-.icon-account-login {
-  fill: #f00;
-}
-```
-
-To learn more about SVG Sprites, read [Chris Coyier's guide](http://css-tricks.com/svg-sprites-use-better-icon-fonts/).
-
-#### Using Open Iconic's Icon Font...
-
-
-##### …with Bootstrap
-
-You can find our Bootstrap stylesheets in `font/css/open-iconic-bootstrap.{css, less, scss, styl}`
-
-
-```
-<link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+```java
+input(<droplet_name>, x,y, size);
+//      string, int, int, float
 ```
 
+#### Move
 
-```
-<span class="oi oi-icon-name" title="icon name" aria-hidden="true"></span>
-```
-
-##### …with Foundation
-
-You can find our Foundation stylesheets in `font/css/open-iconic-foundation.{css, less, scss, styl}`
-
-```
-<link href="/open-iconic/font/css/open-iconic-foundation.css" rel="stylesheet">
+``` java
+move(<droplet_name>, x_dest, y_dest);
+//		string, int ,int 
 ```
 
+#### Merge
 
-```
-<span class="fi-icon-name" title="icon name" aria-hidden="true"></span>
-```
-
-##### …on its own
-
-You can find our default stylesheets in `font/css/open-iconic.{css, less, scss, styl}`
-
-```
-<link href="/open-iconic/font/css/open-iconic.css" rel="stylesheet">
+```java
+merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_dest);
+// 		string, string, string, int, int 
 ```
 
+#### Split
+
+```java
+split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
+// string, string, strig, int, int ,int, real
+// note: ratio is D1/(D1+D2)
 ```
-<span class="oi" data-glyph="icon-name" title="icon name" aria-hidden="true"></span>
+
+#### Mix
+
+```java
+mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
+// 	string, int ,int ,int ,int float
 ```
 
+#### Output
 
-## License
+``` java
+output(<droplet_name>, x, y)
+// string, int ,int 
+```
 
-### Icons
+### Store
 
-All code (including SVG markup) is under the [MIT License](http://opensource.org/licenses/MIT).
+```java
+store(<droplet_name>,x,y, time)
+// string, int, int , float
+```
 
-### Fonts
+## Syntax checker
 
-All fonts are under the [SIL Licensed](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web).
+### Exception/Errors
+
+> The exception is not throwed by compiler, it is throwed by executor
+
+* Error001: droplet out of bound
+* Error002: can not split droplet for there is not enough space
+* Error003: can not mix droplet for there is not enough space (maybe merged with error02)
+* Error004 : can not find a route
+
+### Rules check
+
+> By compiler
+
+* Invalid 1: droplet is not defined before
+* Invalid 2: position is out of bound *(should this be handled as exception?)*
+
+
+
+### Route-finding algorithm
+
+> I will use a* firstly.
+>
+> This step will be done in executor.
