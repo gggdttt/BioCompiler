@@ -72,7 +72,7 @@ merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_d
 
 ```java
 split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
-// string, string, strig, int, int ,int, real
+// string, string, strig, int, int ,int, int, real
 // note: ratio is D1/(D1+D2)
 ```
 
@@ -80,7 +80,7 @@ split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_de
 
 ```java
 mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
-// 	string, int ,int ,int ,int float
+// 	string, int ,int ,int ,int int
 ```
 
 #### Output

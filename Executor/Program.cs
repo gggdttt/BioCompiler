@@ -1,8 +1,4 @@
-﻿// Copyright (c) 2022 Wenjie Fan
-// Department of Applied Mathematics
-// Technical University of Denmark
-
-namespace BioCompiler
+﻿namespace BioCompiler
 
 {
     using System;

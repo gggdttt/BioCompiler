@@ -1,7 +1,4 @@
-﻿// Copyright (c) 2022 Wenjie Fan
-// Department of Applied Mathematics
-// Technical University of Denmark
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using Executor.Model.Operation;
 
 namespace Executor.Model

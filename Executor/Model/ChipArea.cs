@@ -1,7 +1,4 @@
-﻿// Copyright (c) 2022 Wenjie Fan
-// Department of Applied Mathematics
-// Technical University of Denmark
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;

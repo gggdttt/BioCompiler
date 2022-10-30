@@ -44,21 +44,51 @@ public interface ISyntaxVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitStat([NotNull] SyntaxParser.StatContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="SyntaxParser.droplet"/>.
+	/// Visit a parse tree produced by <see cref="SyntaxParser.declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitDroplet([NotNull] SyntaxParser.DropletContext context);
+	Result VisitDeclaration([NotNull] SyntaxParser.DeclarationContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="SyntaxParser.moving"/>.
+	/// Visit a parse tree produced by <see cref="SyntaxParser.input"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitMoving([NotNull] SyntaxParser.MovingContext context);
+	Result VisitInput([NotNull] SyntaxParser.InputContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="SyntaxParser.spliting"/>.
+	/// Visit a parse tree produced by <see cref="SyntaxParser.move"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitSpliting([NotNull] SyntaxParser.SplitingContext context);
+	Result VisitMove([NotNull] SyntaxParser.MoveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.merge"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMerge([NotNull] SyntaxParser.MergeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.split"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSplit([NotNull] SyntaxParser.SplitContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.mix"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMix([NotNull] SyntaxParser.MixContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.output"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOutput([NotNull] SyntaxParser.OutputContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.store"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStore([NotNull] SyntaxParser.StoreContext context);
 }

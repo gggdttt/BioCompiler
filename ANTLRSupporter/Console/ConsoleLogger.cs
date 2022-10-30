@@ -1,7 +1,4 @@
-﻿// Copyright (c) 2022 Wenjie Fan
-// Department of Applied Mathematics
-// Technical University of Denmark
-namespace ToolSupporter.Console
+﻿namespace ToolSupporter.Console
 {
     using System;
     class ConsoleLogger
