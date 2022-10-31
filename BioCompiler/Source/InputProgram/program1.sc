@@ -1,22 +1,40 @@
 # this is a demo
-d1 = droplet(1,1,2,2);
-d2 = droplet(1,2,3,3);
-d3 = droplet(1,3,4,4);
+
+# droplet declaration
+droplet d1;
+droplet d2;
+droplet d3;
+
+# droplet input
+input(d1,1,1,1.0);
+input(d2,4,4,0.5);
+input(d3,10,10,3.2);
 
 # move
-Move(d1,3, 3);
+move(d1,3,3);
+move(d2,7,7);
+move(d3,9,9);
 
-# split
-d4,d5 = Split(d3,1,3,2,2);
-
-# while,for loop
+# split 
+# d3-> d4, d5
+droplet d4;
+droplet d5;
+split(d4,d5,d3,12,12,15,15,0.5);
 
 # merging
+# d4,d5->d3
+merge(d3,d4,d5,5,9);
 
 # mixing
+mix(d3,2,2,2,2,5);
 
-# dispose
-d1 = sense(d1);
+# store
+store(d3,5,5,2.0);
+
+# output
+output(d1,0,0);
+output(d2,0,0);
+output(d3,0,0);
 
 # support list 
 

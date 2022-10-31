@@ -14,12 +14,12 @@ namespace Executor.Model.Operation
         public string name { get; }
         public int xValue { get; }
         public int yValue { get; }
-        public float size { get; }
+        public double size { get; }
         public int _order_id { get; }
 
         public Droplet execResult { get; set; }
 
-        public DropletInputer(string dropletName, int xValue, int yValue, float size)
+        public DropletInputer(string dropletName, int xValue, int yValue, double size)
         {
             // TODO : add order_id here 
             name = dropletName;

@@ -14,6 +14,7 @@ namespace BioCompiler
     using BioCompiler.Compiler;
     using Executor.Model.Operation;
     using System.Text.Json;
+    using Newtonsoft.Json;
 
     internal static class Program
     {
@@ -42,33 +43,10 @@ namespace BioCompiler
                 visitor.Visit(programContext);
 
                 StringBuilder temp = new StringBuilder();
+                
 
-                foreach (var line in visitor.Lines)
-                {
-                    if (line is DropletInputer)
-                    {
-                        DropletInputer dropletCreator = (DropletInputer)line;
-                        temp.AppendLine( JsonSerializer.Serialize(dropletCreator));
-                        Console.WriteLine("droplet:{0},xValue:{1}, yValue:{2}" ,dropletCreator.name ,dropletCreator.xValue , dropletCreator.yValue);
-                    }
-
-                    else if (line is DropletSplitter)
-                    {
-                        DropletSplitter dropletSplitor = (DropletSplitter)line;
-                        temp.AppendLine(JsonSerializer.Serialize(dropletSplitor));
-                        Console.WriteLine("Splitor droplet Name:{2} to Name1:{0}, Name2:{1}",
-                            dropletSplitor.droplet1Name,dropletSplitor.droplet2Name, dropletSplitor.originDropletName);
-                    }
-
-                    else if (line is DropletMover)
-                    {
-                        DropletMover movingCreator = (DropletMover)line;
-                        temp.AppendLine(JsonSerializer.Serialize(movingCreator));
-                        Console.WriteLine("moving: Name{0} to x:{1} , y:{2}", movingCreator.name, movingCreator.xValue, movingCreator.yValue);
-                    }
-
-                }
-                Console.WriteLine(temp);
+                temp.Append(JsonConvert.SerializeObject(visitor.Lines, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+               
                 File.WriteAllText(@"C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\BioCompiler\Source\Output\result.json", temp.ToString());
 
             }

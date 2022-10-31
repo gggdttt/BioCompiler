@@ -15,12 +15,12 @@ namespace Executor.Model
         private readonly string name;
         private int xValue;
         private int yValue;
-        private float size;
+        private double size;
         
         private bool isMoving;
 
         // redefine 
-        public Droplet(string  name, int xValue, int yValue, float size, bool isMoving)
+        public Droplet(string  name, int xValue, int yValue, double size, bool isMoving)
         {
             this.name = name;
             this.xValue = xValue;

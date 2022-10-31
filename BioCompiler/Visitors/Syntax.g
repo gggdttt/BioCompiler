@@ -17,7 +17,7 @@ stat
     ;
 
 declaration
-    : 'Droplet' ID ';'
+    : 'droplet' ID ';'
     ;
 
 input
@@ -52,13 +52,9 @@ store
 ID
  : [a-zA-Z_] [a-zA-Z_0-9]*
  ;
-
-DIGIT
-    :    '0'..'9'
-    ;
     
 INT 
-    :    DIGIT+
+    :    [0-9]+
     ;
 FLOAT
     :    INT '.' INT
