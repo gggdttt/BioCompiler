@@ -1,4 +1,8 @@
-﻿namespace BioCompiler
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+namespace BioCompiler
 
 {
     using System;
@@ -34,31 +38,31 @@
                 SyntaxParser syntaxParser = new SyntaxParser(commonTokenStream);
 
                 ProgramContext programContext = syntaxParser.program();
-                BioSyntaxBasicVisitor visitor = new BioSyntaxBasicVisitor();
+                BioOperationSyntaxBasicVisitor visitor = new BioOperationSyntaxBasicVisitor();
                 visitor.Visit(programContext);
 
                 StringBuilder temp = new StringBuilder();
 
                 foreach (var line in visitor.Lines)
                 {
-                    if (line is DropletCreator)
+                    if (line is DropletInputer)
                     {
-                        DropletCreator dropletCreator = (DropletCreator)line;
+                        DropletInputer dropletCreator = (DropletInputer)line;
                         temp.AppendLine( JsonSerializer.Serialize(dropletCreator));
                         Console.WriteLine("droplet:{0},xValue:{1}, yValue:{2}" ,dropletCreator.name ,dropletCreator.xValue , dropletCreator.yValue);
                     }
 
-                    else if (line is DropletSplitor)
+                    else if (line is DropletSplitter)
                     {
-                        DropletSplitor dropletSplitor = (DropletSplitor)line;
+                        DropletSplitter dropletSplitor = (DropletSplitter)line;
                         temp.AppendLine(JsonSerializer.Serialize(dropletSplitor));
                         Console.WriteLine("Splitor droplet Name:{2} to Name1:{0}, Name2:{1}",
                             dropletSplitor.droplet1Name,dropletSplitor.droplet2Name, dropletSplitor.originDropletName);
                     }
 
-                    else if (line is MovingCreator)
+                    else if (line is DropletMover)
                     {
-                        MovingCreator movingCreator = (MovingCreator)line;
+                        DropletMover movingCreator = (DropletMover)line;
                         temp.AppendLine(JsonSerializer.Serialize(movingCreator));
                         Console.WriteLine("moving: Name{0} to x:{1} , y:{2}", movingCreator.name, movingCreator.xValue, movingCreator.yValue);
                     }

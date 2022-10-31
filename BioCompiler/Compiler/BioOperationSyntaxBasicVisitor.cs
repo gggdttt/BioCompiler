@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
 using static SyntaxParser;
-using Executor.Model;
 using Executor.Model.Operation;
 
 namespace BioCompiler.Compiler
 {
-    internal class BioSyntaxBasicVisitor : SyntaxBaseVisitor<CompilerOperation>
+    internal class BioOperationSyntaxBasicVisitor : SyntaxBaseVisitor<CompilerOperation>
     {
         public List<CompilerOperation> Lines = new List<CompilerOperation>();
         public override CompilerOperation VisitStat(StatContext context)

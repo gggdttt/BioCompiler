@@ -47,7 +47,7 @@ droplet <name>;
 // 		string
 ```
 
-#### Input/Output
+#### Input
 
 ```java
 input(<droplet_name>, x,y, size);

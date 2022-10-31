@@ -1,4 +1,8 @@
-﻿using MicrofluidSimulator.SimulatorCode.DataTypes;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+using MicrofluidSimulator.SimulatorCode.DataTypes;
 using System.Collections;
 using System.IO;
 using Newtonsoft.Json;

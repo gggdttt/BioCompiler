@@ -1,3 +1,7 @@
+// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
 using MicrofluidSimulator;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

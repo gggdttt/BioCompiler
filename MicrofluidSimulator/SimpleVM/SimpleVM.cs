@@ -1,4 +1,9 @@
-﻿/*
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+/*
  * This is a simple version of the virtual machine, it is used for testing purposes,
  * since we do not have access to the actual virtual machine.
  */

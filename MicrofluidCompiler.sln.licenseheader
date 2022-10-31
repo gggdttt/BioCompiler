@@ -1,6 +1,9 @@
 ﻿extensions: designer.cs generated.cs
 extensions: .cs .cpp .h
-// Copyright (c) 2011 rubicon IT GmbH
+// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
 extensions: .aspx .ascx
 <%-- 
 Copyright (c) 2011 rubicon IT GmbH

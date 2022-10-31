@@ -1,4 +1,8 @@
-﻿using MicrofluidSimulator.SimulatorCode.DataTypes;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+using MicrofluidSimulator.SimulatorCode.DataTypes;
 namespace MicrofluidSimulator.SimulatorCode.Models
 {
     public class TemperatureSensorModels
