@@ -28,4 +28,6 @@
     <ProjectReference Include="..\Executor\Executor.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties source_4output_4result_1json__JsonSchema="https://cdn.jsdelivr.net/gh/roadrunner-server/roadrunner@latest/schemas/config/2.0.schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

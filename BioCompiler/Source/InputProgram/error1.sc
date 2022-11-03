@@ -5,11 +5,11 @@
 droplet d1;
 droplet d2;
 
-# droplet input
-input(d3,10,10,3.2);
-
 # move
 move(d3,9,9);
+
+# droplet input
+input(d3,10,10,3.2);
 
 # split 
 split(d4,d5,d3,12,12,15,15,0.5);

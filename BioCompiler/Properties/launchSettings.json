@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BioCompilerNoError": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program1.sc"
+    },
+    "BioCompilerError01": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\error1.sc"
+    }
+  }
+}

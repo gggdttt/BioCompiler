@@ -119,15 +119,6 @@ droplet d1;
 droplet d1;
 ```
 
-### Invalid Source Code3
-
-```api
-# droplet dcelartion
-
-```
-
-
-
 
 
 
