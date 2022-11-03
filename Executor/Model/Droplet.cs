@@ -4,6 +4,7 @@
 // DTU(Technical University of Denmark)
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,18 +17,30 @@ namespace Executor.Model
         private int xValue;
         private int yValue;
         private double size;
-        
-        private bool isMoving;
+        private bool isBeingUsed;
 
         // redefine 
-        public Droplet(string  name, int xValue, int yValue, double size, bool isMoving)
+        public Droplet(string  name, int xValue, int yValue, double size, bool isBeingUsed)
         {
             this.name = name;
             this.xValue = xValue;
             this.yValue = yValue;
             this.size = size;
-            this.isMoving = isMoving;
+            this.isBeingUsed = isBeingUsed;
         }
 
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Droplet d = (Droplet)obj;
+                return name == d.name;
+            }
+        }
     }
 }

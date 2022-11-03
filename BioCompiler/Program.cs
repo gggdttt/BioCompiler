@@ -15,6 +15,8 @@ namespace BioCompiler
     using Executor.Model.Operation;
     using System.Text.Json;
     using Newtonsoft.Json;
+    using BioCompiler.Checker;
+    using System.Collections.Immutable;
 
     internal static class Program
     {
@@ -22,15 +24,15 @@ namespace BioCompiler
         {
             try
             {
+                // start to read source file
                 StringBuilder text = new StringBuilder();
 
-                string path = Path.GetFullPath("C:\\Users\\Wenjie\\OneDrive\\MasterThesis\\VisionBasedCompiler\\BioCompiler\\Source\\InputProgram\\program1.sc");
+                string path = Path.GetFullPath("C:\\Users\\Wenjie\\OneDrive\\MasterThesis\\VisionBasedCompiler\\BioCompiler\\Source\\InputProgram\\error1.sc");
 
                 IEnumerable<string> fileContents = File.ReadAllLines(path);
                 foreach (string s in fileContents)
                 {
                     text.AppendLine(s);
-
                 }
 
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());
@@ -43,10 +45,11 @@ namespace BioCompiler
                 visitor.Visit(programContext);
 
                 StringBuilder temp = new StringBuilder();
-                
+                DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
+                checker.DoCheck(visitor.Lines.ToImmutableArray());
 
                 temp.Append(JsonConvert.SerializeObject(visitor.Lines, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
-               
+
                 File.WriteAllText(@"C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\BioCompiler\Source\Output\result.json", temp.ToString());
 
             }

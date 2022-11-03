@@ -3,11 +3,15 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using System.Security;
+
 namespace Executor.Model.Operation
 {
-    
+
     public interface CompilerOperation
     {
+        public int getLine();
         public void Executed();
+        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet);
     }
 }

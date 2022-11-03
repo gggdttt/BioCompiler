@@ -99,6 +99,39 @@ store(<droplet_name>,x,y, time)
 
 ## Syntax checker
 
+### Invalid Source Code1
+
+```apl
+# droplet declaration
+droplet d1;
+droplet d2;
+
+# droplet input
+input(d3,10,10,3.2);
+
+```
+
+### Invalid Source Code2
+
+```api
+# droplet declaration
+droplet d1;
+droplet d1;
+```
+
+### Invalid Source Code3
+
+```api
+# droplet dcelartion
+
+```
+
+
+
+
+
+
+
 ### Exception/Errors
 
 > The exception is not throwed by compiler, it is throwed by executor
