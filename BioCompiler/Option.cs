@@ -9,10 +9,10 @@ namespace BioCompiler
 {
     internal class Option
     {
-        [Option('s', "source", Required = true, HelpText = ".app file to build documentation for")]
+        [Option('s', "source", Required = true, HelpText = ".input file")]
         public string? Source { get; set; }
 
-        [Option('o', "output", Required = true, HelpText = ".app file to build documentation for")]
+        [Option('o', "output", Required = true, HelpText = ".output path")]
         public string? Output { get; set; }
 
     }

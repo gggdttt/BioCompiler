@@ -32,7 +32,6 @@ namespace BioCompiler
 
                 BioOperationSyntaxBasicVisitor visitor = GetVisitor(fileContent);
 
-
                 StringBuilder tempString = new StringBuilder();
                 DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
                 checker.DoCheck(visitor.Lines.ToImmutableArray());

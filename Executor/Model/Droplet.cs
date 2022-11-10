@@ -2,12 +2,6 @@
 // Author: Wenjie Fan (s210310)
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Executor.Model
 {

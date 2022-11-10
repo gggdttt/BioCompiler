@@ -12,7 +12,6 @@ namespace BioCompiler
     {
         private static void Main(string[] args)
         {
-
             CommandLine.Parser.Default.ParseArguments<Option>(args)
                .WithParsed<Option>(opts =>
                {
