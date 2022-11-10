@@ -14,31 +14,28 @@ using ToolSupporter.FileOperator;
 namespace BioCompiler
 
 {
-    internal class Runner
+    public class Runner
     {
         Option option;
+
+        public Runner()
+        {
+            option = new Option();
+        }
 
         public Runner(Option option)
         {
             this.option = option;
         }
 
-        public int run()
+        public int Run()
         {
             try
             {
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
-
-                BioOperationSyntaxBasicVisitor visitor = GetVisitor(fileContent);
-
-                StringBuilder tempString = new StringBuilder();
-                DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
-                checker.DoCheck(visitor.Lines.ToImmutableArray());
-
-                tempString.Append(JsonConvert.SerializeObject(visitor.Lines, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
-
-                BioFileWriter.Write(option.Output!, tempString.ToString());
+                string result = DoCompile(fileContent);
+                BioFileWriter.Write(option.Output!, result);
                 return 0;
             }
             catch (Exception ex)
@@ -46,6 +43,21 @@ namespace BioCompiler
                 Console.WriteLine("Error: " + ex.Message);
                 return -1;
             }
+        }
+
+
+        public string DoCompile(string fileContent)
+        {
+            BioOperationSyntaxBasicVisitor visitor = GetVisitor(fileContent);
+
+            StringBuilder tempString = new StringBuilder();
+            DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
+
+            checker.DoCheck(visitor.Lines.ToImmutableArray());
+
+            tempString.Append(JsonConvert.SerializeObject(visitor.Lines, Formatting.Indented, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+
+            return tempString.ToString();
         }
 
         private BioOperationSyntaxBasicVisitor GetVisitor(string str)

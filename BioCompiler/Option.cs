@@ -7,7 +7,7 @@ using CommandLine;
 namespace BioCompiler
 
 {
-    internal class Option
+    public class Option
     {
         [Option('s', "source", Required = true, HelpText = ".input file")]
         public string? Source { get; set; }

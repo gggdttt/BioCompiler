@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace BioCompiler.Compiler
 {
-    internal class BioOperationSyntaxBasicVisitor : SyntaxBaseVisitor<CompilerOperation>
+    public class BioOperationSyntaxBasicVisitor : SyntaxBaseVisitor<CompilerOperation>
     {
         public List<CompilerOperation> Lines = new List<CompilerOperation>();
         public override CompilerOperation VisitStat(StatContext context)

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Executor", "Executor\Execut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolSupporter", "ANTLRSupporter\ToolSupporter.csproj", "{40B8C4DF-5C34-4F5D-852E-691265427276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioCompilerTest", "BioCompilerTest\BioCompilerTest.csproj", "{0B3E9131-D3D3-42C8-8C66-86C957E9D49F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCompiler", "test\TestCompiler\TestCompiler.csproj", "{7F4A9B5B-09DC-4194-AB38-F82E66455606}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{40B8C4DF-5C34-4F5D-852E-691265427276}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B8C4DF-5C34-4F5D-852E-691265427276}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B8C4DF-5C34-4F5D-852E-691265427276}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B3E9131-D3D3-42C8-8C66-86C957E9D49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B3E9131-D3D3-42C8-8C66-86C957E9D49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B3E9131-D3D3-42C8-8C66-86C957E9D49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B3E9131-D3D3-42C8-8C66-86C957E9D49F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4A9B5B-09DC-4194-AB38-F82E66455606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4A9B5B-09DC-4194-AB38-F82E66455606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4A9B5B-09DC-4194-AB38-F82E66455606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4A9B5B-09DC-4194-AB38-F82E66455606}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

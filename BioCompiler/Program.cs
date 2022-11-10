@@ -15,7 +15,7 @@ namespace BioCompiler
             CommandLine.Parser.Default.ParseArguments<Option>(args)
                .WithParsed<Option>(opts =>
                {
-                   Environment.Exit(new Runner(opts).run());
+                   Environment.Exit(new Runner(opts).Run());
                })
                .WithNotParsed(errs =>
                {
