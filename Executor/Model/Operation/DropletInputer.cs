@@ -18,8 +18,6 @@ namespace Executor.Model.Operation
         public double size { get; }
         public int _order_id { get; }
 
-        public Droplet execResult { get; set; }
-
         public DropletInputer(string dropletName, int xValue, int yValue, double size, int line)
         {
             // TODO : add order_id here 
@@ -36,7 +34,6 @@ namespace Executor.Model.Operation
         }
         public void Executed()
         {
-            execResult = new Droplet(name, xValue, yValue, size, false);
         }
 
         /// <summary>

@@ -21,8 +21,7 @@
     "xValue": 1,
     "yValue": 1,
     "size": 1.0,
-    "_order_id": 0,
-    "execResult": null
+    "_order_id": 0
   },
   {
     "$type": "Executor.Model.Operation.DropletInputer, Executor",
@@ -31,8 +30,7 @@
     "xValue": 4,
     "yValue": 4,
     "size": 0.5,
-    "_order_id": 0,
-    "execResult": null
+    "_order_id": 0
   },
   {
     "$type": "Executor.Model.Operation.DropletInputer, Executor",
@@ -41,8 +39,7 @@
     "xValue": 10,
     "yValue": 10,
     "size": 3.2,
-    "_order_id": 0,
-    "execResult": null
+    "_order_id": 0
   },
   {
     "$type": "Executor.Model.Operation.DropletMover, Executor",
@@ -71,15 +68,10 @@
     "line": 20
   },
   {
-    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
-    "name": "d5",
-    "line": 21
-  },
-  {
     "$type": "Executor.Model.Operation.DropletSplitter, Executor",
-    "line": 22,
-    "outDestName1": "d4",
-    "outDestName2": "d5",
+    "line": 21,
+    "outDestName1": "d3",
+    "outDestName2": "d4",
     "inDropletName": "d3",
     "outDest1X": 12,
     "outDest1Y": 12,
@@ -90,16 +82,16 @@
   },
   {
     "$type": "Executor.Model.Operation.DropletMerger, Executor",
-    "line": 26,
+    "line": 25,
     "outDropletName": "d3",
     "inDroplet1Name": "d4",
-    "inDroplet2Name": "d5",
+    "inDroplet2Name": "d3",
     "xDest": 5,
     "yDest": 9
   },
   {
     "$type": "Executor.Model.Operation.DropletMixer, Executor",
-    "line": 29,
+    "line": 28,
     "name": "d3",
     "xMix": 2,
     "yMix": 2,
@@ -109,7 +101,7 @@
   },
   {
     "$type": "Executor.Model.Operation.DropletStorer, Executor",
-    "line": 32,
+    "line": 31,
     "name": "d3",
     "xValue": 5,
     "yValue": 5,
@@ -117,21 +109,21 @@
   },
   {
     "$type": "Executor.Model.Operation.DropletOutputer, Executor",
-    "line": 35,
+    "line": 34,
     "name": "d1",
     "xValue": 0,
     "yValue": 0
   },
   {
     "$type": "Executor.Model.Operation.DropletOutputer, Executor",
-    "line": 36,
+    "line": 35,
     "name": "d2",
     "xValue": 0,
     "yValue": 0
   },
   {
     "$type": "Executor.Model.Operation.DropletOutputer, Executor",
-    "line": 37,
+    "line": 36,
     "name": "d3",
     "xValue": 0,
     "yValue": 0
