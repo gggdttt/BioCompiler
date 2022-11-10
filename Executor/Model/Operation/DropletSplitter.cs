@@ -75,6 +75,26 @@ namespace Executor.Model.Operation
                 declaredSet.Add(inDropletName);
                 return true;
             }
+
+            else if (occupiedSet.Contains(outDestName1)
+                && declaredSet.Contains(outDestName2)
+                && occupiedSet.Contains(inDropletName)
+                && outDestName1.Equals(inDropletName))
+            {
+                declaredSet.Remove(outDestName2);
+                occupiedSet.Add(outDestName2);
+                return true;
+            }
+
+            else if (declaredSet.Contains(outDestName1)
+                && occupiedSet.Contains(outDestName2)
+                && occupiedSet.Contains(inDropletName)
+                && outDestName2.Equals(inDropletName))
+            {
+                declaredSet.Remove(outDestName1);
+                occupiedSet.Add(outDestName1);
+                return true;
+            }
             else return false;
         }
     }

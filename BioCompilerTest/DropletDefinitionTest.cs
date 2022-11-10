@@ -5,16 +5,18 @@
 namespace BioCompilerTest
 {
     [TestClass]
-    public class DropletDefinitionTest
+    public class DropletDeclarationTest
     {
-        public string origin = "" +
-            "Droplet d1 = D(2,2,1,1);" +
-            "Droplet d2 = D(3,3,1,1);" +
-            "Droplet d3 = D(4,5,3,3);";
+        public string origin = "# this is a demo\r\n" +
+            "# droplet declaration\r\n" +
+            "droplet d1;\r\n" +
+            "droplet d2;\r\n" +
+            "droplet d3;\r\n";
+
         [TestMethod]
         public void TestMethod1()
         {
-                   
+
         }
     }
 }

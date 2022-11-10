@@ -8,6 +8,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Executor.Model.Operation
@@ -69,6 +70,14 @@ namespace Executor.Model.Operation
                 declaredSet.Add(inDroplet2Name);
                 return true;
             }
+            else if (occupiedSet.Contains(outDropletName)
+                && occupiedSet.Contains(inDroplet1Name)
+                && occupiedSet.Contains(inDroplet2Name)
+                && (outDropletName.Equals(inDroplet1Name) || outDropletName.Equals(inDroplet2Name))
+                && !inDroplet1Name.Equals(inDroplet2Name))
+            { //merge(d1,d2,d1,....) d1,d2 ->d1
+                return true;
+            } 
             else return false;
         }
     }

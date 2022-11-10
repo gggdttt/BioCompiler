@@ -7,6 +7,10 @@
     "BioCompilerError01": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\error1.sc"
+    },
+    "Profile 1": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program2.sc"
     }
   }
 }
