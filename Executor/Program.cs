@@ -2,16 +2,23 @@
 // Author: Wenjie Fan (s210310)
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
-namespace BioCompiler
+using CommandLine;
 
+namespace Executor
 {
     internal static class Program
     {
         private static void Main(string[] args)
         {
-
-              //  ImmutableArray<>
-                //File.WriteAllText(@"C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\BioCompiler\Source\Output\result.json", temp.ToString());
+            CommandLine.Parser.Default.ParseArguments<ExecutorLaunchOption>(args)
+               .WithParsed(opts =>
+               {
+                   Environment.Exit(new Executor(opts).Execute());
+               })
+               .WithNotParsed(errs =>
+               {
+                   Environment.Exit(1);
+               });
         }
     }
 }

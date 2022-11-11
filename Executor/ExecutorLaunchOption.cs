@@ -4,16 +4,16 @@
 // DTU(Technical University of Denmark)
 using CommandLine;
 
-namespace BioCompiler
+namespace Executor
 
 {
-    public class Option
+    public class ExecutorLaunchOption
     {
         [Option('s', "source", Required = true, HelpText = ".input file")]
         public string? Source { get; set; }
 
-        [Option('o', "output", Required = true, HelpText = ".output path")]
-        public string? Output { get; set; }
+/*        [Option('o', "output", Required = true, HelpText = ".output path")]
+        public string? Output { get; set; }*/
 
     }
 

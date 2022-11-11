@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Executor": {
+      "commandName": "Project",
+      "commandLineArgs": "--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json"
+    }
+  }
+}

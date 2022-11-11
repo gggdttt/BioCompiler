@@ -16,14 +16,14 @@ namespace BioCompiler
 {
     public class Runner
     {
-        Option option;
+        CompilerLaunchOption option;
 
         public Runner()
         {
-            option = new Option();
+            option = new CompilerLaunchOption();
         }
 
-        public Runner(Option option)
+        public Runner(CompilerLaunchOption option)
         {
             this.option = option;
         }
@@ -40,6 +40,7 @@ namespace BioCompiler
             }
             catch (Exception ex)
             {
+                //TODO: create more exception
                 Console.WriteLine("Error: " + ex.Message);
                 return -1;
             }
