@@ -7,20 +7,26 @@ namespace Executor.Model
 {
     public class Droplet
     {
-        private readonly string name;
-        private int xValue;
-        private int yValue;
-        private double size;
-        private bool isBeingUsed;
+        public string name { get; set; }
+        public int xValue { get; set; }
+        public int yValue { get; set; }
+        public double size { get; set; }
 
         // redefine 
-        public Droplet(string  name, int xValue, int yValue, double size, bool isBeingUsed)
+        public Droplet(string name, int xValue, int yValue, double size)
         {
             this.name = name;
             this.xValue = xValue;
             this.yValue = yValue;
             this.size = size;
-            this.isBeingUsed = isBeingUsed;
+        }
+
+        public Droplet(string name)
+        {
+            this.name = name;
+            this.xValue = 0;
+            this.yValue = 0;
+            this.size = 0;
         }
 
         public override bool Equals(Object obj)

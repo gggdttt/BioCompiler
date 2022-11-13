@@ -3,6 +3,8 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using System.Collections.Immutable;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -16,11 +18,9 @@ namespace Executor.Model.Operation
         public int xValue { get; }
         public int yValue { get; }
         public double size { get; }
-        public int _order_id { get; }
 
         public DropletInputer(string dropletName, int xValue, int yValue, double size, int line)
         {
-            // TODO : add order_id here 
             name = dropletName;
             this.xValue = xValue;
             this.yValue = yValue;
@@ -28,12 +28,9 @@ namespace Executor.Model.Operation
             this.line = line;
         }
 
-        public int getLine()
+        public int GetLine()
         {
             return line;
-        }
-        public void Executed()
-        {
         }
 
         /// <summary>
@@ -45,7 +42,6 @@ namespace Executor.Model.Operation
         /// <returns></returns>
         public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-
             if (declaredSet.Count() == 0) return false;
             if (declaredSet.Contains(name))
             {
@@ -56,5 +52,25 @@ namespace Executor.Model.Operation
             else return false;
         }
 
+        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        {
+            // the droplet has not been initialized
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
+        }
+
+        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            // nothing happened
+        }
+
+        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            //generate a new droplet
+            activeDroplets.Add(new Droplet(name, xValue, yValue, size));
+        }
+        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+        }
     }
 }

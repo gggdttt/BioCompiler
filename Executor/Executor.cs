@@ -10,6 +10,7 @@ using Executor.Model.Operation;
 using Executor.Model.OperationHelper;
 using Newtonsoft.Json;
 using System;
+using Executor.Model;
 
 namespace Executor
 
@@ -37,12 +38,13 @@ namespace Executor
 
                 JsonConverter[] converters = { new CompilerOperation2JSONConverter() };
 
-                ImmutableArray<CompilerOperation> operations = 
-                    JsonConvert.DeserializeObject<ImmutableArray<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters });
+                ImmutableList<CompilerOperation> operations = JsonConvert.DeserializeObject<ImmutableList<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
                 foreach (CompilerOperation operation in operations)
                 {
                     Console.WriteLine(operation.ToString());
                 }
+
+                Chip c = new Chip(operations, 20, 20);
                 return 0;
             }
             catch (Exception ex)

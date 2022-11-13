@@ -3,6 +3,9 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using System.Collections.Immutable;
+using System.Xml.Linq;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -25,14 +28,11 @@ namespace Executor.Model.Operation
             this.line = line;
         }
 
-        public int getLine()
+        public int GetLine()
         {
             return line;
         }
-        public void Executed()
-        {
-            //this.result1 = new Droplet(aimDroplet1, xValue1/2, yValue1, width, length, false);//
-        }
+
         /// <summary>
         /// If its name is not in declaredSet, return false 
         /// If it has been included in, return true and move it from declared Set to occupiedSet
@@ -50,6 +50,30 @@ namespace Executor.Model.Operation
                 return true;
             }
             else return false;
+        }
+
+        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        {
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+        }
+
+        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            // remove it in opreations
+            // equals has been overriden
+            Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
+            activeDroplets.Remove(d1);
+        }
+
+        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            // nothing to change
+        }
+
+        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        {
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0
+                && busyDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0;
         }
     }
 }
