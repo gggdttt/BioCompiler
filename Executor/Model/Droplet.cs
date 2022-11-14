@@ -29,7 +29,7 @@ namespace Executor.Model
             this.size = 0;
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(Object? obj)
         {
             //Check for null and compare run-time types.
             if ((obj == null) || !this.GetType().Equals(obj.GetType()))
@@ -41,6 +41,11 @@ namespace Executor.Model
                 Droplet d = (Droplet)obj;
                 return name == d.name;
             }
+        }
+
+        public override string ToString()
+        {
+            return "Droplet: " + name + " xValue:" + xValue + " yValue:" + yValue + " size:" + size;
         }
     }
 }

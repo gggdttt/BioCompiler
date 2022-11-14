@@ -3,8 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Collections.Immutable;
-using System.Xml.Linq;
 
 namespace Executor.Model.Operation
 {
@@ -55,12 +53,17 @@ namespace Executor.Model.Operation
             return occupiedSet.Contains(name);
         }
 
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            return false;
         }
 
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        private void Active2Busy(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             //droplet active->busy
             Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
@@ -73,7 +76,7 @@ namespace Executor.Model.Operation
             activeDroplets.Add(new Droplet(name, xMix, yMix, d1.size));
         }
 
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // droplet busy->active
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
@@ -82,10 +85,15 @@ namespace Executor.Model.Operation
             // TODO: timesCounter ++;
         }
 
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1
                 && repeatTimes == timesCounter;
+        }
+
+        public override string ToString()
+        {
+            return "DropletMixer: " + name;
         }
     }
 }

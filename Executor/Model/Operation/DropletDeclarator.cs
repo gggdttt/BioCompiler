@@ -3,8 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Collections.Immutable;
-
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -45,30 +43,28 @@ namespace Executor.Model.Operation
             else return false;
         }
 
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // the droplet has not been initialized
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
         }
 
 
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
-        {
-            // nothing to consume 
-            // nothing to generate
-        }
-
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets) 
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets) 
         { 
             // nothing happen
         }
 
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         { 
             // don't need to execute 
             return true;
         }
 
+        public override string ToString()
+        {
+            return "DropletDeclarator: " + name;
+        }
 
     }
 }

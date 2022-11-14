@@ -4,7 +4,6 @@
 // DTU(Technical University of Denmark)
 
 using System.Text;
-using System.Collections.Immutable;
 using ToolSupporter.FileOperator;
 using Executor.Model.Operation;
 using Executor.Model.OperationHelper;
@@ -38,19 +37,20 @@ namespace Executor
 
                 JsonConverter[] converters = { new CompilerOperation2JSONConverter() };
 
-                ImmutableList<CompilerOperation> operations = JsonConvert.DeserializeObject<ImmutableList<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
+                List<CompilerOperation> operations = JsonConvert.DeserializeObject<List<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
                 foreach (CompilerOperation operation in operations)
                 {
                     Console.WriteLine(operation.ToString());
                 }
 
                 Chip c = new Chip(operations, 20, 20);
+                c.DoNextStep();
                 return 0;
             }
             catch (Exception ex)
             {
                 //TODO: create more exception
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return -1;
             }
         }

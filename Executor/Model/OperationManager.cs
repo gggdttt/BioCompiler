@@ -2,7 +2,6 @@
 // Author: Wenjie Fan (s210310)
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
-using System.Collections.Immutable;
 using Executor.Model.Operation;
 
 namespace Executor.Model
@@ -15,23 +14,23 @@ namespace Executor.Model
         int y;
 
         // Operations from json
-        ImmutableList<CompilerOperation> operations;
+        List<CompilerOperation> operations;
 
-        ImmutableList<CompilerOperation> executingOperations;
+        List<CompilerOperation> executingOperations;
 
-        ImmutableList<Droplet> activeDroplets;
+        List<Droplet> activeDroplets;
 
-        ImmutableList<Droplet> busyDroplets;
+        List<Droplet> busyDroplets;
 
 
-        public OperationManager(ImmutableList<CompilerOperation> operations, int x, int y)
+        public OperationManager(List<CompilerOperation> operations, int x, int y)
         {
             this.x = x;
             this.y = y;
             this.operations = operations;
-            executingOperations = ImmutableList.Create<CompilerOperation>();
-            activeDroplets = ImmutableList.Create<Droplet>();
-            busyDroplets = ImmutableList.Create<Droplet>();
+            executingOperations = new List<CompilerOperation>();
+            activeDroplets = new List<Droplet>();
+            busyDroplets = new List<Droplet>();
         }
 
         /// <summary>
@@ -39,14 +38,13 @@ namespace Executor.Model
         /// </summary>
         public void BeforeExecuting()
         {
-            ImmutableList<CompilerOperation> executalbeOperations = operations.Where(t => t.IsExecutable(activeDroplets)).ToImmutableList();
-            foreach (CompilerOperation op in executalbeOperations)
-            {
-                op.Active2Busy(activeDroplets, busyDroplets);
-            }
+            List<CompilerOperation> executalbeOperations = operations.Where(t => t.IsExecutable(activeDroplets,busyDroplets)).ToList();
+
             // remove all executable operations and add them to executingOperations
-            operations = operations.RemoveAll(t => t.IsExecutable(activeDroplets));
-            executingOperations = executingOperations.AddRange(executalbeOperations);
+            operations = operations.Except(executalbeOperations).ToList();
+            executingOperations.AddRange(executalbeOperations);
+            Console.WriteLine("\n\n\n before executing");
+            DebugPrint();
         }
 
         /// <summary>
@@ -59,6 +57,9 @@ namespace Executor.Model
             {
                 op.ExecuteOperation(activeDroplets, busyDroplets);
             }
+
+            Console.WriteLine("\n\n\n executing");
+            DebugPrint();
         }
 
         /// <summary>
@@ -66,9 +67,44 @@ namespace Executor.Model
         /// </summary>
         public void AfterExecute()
         {
-            ImmutableList<CompilerOperation> executedOperations = operations.Where(t => t.HasExecuted(activeDroplets, busyDroplets)).ToImmutableList();
-            executingOperations = executingOperations.RemoveAll(t => t.HasExecuted(activeDroplets, busyDroplets));
+            List<CompilerOperation> executedOperations = operations.Where(t => t.HasExecuted(activeDroplets, busyDroplets)).ToList();
+            executingOperations.RemoveAll(t => t.HasExecuted(activeDroplets, busyDroplets));
+
+            Console.WriteLine("\n\n\nafter executing");
+            DebugPrint();
         }
 
+        public bool AllTasksCompleted()
+        {
+
+            return operations.Count() == 0 && executingOperations.Count() == 0;
+        }
+
+        private void DebugPrint()
+        {
+            Console.WriteLine("======================================================:");
+
+            Console.WriteLine("-----------------operations:");
+            foreach (CompilerOperation op in operations)
+            {
+                Console.WriteLine(op);
+            }
+
+            Console.WriteLine("-----------------executingOperations:");
+            foreach (CompilerOperation op in executingOperations)
+            {
+                Console.WriteLine(op);
+            }
+            Console.WriteLine("-----------------activeDroplets:");
+            foreach (Droplet d in activeDroplets)
+            {
+                Console.WriteLine(d);
+            }
+            Console.WriteLine("-----------------busyDroplets:");
+            foreach (Droplet d in busyDroplets)
+            {
+                Console.WriteLine(d);
+            }
+        }
     }
 }

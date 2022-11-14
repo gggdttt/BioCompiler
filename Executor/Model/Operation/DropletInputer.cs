@@ -3,7 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Collections.Immutable;
 
 namespace Executor.Model.Operation
 {
@@ -14,14 +13,14 @@ namespace Executor.Model.Operation
     public class DropletInputer : CompilerOperation
     {
         public int line { get; }
-        public string name { get; }
+        public string name { get; set; }
         public int xValue { get; }
         public int yValue { get; }
         public double size { get; }
 
         public DropletInputer(string dropletName, int xValue, int yValue, double size, int line)
         {
-            name = dropletName;
+            this.name = dropletName;
             this.xValue = xValue;
             this.yValue = yValue;
             this.size = size;
@@ -52,25 +51,26 @@ namespace Executor.Model.Operation
             else return false;
         }
 
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // the droplet has not been initialized
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
         }
 
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
-        {
-            // nothing happened
-        }
 
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             //generate a new droplet
             activeDroplets.Add(new Droplet(name, xValue, yValue, size));
         }
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+        }
+
+        public override string ToString()
+        {
+            return "DropletInputer: " + name;
         }
     }
 }

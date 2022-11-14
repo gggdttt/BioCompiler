@@ -3,8 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Collections.Immutable;
-
 namespace Executor.Model.Operation
 {
 
@@ -27,35 +25,29 @@ namespace Executor.Model.Operation
 
         ///============================================================================================================
         /// The following functions are for executor
-        
+
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="activeDroplets"></param>
-        /// <returns></returns>
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets);
-
-        /// <summary>
-        /// Check if the 
-        /// </summary>
         /// <param name="activeDroplets">Active droplets of Chip</param>
         /// <param name="busyDroplets">Busy Droplet of Chip</param>
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets);
+        /// <returns></returns>
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="activeDroplets"></param>
         /// <param name="busyDroplets"></param>
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets);
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets);
 
 
         /// <summary>
         /// Check if current operation has completed by comparing the current position and dest position
         /// </summary>
         /// <returns></returns>
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets);
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets);
 
 
     }

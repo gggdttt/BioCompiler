@@ -3,6 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Xml.Linq;
 
@@ -52,12 +53,17 @@ namespace Executor.Model.Operation
             else return false;
         }
 
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            return false;
         }
 
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        private void Active2Busy(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // remove it in opreations
             // equals has been overriden
@@ -65,15 +71,20 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d1);
         }
 
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public void ExecuteOperation(List <Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // nothing to change
         }
 
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0
                 && busyDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0;
+        }
+
+        public override string ToString()
+        {
+            return "DropletOutputer: " + name;
         }
     }
 }

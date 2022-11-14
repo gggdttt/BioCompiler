@@ -3,8 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Collections.Immutable;
-using System.Xml.Linq;
 
 namespace Executor.Model.Operation
 {
@@ -91,16 +89,21 @@ namespace Executor.Model.Operation
             else return false;
         }
 
-        public bool IsExecutable(ImmutableList<Droplet> activeDroplets)
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // the indroplet exist
             // the out droplet1 and outdroplet2 have not been inputed 
-            return activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 1
+            if (activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 1
                 && activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).Count() == 0
-                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).Count() == 0;
+                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).Count() == 0)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            return false;
         }
 
-        public void Active2Busy(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        private void Active2Busy(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // d1: active -> busy
             Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).First();
@@ -108,7 +111,7 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d1);
         }
 
-        public void ExecuteOperation(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // add two new generated droplet to active Droplets
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(inDropletName)).First();
@@ -116,11 +119,16 @@ namespace Executor.Model.Operation
             activeDroplets.Add(new Droplet(outDestName1, outDest1X, outDest1Y, d1.size * ratio));
             activeDroplets.Add(new Droplet(outDestName2, outDest2X, outDest2Y, d1.size * (1 - ratio)));
         }
-        public bool HasExecuted(ImmutableList<Droplet> activeDroplets, ImmutableList<Droplet> busyDroplets)
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 0
                 && activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).Count() == 1
                 && activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).Count() == 1;
+        }
+
+        public override string ToString()
+        {
+            return "DropletSplitter: " + " outDestName1:" + outDestName1 + " outDestName2" + outDestName2 + " inDropletName:" + inDropletName;
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using Executor.Model.Operation;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Executor.Model
 {
@@ -20,7 +15,7 @@ namespace Executor.Model
 
         OperationManager manager;
 
-        public Chip(ImmutableList<CompilerOperation> operations, int x, int y)
+        public Chip(List<CompilerOperation> operations, int x, int y)
         {
             this.xLength = x;
             this.yLength = y;
@@ -29,7 +24,16 @@ namespace Executor.Model
 
         public void DoNextStep()
         {
-            
+            int i = 0;
+            while (!manager.AllTasksCompleted() && i < 20)
+            {
+                manager.BeforeExecuting();
+                manager.Executing();
+                manager.AfterExecute();
+                i++;
+                Console.WriteLine("i=" + i);
+            }
+            Console.WriteLine("Executing completed!");
         }
 
     }
