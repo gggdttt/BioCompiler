@@ -59,19 +59,21 @@ namespace Executor.Model.Operation
             Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
             activeDroplets.Remove(d1);
             busyDroplets.Add(d1);
-
-            int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
-            //TODO
-            Console.WriteLine("Is waiting for Droplet Moving, need time:" + waitTime);
-            // generate out1
-
         }
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
             busyDroplets.Remove(d1);
+            // TODO remove, assume now it's finished at once
+            d1.xValue = xDest;
+            d1.yValue = yDest;
+            //============
             activeDroplets.Add(d1);
+
+            int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
+            //TODO
+            Console.WriteLine("Is waiting for Droplet Moving, need time:" + waitTime);
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

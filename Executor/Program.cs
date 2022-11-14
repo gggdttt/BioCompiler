@@ -13,7 +13,7 @@ namespace Executor
             CommandLine.Parser.Default.ParseArguments<ExecutorLaunchOption>(args)
                .WithParsed(opts =>
                {
-                   Environment.Exit(new Executor(opts).Execute());
+                   Environment.Exit(new ProcessExecutor(opts).Execute());
                })
                .WithNotParsed(errs =>
                {

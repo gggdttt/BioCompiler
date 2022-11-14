@@ -6,14 +6,14 @@ namespace Executor.Model
     /// <summary>
     /// 
     /// </summary>
-    internal class Chip
+    public class Chip
     {
 
         int xLength;
 
         int yLength;
 
-        OperationManager manager;
+        public OperationManager manager { get; set; }
 
         public Chip(List<CompilerOperation> operations, int x, int y)
         {

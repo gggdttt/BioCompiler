@@ -3,27 +3,25 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Text;
 using ToolSupporter.FileOperator;
 using Executor.Model.Operation;
 using Executor.Model.OperationHelper;
 using Newtonsoft.Json;
-using System;
 using Executor.Model;
 
 namespace Executor
 
 {
-    public class Executor
+    public class ProcessExecutor
     {
         ExecutorLaunchOption option;
 
-        public Executor()
+        public ProcessExecutor()
         {
             option = new ExecutorLaunchOption();
         }
 
-        public Executor(ExecutorLaunchOption option)
+        public ProcessExecutor(ExecutorLaunchOption option)
         {
             this.option = option;
         }
@@ -34,16 +32,7 @@ namespace Executor
             {
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
-
-                JsonConverter[] converters = { new CompilerOperation2JSONConverter() };
-
-                List<CompilerOperation> operations = JsonConvert.DeserializeObject<List<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
-                foreach (CompilerOperation operation in operations)
-                {
-                    Console.WriteLine(operation.ToString());
-                }
-
-                Chip c = new Chip(operations, 20, 20);
+                Chip c = new Chip(GetOperationsListFromJSON(fileContent), 20, 20);
                 c.DoNextStep();
                 return 0;
             }
@@ -53,6 +42,13 @@ namespace Executor
                 Console.WriteLine(ex.StackTrace);
                 return -1;
             }
+        }
+
+        public List<CompilerOperation> GetOperationsListFromJSON(string fileContent)
+        {
+
+            JsonConverter[] converters = { new CompilerOperation2JSONConverter() };
+            return JsonConvert.DeserializeObject<List<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
         }
 
 

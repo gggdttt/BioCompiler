@@ -6,7 +6,7 @@ using Executor.Model.Operation;
 
 namespace Executor.Model
 {
-    internal class OperationManager
+    public  class OperationManager
     {
 
         int x;
@@ -38,7 +38,7 @@ namespace Executor.Model
         /// </summary>
         public void BeforeExecuting()
         {
-            List<CompilerOperation> executalbeOperations = operations.Where(t => t.IsExecutable(activeDroplets,busyDroplets)).ToList();
+            List<CompilerOperation> executalbeOperations = operations.Where(t => t.IsExecutable(activeDroplets, busyDroplets)).ToList();
 
             // remove all executable operations and add them to executingOperations
             operations = operations.Except(executalbeOperations).ToList();
@@ -67,10 +67,11 @@ namespace Executor.Model
         /// </summary>
         public void AfterExecute()
         {
-            List<CompilerOperation> executedOperations = operations.Where(t => t.HasExecuted(activeDroplets, busyDroplets)).ToList();
-            executingOperations.RemoveAll(t => t.HasExecuted(activeDroplets, busyDroplets));
+            List<CompilerOperation> executedOperations = executingOperations.Where(t => t.HasExecuted(activeDroplets, busyDroplets)).ToList();
+            // remove executed 
+            executingOperations = executingOperations.Except(executedOperations).ToList();
 
-            Console.WriteLine("\n\n\nafter executing");
+            Console.WriteLine("\n\n\n after executing");
             DebugPrint();
         }
 
@@ -95,11 +96,13 @@ namespace Executor.Model
             {
                 Console.WriteLine(op);
             }
+
             Console.WriteLine("-----------------activeDroplets:");
             foreach (Droplet d in activeDroplets)
             {
                 Console.WriteLine(d);
             }
+
             Console.WriteLine("-----------------busyDroplets:");
             foreach (Droplet d in busyDroplets)
             {

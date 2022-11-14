@@ -94,11 +94,6 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d2);
             busyDroplets.Add(d1);
             busyDroplets.Add(d2);
-
-            // TODO: 
-            int waitTime = Math.Max(Math.Abs(d1.yValue - yDest) + Math.Abs(d1.xValue - xDest), Math.Abs(d2.yValue - yDest) + Math.Abs(d2.xValue - xDest));
-            Console.WriteLine("Is waiting for merging, need time:" + waitTime);
-
         }
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
@@ -110,6 +105,10 @@ namespace Executor.Model.Operation
             busyDroplets.Remove(d1);
             busyDroplets.Remove(d2);
             activeDroplets.Add(new Droplet(outDropletName, xDest, yDest, d1.size + d2.size));
+
+            // TODO: 
+            int waitTime = Math.Max(Math.Abs(d1.yValue - yDest) + Math.Abs(d1.xValue - xDest), Math.Abs(d2.yValue - yDest) + Math.Abs(d2.xValue - xDest));
+            Console.WriteLine("Is waiting for merging, need time:" + waitTime);
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
