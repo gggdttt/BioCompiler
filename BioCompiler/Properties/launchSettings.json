@@ -1,20 +1,24 @@
 {
   "profiles": {
-    "BioCompilerNoError": {
-      "commandName": "Project",
-      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program1.sc"
-    },
     "BioCompilerError01": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\error1.sc"
     },
-    "Profile 1": {
+    "BioCompilerProgram01": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program1.sc"
+    },
+    "BioCompilerProgram02": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program2.sc"
     },
-    "simple": {
+    "BioCompilerProgram03": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program3.sc"
+    },
+    "Server_BioCompilerProgram03": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json\r\n--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\InputProgram\\program3.sc"
     }
   }
 }

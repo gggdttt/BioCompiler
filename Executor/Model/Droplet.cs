@@ -47,5 +47,10 @@ namespace Executor.Model
         {
             return "Droplet: " + name + " xValue:" + xValue + " yValue:" + yValue + " size:" + size;
         }
+
+        public override int GetHashCode()
+        {
+            return name.GetHashCode();
+        }
     }
 }
