@@ -21,13 +21,9 @@ namespace Executor.Model.Operation
             this.line = line;
         }
 
-        public int getLine()
+        public int GetLine()
         {
             return line;
-        }
-        public void Executed()
-        {
-            //this.result1 = new Droplet(aimDroplet1, xValue1/2, yValue1, width, length, false);//
         }
 
         /// <summary>
@@ -45,6 +41,29 @@ namespace Executor.Model.Operation
                 return true;
             }
             else return false;
+        }
+
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            // the droplet has not been initialized
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
+        }
+
+
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets) 
+        { 
+            // nothing happen
+        }
+
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        { 
+            // don't need to execute 
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return "DropletDeclarator: " + name;
         }
 
     }

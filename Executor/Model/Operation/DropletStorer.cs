@@ -3,6 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -16,26 +17,22 @@ namespace Executor.Model.Operation
         public int xValue { get; }
         public int yValue { get; }
         public double latency { get; }
+        public int time { get; }
 
         public DropletStorer(string name, int xValue, int yValue, double latency, int line)
         {
-
             this.name = name;
             this.xValue = xValue;
             this.yValue = yValue;
             this.latency = latency;
             this.line = line;
+            time = 0;
         }
 
-        public int getLine()
+        public int GetLine()
         {
             return line;
         }
-        public void Executed()
-        {
-            //this.result1 = new Droplet(aimDroplet1, xValue1/2, yValue1, width, length, false);//
-        }
-
 
         /// <summary>
         /// If its name is not in declaredSet, return false 
@@ -47,6 +44,41 @@ namespace Executor.Model.Operation
         public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
             return occupiedSet.Contains(name);
+        }
+
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            if( activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            return false;
+        }
+
+        private void Active2Busy(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
+            activeDroplets.Remove(d1);
+            busyDroplets.Add(d1);
+        }
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
+            busyDroplets.Remove(d1);
+            activeDroplets.Add(d1);
+        }
+
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).ToList().Count == 1
+                && busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList().Count == 0
+                && time == latency;
+        }
+
+        public override string ToString()
+        {
+            return "DropletStorer: " + name;
         }
     }
 }

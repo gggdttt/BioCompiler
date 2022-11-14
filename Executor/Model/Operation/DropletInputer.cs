@@ -3,6 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -12,28 +13,23 @@ namespace Executor.Model.Operation
     public class DropletInputer : CompilerOperation
     {
         public int line { get; }
-        public string name { get; }
+        public string name { get; set; }
         public int xValue { get; }
         public int yValue { get; }
         public double size { get; }
-        public int _order_id { get; }
 
         public DropletInputer(string dropletName, int xValue, int yValue, double size, int line)
         {
-            // TODO : add order_id here 
-            name = dropletName;
+            this.name = dropletName;
             this.xValue = xValue;
             this.yValue = yValue;
             this.size = size;
             this.line = line;
         }
 
-        public int getLine()
+        public int GetLine()
         {
             return line;
-        }
-        public void Executed()
-        {
         }
 
         /// <summary>
@@ -45,7 +41,6 @@ namespace Executor.Model.Operation
         /// <returns></returns>
         public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-
             if (declaredSet.Count() == 0) return false;
             if (declaredSet.Contains(name))
             {
@@ -56,5 +51,26 @@ namespace Executor.Model.Operation
             else return false;
         }
 
+        public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            // the droplet has not been initialized
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
+        }
+
+
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            //generate a new droplet
+            activeDroplets.Add(new Droplet(name, xValue, yValue, size));
+        }
+        public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+        }
+
+        public override string ToString()
+        {
+            return "DropletInputer: " + name;
+        }
     }
 }

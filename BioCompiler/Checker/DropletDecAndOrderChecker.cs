@@ -23,7 +23,7 @@ namespace BioCompiler.Checker
                     /*                    Console.WriteLine("declaredSet"+string.Join("", declaredSet.ToArray()));
                                         Console.WriteLine("occupiedSet:"+string.Join("", occupiedSet.ToArray()));*/
                     // TODO, throw Exception formally
-                    throw new Exception("Calling an undeclared droplet or this droplet is occupied in line:" + operation.getLine());
+                    throw new Exception("Calling an undeclared droplet or this droplet is occupied in line:" + operation.GetLine());
                 }
             }
             return true;

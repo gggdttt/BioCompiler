@@ -12,8 +12,8 @@ namespace BioCompiler
     {
         private static void Main(string[] args)
         {
-            CommandLine.Parser.Default.ParseArguments<Option>(args)
-               .WithParsed<Option>(opts =>
+            CommandLine.Parser.Default.ParseArguments<CompilerLaunchOption>(args)
+               .WithParsed<CompilerLaunchOption>(opts =>
                {
                    Environment.Exit(new Runner(opts).Run());
                })
