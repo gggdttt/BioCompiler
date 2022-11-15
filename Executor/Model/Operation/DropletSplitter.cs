@@ -23,11 +23,10 @@ namespace Executor.Model.Operation
         public int outDest2Y { get; }
         public double ratio { get; }
 
-        public int _order_id { get; }
-
+        private static double d1Size = 0;
+        private static double d2Size = 0;
         public DropletSplitter(string outDestName1, string outDestName2, string inDropletName, int outDest1X, int outDest1Y, int outDest2X, int outDest2Y, double ratio, int line)
         {
-            // TODO : add order_id here 
             this.outDestName1 = outDestName1;
             this.outDestName2 = outDestName2;
             this.inDropletName = inDropletName;
@@ -91,7 +90,27 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            // the indroplet exist
+
+            // special case1: d1 -> d1 d2
+            if (inDropletName.Equals(outDestName1)
+                && !inDropletName.Equals(outDestName2)
+                && activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 1
+                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).Count() == 0)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            // special case2: d1-> d2 d1
+            if (inDropletName.Equals(outDestName2)
+                && !inDropletName.Equals(outDestName1)
+                && activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 1
+                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).Count() == 0)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+
+            // the indroplet exist and available and two output droplet not busy
             // the out droplet1 and outdroplet2 have not been inputed 
             if (activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 1
                 && activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).Count() == 0
@@ -121,14 +140,22 @@ namespace Executor.Model.Operation
         }
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            return activeDroplets.Where(droplet => droplet.name.Equals(inDropletName)).Count() == 0
-                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).Count() == 1
-                && activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).Count() == 1;
+            List<Droplet> l1 = activeDroplets.Where(droplet => droplet.name.Equals(outDestName1)).ToList();
+            List<Droplet> l2 = activeDroplets.Where(droplet => droplet.name.Equals(outDestName2)).ToList();
+            return
+                l1 != null
+                && l2 != null
+                && l1!.Count() == 1
+                && l2!.Count() == 1
+                && l1.First().xValue == outDest1X
+                && l1.First().yValue == outDest1Y
+                && l2.First().xValue == outDest2X
+                && l2.First().yValue == outDest2Y;
         }
 
         public override string ToString()
         {
-            return "DropletSplitter: " + " outDestName1:" + outDestName1 + " outDestName2" + outDestName2 + " inDropletName:" + inDropletName;
+            return "DropletSplitter: " + " outDestName1:" + outDestName1 + " outDestName2:" + outDestName2 + " inDropletName:" + inDropletName;
         }
     }
 }

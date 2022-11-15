@@ -18,6 +18,8 @@ namespace Executor.Model.Operation
         public int yValue { get; }
         public double size { get; }
 
+        static List<Droplet> RecordDroplets = new List<Droplet>();
+
         public DropletInputer(string dropletName, int xValue, int yValue, double size, int line)
         {
             this.name = dropletName;
@@ -54,18 +56,30 @@ namespace Executor.Model.Operation
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // the droplet has not been initialized
-            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0;
+            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
+                && RecordDroplets.Where(droplet => droplet.name.Equals(name)).Count()==0)
+            {
+                RecordDroplets.Add(new Droplet(name, xValue, yValue, size));
+                return true;
+            }
+            return false;
         }
 
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
+            Droplet d = RecordDroplets.Where(droplet => droplet.name.Equals(name)).First();
+            RecordDroplets.Remove(d);
             //generate a new droplet
-            activeDroplets.Add(new Droplet(name, xValue, yValue, size));
+            activeDroplets.Add(d);
         }
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1;
+            Droplet d = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
+            return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1
+                && d.xValue == xValue
+                && d.yValue == yValue
+                && d.size ==size;
         }
 
         public override string ToString()
