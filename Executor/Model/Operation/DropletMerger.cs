@@ -117,10 +117,12 @@ namespace Executor.Model.Operation
                 && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet1Name)).Count() == 0
                 && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet2Name)).Count() == 0;
         }
+
         public override string ToString()
         {
             return "DropletMerger: " + " outDropletName:" + outDropletName 
                 + " inDroplet1Name:"+ inDroplet1Name + " inDroplet2Name:" + inDroplet2Name;
         }
+
     }
 }
