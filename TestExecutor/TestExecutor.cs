@@ -72,7 +72,7 @@ namespace TestExecutor
         }
 
         [TestMethod]
-        public void TestMultiInputAndOuput()
+         public void TestMultiInputAndOuput()
         {
             string origin =
                 "droplet d1;\r\n" +
@@ -81,7 +81,7 @@ namespace TestExecutor
                 "input(d2,4,4,0.5);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
+                "input(d1,1,1,1.0);\r\n" + 
                 "input(d2,4,4,0.5);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
