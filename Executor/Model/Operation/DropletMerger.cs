@@ -136,7 +136,6 @@ namespace Executor.Model.Operation
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             Droplet outDroplet = activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).First();
-
             return activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
                 && outDroplet.xValue == xDest
                 && outDroplet.yValue == yDest

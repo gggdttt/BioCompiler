@@ -57,6 +57,7 @@ namespace Executor.Model.Operation
         {
             // the droplet has not been initialized
             if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
+                &&busyDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
                 && RecordDroplets.Where(droplet => droplet.name.Equals(name)).Count()==0)
             {
                 RecordDroplets.Add(new Droplet(name, xValue, yValue, size));

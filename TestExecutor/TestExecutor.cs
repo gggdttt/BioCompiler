@@ -148,15 +148,13 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "input(d1,1,1,1.0);\r\n" +
-                "mix(d1,2,2,2,2,5);\r\n\r\n" +
-                "mix(d1,2,2,2,2,5);\r\n\r\n" +
-                "mix(d1,2,2,2,2,5);\r\n\r\n" +
+                "mix(d1,2,2,2,2,5);\r\n" +
+                "mix(d1,2,2,2,2,5);\r\n" +
+                "mix(d1,2,2,2,2,5);\r\n" +
                 "output(d1,0,0);\r\n";
-
             Chip c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.manager.AllTasksCompleted());
         }
-
 
         [TestMethod]
         public void TestSplitter()
@@ -270,6 +268,36 @@ namespace TestExecutor
                 "store(d3,5,5,2.0);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n" +
+                "output(d3,0,0);\r\n";
+
+            Chip c = GetChipAndRun(origin, 32, 20);
+            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+        }
+
+
+        [TestMethod]
+        public void TestAllSpecialCase2()
+        {
+            // input again after output
+            string origin =
+                "droplet d1;\r\n" +
+                "droplet d2;\r\n" +
+                "droplet d3;\r\n" +
+                "input(d1,1,1,1.0);\r\n" +
+                "input(d2,4,4,0.5);\r\n" +
+                "input(d3,10,10,3.2);\r\n" +
+                "move(d1,3,3);\r\n" +
+                "move(d2,7,7);\r\n" +
+                "move(d3,9,9);\r\n" +
+                "droplet d4;\r\n" +
+                "split(d4,d3,d3,12,12,15,15,0.5);\r\n" +
+                "merge(d3,d4,d3,5,9);\r\n" +
+                "mix(d3,2,2,2,2,5);\r\n" +
+                "store(d3,5,5,2.0);\r\n" +
+                "output(d1,0,0);\r\n" +
+                "output(d2,0,0);\r\n" +
+                "output(d3,0,0);\r\n"+
+                "input(d3,10,10,3.2);\r\n" +
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
