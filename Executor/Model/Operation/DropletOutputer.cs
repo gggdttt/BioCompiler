@@ -78,8 +78,8 @@ namespace Executor.Model.Operation
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            return activeDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0
-                && busyDroplets.Where(droplet => droplet.name.Equals(name)).ToImmutableList().Count == 0;
+            // if it is executable, then it must have been executed
+            return true;
         }
 
         public override string ToString()
