@@ -7,7 +7,7 @@
 namespace Executor.Model.Operation
 {
     /// <summary>
-    /// store(<droplet_name>,x,y, time)
+    /// store(<droplet_name>,x,y, latency)
     ///     string, int, int , float
     /// </summary>
     public class DropletStorer : CompilerOperation
@@ -17,7 +17,7 @@ namespace Executor.Model.Operation
         public int xValue { get; }
         public int yValue { get; }
         public double latency { get; }
-        public int time { get; }
+        public double time { get; set; }
 
         public DropletStorer(string name, int xValue, int yValue, double latency, int line)
         {
@@ -67,6 +67,8 @@ namespace Executor.Model.Operation
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
             busyDroplets.Remove(d1);
             activeDroplets.Add(d1);
+            // TODO: remove, incre time until time == latency
+            time = latency;
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

@@ -4,6 +4,7 @@
 // DTU(Technical University of Denmark)
 
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Executor.Model.Operation
 {
@@ -20,6 +21,8 @@ namespace Executor.Model.Operation
         public string inDroplet2Name { get; }
         public int xDest { get; }
         public int yDest { get; }
+
+        private double mergedSize { get; set; }
 
         public DropletMerger(string outDropletName, string inDroplet1Name, string inDroplet2Name, int xValue, int yValue, int line)
         {
@@ -73,6 +76,25 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
+            // special case1: d1 d2  -> d1 
+            if (outDropletName.Equals(inDroplet1Name)
+                && !outDropletName.Equals(inDroplet2Name)
+                && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet1Name)).Count() == 1
+                && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet2Name)).Count() == 1)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+            // special case2:  d2 d1 ->d1
+            if (outDropletName.Equals(inDroplet2Name)
+                && !outDropletName.Equals(inDroplet1Name)
+                && activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
+                && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet1Name)).Count() == 1)
+            {
+                Active2Busy(activeDroplets, busyDroplets);
+                return true;
+            }
+
             // the out droplet does not exist
             // the in droplet1 and indroplet2 are in activeDroplets 
             if (activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 0
@@ -105,7 +127,7 @@ namespace Executor.Model.Operation
             busyDroplets.Remove(d1);
             busyDroplets.Remove(d2);
             activeDroplets.Add(new Droplet(outDropletName, xDest, yDest, d1.size + d2.size));
-
+            mergedSize = d1.size + d2.size;
             // TODO: 
             int waitTime = Math.Max(Math.Abs(d1.yValue - yDest) + Math.Abs(d1.xValue - xDest), Math.Abs(d2.yValue - yDest) + Math.Abs(d2.xValue - xDest));
             Console.WriteLine("Is waiting for merging, need time:" + waitTime);
@@ -113,14 +135,19 @@ namespace Executor.Model.Operation
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
+            Droplet outDroplet = activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).First();
+
             return activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
-                && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet1Name)).Count() == 0
-                && activeDroplets.Where(droplet => droplet.name.Equals(inDroplet2Name)).Count() == 0;
+                && outDroplet.xValue == xDest
+                && outDroplet.yValue == yDest
+                && outDroplet.size == mergedSize;
         }
+
         public override string ToString()
         {
-            return "DropletMerger: " + " outDropletName:" + outDropletName 
-                + " inDroplet1Name:"+ inDroplet1Name + " inDroplet2Name:" + inDroplet2Name;
+            return "DropletMerger: " + " outDropletName:" + outDropletName
+                + " inDroplet1Name:" + inDroplet1Name + " inDroplet2Name:" + inDroplet2Name;
         }
+
     }
 }

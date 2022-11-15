@@ -70,8 +70,6 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d1);
             busyDroplets.Add(d1);
 
-            // generate out1
-            activeDroplets.Add(new Droplet(name, xMix, yMix, d1.size));
         }
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
@@ -81,7 +79,8 @@ namespace Executor.Model.Operation
             busyDroplets.Remove(d1);
             activeDroplets.Add(d1);
             // TODO: timesCounter ++;
-            //TODO
+            timesCounter = repeatTimes;
+            // TODO:
             Console.WriteLine("Is waiting for Droplet Mixing, need time:");
         }
 
