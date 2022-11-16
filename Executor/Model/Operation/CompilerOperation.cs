@@ -28,19 +28,19 @@ namespace Executor.Model.Operation
 
 
         /// <summary>
-        /// 
+        /// Check if the operation is executable. If it is executable, move the droplets it need from activeDroplets to busyDroplets  and return True, other wise do nothing and return false
         /// </summary>
         /// <param name="activeDroplets">Active droplets of Chip</param>
         /// <param name="busyDroplets">Busy Droplet of Chip</param>
-        /// <returns></returns>
+        /// <returns>Return True if it is executable, otherwise return false </returns>
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets);
 
         /// <summary>
-        /// 
+        /// Execute the operation by steps. Every unit time, execute one step of operation. For example, move droplet from (0,0) to (1,1), it needs 3 steps, so it need 3 unit time to run.
         /// </summary>
-        /// <param name="activeDroplets"></param>
-        /// <param name="busyDroplets"></param>
-        /// <param name="manager"></param>
+        /// <param name="activeDroplets">Active droplets of Chip</param>
+        /// <param name="busyDroplets">The droplets are busy/occupied </param>
+        /// <param name="manager">Use movement manager to move droplets</param>
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager);
 
 

@@ -21,12 +21,14 @@ namespace Executor.Model.Operation
         public int xValue { get; }
         public int yValue { get; }
 
+        private bool outputFlag;
         public DropletOutputer(string name, int xValue, int yValue, int line)
         {
             this.name = name;
             this.xValue = xValue;
             this.yValue = yValue;
             this.line = line;
+            outputFlag = false;
         }
 
         public int GetLine()
@@ -65,21 +67,36 @@ namespace Executor.Model.Operation
 
         private void Active2Busy(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            // remove it in opreations
-            // equals has been overriden
+            // Remove it from activeDroplets
             Droplet d1 = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
             activeDroplets.Remove(d1);
+            busyDroplets.Add(d1);
         }
 
         public void ExecuteOperation(List <Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
-            // nothing to change
+            List<Droplet> temp = busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList();
+            // if it has not moved to dest
+            if (temp != null && (temp.First().xValue != xValue || temp.First().yValue != yValue))
+            {
+                manager.MoveByOneStep(temp.First(), xValue, yValue, activeDroplets, busyDroplets);
+            }
+
+            // check if it has moved to dest after the this movement
+            // if it has moved to dest successfully, remove it from busy droplets and set flag to true
+            if (temp != null && temp.First().xValue == xValue && temp.First().yValue == yValue)
+            {
+
+                busyDroplets.Remove(temp.First());
+                outputFlag = true;
+            }
+            //int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            // if it is executable, then it must have been executed
-            return true;
+            // Return true if this droplet has been outputed
+            return outputFlag;
         }
 
         public override string ToString()
