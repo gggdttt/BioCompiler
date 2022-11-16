@@ -29,15 +29,13 @@ namespace Executor.Model
         public void StartOpearions()
         {
             int i = 0;
-            while (!operationManager.AllTasksCompleted() && i < 100)
+            while (!operationManager.AllTasksCompleted())
             {
                 operationManager.BeforeExecuting();
                 operationManager.Executing(movementManager);
                 operationManager.AfterExecute();
                 i++;
-                Console.WriteLine("i=" + i);
             }
-            Console.WriteLine("Executing completed!");
         }
 
     }

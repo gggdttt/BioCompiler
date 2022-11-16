@@ -86,7 +86,6 @@ namespace Executor.Model.Operation
             // if it has moved to dest successfully, remove it from busy droplets and set flag to true
             if (temp != null && temp.First().xValue == xValue && temp.First().yValue == yValue)
             {
-
                 busyDroplets.Remove(temp.First());
                 outputFlag = true;
             }
