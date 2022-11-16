@@ -62,6 +62,7 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d1);
             busyDroplets.Add(d1);
         }
+
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
