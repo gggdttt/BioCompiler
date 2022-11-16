@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Executor.Router
 {
-    enum RouterOption
+    public enum RouterOption
     {
         SimpleXY,
         AStar,
