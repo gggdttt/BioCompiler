@@ -23,8 +23,6 @@ namespace Executor.Model.Operation
         public int outDest2Y { get; }
         public double ratio { get; }
 
-        private static double d1Size = 0;
-        private static double d2Size = 0;
         public DropletSplitter(string outDestName1, string outDestName2, string inDropletName, int outDest1X, int outDest1Y, int outDest2X, int outDest2Y, double ratio, int line)
         {
             this.outDestName1 = outDestName1;
@@ -130,7 +128,7 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d1);
         }
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             // add two new generated droplet to active Droplets
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(inDropletName)).First();

@@ -15,7 +15,7 @@ namespace TestExecutor
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
             Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length);
-            c.DoNextStep();
+            c.StartOpearions();
             return c;
         }
 
@@ -34,7 +34,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -55,7 +55,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace TestExecutor
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace TestExecutor
                 "output(d5,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         // d1,d2 ->d2
@@ -139,7 +139,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace TestExecutor
                 "mix(d1,2,2,2,2,5);\r\n" +
                 "output(d1,0,0);\r\n";
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace TestExecutor
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -189,7 +189,7 @@ namespace TestExecutor
                 "output(d5,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -202,7 +202,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -216,7 +216,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
         [TestMethod]
@@ -243,7 +243,7 @@ namespace TestExecutor
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
 
@@ -271,7 +271,7 @@ namespace TestExecutor
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
 
@@ -301,7 +301,7 @@ namespace TestExecutor
                 "output(d3,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
-            Assert.AreEqual(true, c.manager.AllTasksCompleted());
+            Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
     }
 }

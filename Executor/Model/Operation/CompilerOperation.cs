@@ -13,7 +13,7 @@ namespace Executor.Model.Operation
         /// </summary>
         /// <returns>the line number in source code</returns>
         public int GetLine();
-        
+
         /// <summary>
         /// Check if the droplet declaration is well defined
         /// </summary>
@@ -40,7 +40,8 @@ namespace Executor.Model.Operation
         /// </summary>
         /// <param name="activeDroplets"></param>
         /// <param name="busyDroplets"></param>
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets);
+        /// <param name="manager"></param>
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager);
 
 
         /// <summary>

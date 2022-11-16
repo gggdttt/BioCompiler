@@ -6,7 +6,7 @@ using Executor.Model.Operation;
 
 namespace Executor.Model
 {
-    public  class OperationManager
+    public class OperationManager
     {
 
         int x;
@@ -50,12 +50,12 @@ namespace Executor.Model
         /// <summary>
         /// Keypart, need to create a clock to execute step by step
         /// </summary>
-        public void Executing()
+        public void Executing(MovementManager manager)
         {
             // intergration with a clock
             foreach (CompilerOperation op in executingOperations)
             {
-                op.ExecuteOperation(activeDroplets, busyDroplets);
+                op.ExecuteOperation(activeDroplets, busyDroplets, manager);
             }
 
             Console.WriteLine("\n\n\n executing");

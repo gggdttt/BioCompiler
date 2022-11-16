@@ -8,10 +8,10 @@ namespace Executor.Router
         int width;
         int height;
 
-        public SimpleXYRouter(int width, int heights)
+        public SimpleXYRouter(int width, int height)
         {
             this.width = width;
-            this.height = heights;
+            this.height = height;
         }
 
         public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
@@ -21,8 +21,10 @@ namespace Executor.Router
                 throw new ArgumentException("There is no such droplet in busy Droplets!");
             }
 
-            if (CheckGrid(destx, desty))
+            if (!CheckGrid(destx, desty))
             {
+                Console.WriteLine("x is :" + destx + ", y is:" + desty);
+                Console.WriteLine("width is :" + width + ", height is:" + height);
                 throw new ArgumentException("The grid is out of bound!");
             }
 

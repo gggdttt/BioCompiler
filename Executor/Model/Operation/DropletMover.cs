@@ -45,7 +45,7 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
             {
                 Active2Busy(activeDroplets, busyDroplets);
                 return true;
@@ -61,19 +61,25 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d1);
         }
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
-            Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
-            busyDroplets.Remove(d1);
-            // TODO remove, assume now it's finished at once
-            d1.xValue = xDest;
-            d1.yValue = yDest;
-            //============
-            activeDroplets.Add(d1);
+            List<Droplet> temp = busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList();
+            // if it has not moved to dest
+            if (temp != null && (temp.First().xValue != xDest || temp.First().yValue != yDest))
+            {
+                manager.MoveByOneStep(temp.First(), xDest, yDest, activeDroplets, busyDroplets);
+            }
 
-            int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
-            //TODO
-            Console.WriteLine("Is waiting for Droplet Moving, need time:" + waitTime);
+            // check if it has moved to dest after the this movement
+            // if it has moved to dest successfully, remove it from busy droplets and add it to active droplets
+            if (temp != null && temp.First().xValue == xDest && temp.First().yValue == yDest)
+            {
+
+                busyDroplets.Remove(temp.First());
+                activeDroplets.Add(temp.First());
+            }
+            //int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
+
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

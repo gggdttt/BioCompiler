@@ -118,7 +118,7 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d2);
         }
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             // after executing, a new droplet will generate
             // outDroplet will be added to active droplets

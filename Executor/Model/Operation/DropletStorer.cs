@@ -48,7 +48,7 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            if( activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
             {
                 Active2Busy(activeDroplets, busyDroplets);
                 return true;
@@ -63,7 +63,7 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d1);
         }
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
             busyDroplets.Remove(d1);
