@@ -10,8 +10,6 @@ namespace BioCompiler
         private static void Main(string[] args)
         {
 
-              //  ImmutableArray<>
-                //File.WriteAllText(@"C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\BioCompiler\Source\Output\result.json", temp.ToString());
         }
     }
 }

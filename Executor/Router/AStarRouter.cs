@@ -4,7 +4,7 @@
 // DTU(Technical University of Denmark)
 
 using System.Numerics;
-
+using Executor.Model;
 
 namespace Executor.Router
 {
@@ -46,7 +46,7 @@ namespace Executor.Router
         }
     }
 
-    public class Astar
+    public class AStarRouter : RouterInter
     {
         List<List<Node>> Grid;
         int GridRows
@@ -64,7 +64,7 @@ namespace Executor.Router
             }
         }
 
-        public Astar(List<List<Node>> grid)
+        public AStarRouter(List<List<Node>> grid)
         {
             Grid = grid;
         }
@@ -154,6 +154,11 @@ namespace Executor.Router
             }
 
             return temp;
+        }
+
+        public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
+        {
+            throw new NotImplementedException();
         }
     }
 }

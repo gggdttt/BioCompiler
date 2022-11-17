@@ -16,8 +16,12 @@ namespace Executor.Model.Operation
         public string name { get; }
         public int xValue { get; }
         public int yValue { get; }
+        // time this 
         public double latency { get; }
-        public double time { get; set; }
+
+        private DateTime startTime = DateTime.MinValue;
+
+        private bool storeFinishFlag = false;
 
         public DropletStorer(string name, int xValue, int yValue, double latency, int line)
         {
@@ -26,7 +30,6 @@ namespace Executor.Model.Operation
             this.yValue = yValue;
             this.latency = latency;
             this.line = line;
-            time = 0;
         }
 
         public int GetLine()
@@ -48,7 +51,7 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            if( activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
             {
                 Active2Busy(activeDroplets, busyDroplets);
                 return true;
@@ -62,20 +65,34 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d1);
             busyDroplets.Add(d1);
         }
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
-            Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
-            busyDroplets.Remove(d1);
-            activeDroplets.Add(d1);
-            // TODO: remove, incre time until time == latency
-            time = latency;
+            if (startTime == DateTime.MinValue)
+            {
+                // if startTime is minmum, it means this is the time to start
+                startTime = DateTime.Now;
+            }
+            Console.WriteLine("*********DateTime.Now - startTime!***********"+ (DateTime.Now - startTime).TotalMilliseconds.ToString());
+            Console.WriteLine("*********latency!***********" + latency);
+
+            if ((DateTime.Now - startTime).TotalSeconds >= latency)
+            {
+                Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
+                busyDroplets.Remove(d1);
+                activeDroplets.Add(d1);
+                // set flag to true, which represent this operation finish
+                storeFinishFlag = true;
+                Console.WriteLine("*********Store enough time!***********");
+            }
+
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).ToList().Count == 1
                 && busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList().Count == 0
-                && time == latency;
+                && storeFinishFlag;
         }
 
         public override string ToString()
