@@ -4,6 +4,9 @@
 // DTU(Technical University of Denmark)
 
 
+using System.Net.NetworkInformation;
+using System.Xml.Linq;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -21,8 +24,12 @@ namespace Executor.Model.Operation
         public int yDistance { get; }
         public int repeatTimes { get; }
 
-        private int timesCounter;
+        private int currentRepeatTimes = 0;
 
+        private bool movingBackFlag = false;
+        // temp variable to store origin position of the droplet
+        private int originX;
+        private int originY;
         public DropletMixer(string name, int xMix, int yMix, int xDistance, int yDistance, int repeatTimes, int line)
         {
 
@@ -33,7 +40,6 @@ namespace Executor.Model.Operation
             this.yDistance = yDistance;
             this.repeatTimes = repeatTimes;
             this.line = line;
-            timesCounter = 0;
         }
 
         public int GetLine()
@@ -55,7 +61,7 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
             {
                 Active2Busy(activeDroplets, busyDroplets);
                 return true;
@@ -70,24 +76,52 @@ namespace Executor.Model.Operation
             activeDroplets.Remove(d1);
             busyDroplets.Add(d1);
 
+            // save originX and originY
+            originX = d1.xValue;
+            originY = d1.yValue;
         }
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             // droplet busy->active
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(name)).First();
-            busyDroplets.Remove(d1);
-            activeDroplets.Add(d1);
-            // TODO: timesCounter ++;
-            timesCounter = repeatTimes;
-            // TODO:
-            Console.WriteLine("Is waiting for Droplet Mixing, need time:");
+
+            // currentRepeatTimes
+            if (d1.xValue == originX && d1.yValue == originY && currentRepeatTimes != repeatTimes)
+            {
+                currentRepeatTimes++;
+
+                // now is now moving back
+                movingBackFlag = false;
+
+                // if now it is equal to required repeatTimes, do not need to move more
+                if (currentRepeatTimes == repeatTimes)
+                {
+                    busyDroplets.Remove(d1);
+                    activeDroplets.Add(d1);
+                    return;
+                }
+            }
+
+            if(d1.xValue == xMix && d1.yValue == yMix)
+            {
+                movingBackFlag = true;
+            }
+
+            if (!movingBackFlag)
+            {// Moving from origin to dest
+                manager.MoveByOneStep(d1, xMix, yMix, activeDroplets, busyDroplets);
+            }
+            else
+            {
+                manager.MoveByOneStep(d1, originX, originY, activeDroplets, busyDroplets);
+            }
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1
-                && repeatTimes == timesCounter;
+                && repeatTimes == currentRepeatTimes;
         }
 
         public override string ToString()

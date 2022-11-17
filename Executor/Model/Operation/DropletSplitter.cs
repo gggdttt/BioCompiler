@@ -88,7 +88,6 @@ namespace Executor.Model.Operation
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-
             // special case1: d1 -> d1 d2
             if (inDropletName.Equals(outDestName1)
                 && !inDropletName.Equals(outDestName2)

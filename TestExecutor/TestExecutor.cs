@@ -135,7 +135,7 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "input(d1,1,1,1.0);\r\n" +
-                "mix(d1,2,2,2,2,5);\r\n\r\n" +
+                "mix(d1,3,3,3,3,5);\r\n\r\n" +
                 "output(d1,0,0);\r\n";
 
             Chip c = GetChipAndRun(origin, 32, 20);
