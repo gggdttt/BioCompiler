@@ -164,7 +164,7 @@ namespace TestExecutor
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n\r\n" +
                 "input(d1,1,1,2.0);\r\n" +
-                "split(d2,d3,d1,12,12,15,15,0.5);\r\n\r\n" +
+                "split(d2,d3,d1,4,4,2,2,0.5);\r\n\r\n" +
                 "output(d2,0,0);\r\n" +
                 "output(d3,0,0);\r\n";
 

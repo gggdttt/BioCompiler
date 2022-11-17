@@ -4,6 +4,9 @@
 // DTU(Technical University of Denmark)
 
 
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -22,6 +25,8 @@ namespace Executor.Model.Operation
         public int outDest2X { get; }
         public int outDest2Y { get; }
         public double ratio { get; }
+
+        private bool firstTimeFlag = true;
 
         public DropletSplitter(string outDestName1, string outDestName2, string inDropletName, int outDest1X, int outDest1Y, int outDest2X, int outDest2Y, double ratio, int line)
         {
@@ -129,11 +134,42 @@ namespace Executor.Model.Operation
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
+            if (firstTimeFlag && CheckSplittable(activeDroplets, busyDroplets))
+            {// the first time to run
+                List<Droplet> l1 = busyDroplets.Where(droplet => droplet.name.Equals(inDropletName)).ToList();
+                busyDroplets.Remove(l1.First());
+                // TODO: need to check the position
+                busyDroplets.Add(new Droplet(outDestName1, l1.First().xValue, l1.First().yValue, l1.First().size * ratio));
+                busyDroplets.Add(new Droplet(outDestName2, l1.First().xValue + 1, l1.First().yValue, l1.First().size * (1 - ratio)));
+                firstTimeFlag = false;
+                return;
+            }
+
+            if (firstTimeFlag && !CheckSplittable(activeDroplets, busyDroplets))
+            {// now the droplet is not splittable, wait
+                return;
+            }
+
             // add two new generated droplet to active Droplets
-            Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(inDropletName)).First();
-            busyDroplets.Remove(d1);
-            activeDroplets.Add(new Droplet(outDestName1, outDest1X, outDest1Y, d1.size * ratio));
-            activeDroplets.Add(new Droplet(outDestName2, outDest2X, outDest2Y, d1.size * (1 - ratio)));
+            Droplet droplet1 = busyDroplets.Where(droplet => droplet.name.Equals(outDestName1)).First();
+            Droplet droplet2 = busyDroplets.Where(droplet => droplet.name.Equals(outDestName2)).First();
+            if (droplet1.xValue != outDest1X || droplet1.yValue != outDest1Y)
+            {
+                manager.MoveByOneStep(droplet1, outDest1X, outDest1Y, activeDroplets, busyDroplets);
+            }
+            if (droplet2.xValue != outDest2X || droplet2.yValue != outDest2Y)
+            {
+                manager.MoveByOneStep(droplet2, outDest2X, outDest2Y, activeDroplets, busyDroplets);
+            }
+            if(droplet1.xValue == outDest1X && droplet1.yValue == outDest1Y
+                && droplet2.xValue == outDest2X && droplet2.yValue == outDest2Y)
+            {// have arrived in the dest
+                busyDroplets.Remove(droplet1);
+                busyDroplets.Remove(droplet2);
+                activeDroplets.Add(droplet1);
+                activeDroplets.Add(droplet2);
+            }
+
         }
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
@@ -153,6 +189,12 @@ namespace Executor.Model.Operation
         public override string ToString()
         {
             return "DropletSplitter: " + " outDestName1:" + outDestName1 + " outDestName2:" + outDestName2 + " inDropletName:" + inDropletName;
+        }
+
+        private bool CheckSplittable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        {
+            // TODO: implement rule here 
+            return true;
         }
     }
 }
