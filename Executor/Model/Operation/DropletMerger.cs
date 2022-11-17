@@ -3,6 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
@@ -124,22 +125,34 @@ namespace Executor.Model.Operation
             // outDroplet will be added to active droplets
             Droplet d1 = busyDroplets.Where(droplet => droplet.name.Equals(inDroplet1Name)).First();
             Droplet d2 = busyDroplets.Where(droplet => droplet.name.Equals(inDroplet2Name)).First();
-            busyDroplets.Remove(d1);
-            busyDroplets.Remove(d2);
-            activeDroplets.Add(new Droplet(outDropletName, xDest, yDest, d1.size + d2.size));
-            mergedSize = d1.size + d2.size;
-            // TODO: 
-            int waitTime = Math.Max(Math.Abs(d1.yValue - yDest) + Math.Abs(d1.xValue - xDest), Math.Abs(d2.yValue - yDest) + Math.Abs(d2.xValue - xDest));
-            Console.WriteLine("Is waiting for merging, need time:" + waitTime);
+
+            // if they have both arrived at the position
+            if (d1.xValue == xDest && d2.xValue == xDest && d1.yValue == yDest && d2.yValue == yDest)
+            {
+                busyDroplets.Remove(d1);
+                busyDroplets.Remove(d2);
+                activeDroplets.Add(new Droplet(outDropletName, xDest, xDest, d1.size + d2.size));
+                mergedSize = d1.size + d2.size;
+            }
+            else
+            {
+                // TODO: Consider the process of merger.
+                if (d1.xValue != xDest || d1.yValue != yDest)
+                    manager.MoveByOneStep(d1, xDest, yDest, activeDroplets, busyDroplets);
+                if (d2.xValue != xDest || d2.yValue != yDest)
+                    manager.MoveByOneStep(d2, xDest, xDest, activeDroplets, busyDroplets);
+            }
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            Droplet outDroplet = activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).First();
-            return activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
-                && outDroplet.xValue == xDest
-                && outDroplet.yValue == yDest
-                && outDroplet.size == mergedSize;
+            List<Droplet> tempList = activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).ToList();
+            return
+                tempList != null
+                && activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
+                && tempList.First().xValue == xDest
+                && tempList.First().yValue == yDest
+                && tempList.First().size == mergedSize;
         }
 
         public override string ToString()
