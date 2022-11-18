@@ -73,8 +73,8 @@ namespace Executor.Model.Operation
                 // if startTime is minmum, it means this is the time to start
                 startTime = DateTime.Now;
             }
-            Console.WriteLine("*********DateTime.Now - startTime!***********"+ (DateTime.Now - startTime).TotalMilliseconds.ToString());
-            Console.WriteLine("*********latency!***********" + latency);
+            /*            Console.WriteLine("*********DateTime.Now - startTime!***********"+ (DateTime.Now - startTime).TotalMilliseconds.ToString());
+                        Console.WriteLine("*********latency!***********" + latency);*/
 
             if ((DateTime.Now - startTime).TotalSeconds >= latency)
             {
@@ -83,7 +83,7 @@ namespace Executor.Model.Operation
                 activeDroplets.Add(d1);
                 // set flag to true, which represent this operation finish
                 storeFinishFlag = true;
-                Console.WriteLine("*********Store enough time!***********");
+                //Console.WriteLine("*********Store enough time!***********");
             }
 
         }

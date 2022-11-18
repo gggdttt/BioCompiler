@@ -12,30 +12,195 @@ If time allows, the project may also include the development and implementation 
 
 Our project's basic structure looks like: 
 
-**DESIGN->WRITE  CDMF-> COMPILE TO C# CODE -> FIND PATH -> GENERATING INSTRUCT FOR CHIP**
-
-|=====User=========|=======Compiler======|=============Executor======================|
-
-
+![image-20221117191437952](https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202211171914048.png)
 
 <img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202210282155579.png" alt="image-20220929225512913" style="zoom:67%;" />
 
 ##  Compiler
 
-Input : Source code of `cdmf` file.
+Input : Source code of `sc` file.
 
 Output: JSON format 
 
-> input demo:
+Input demo:
 
-``` 
+``` java
+# this is a demo
 
+# droplet declaration
+droplet d1;
+droplet d2;
+droplet d3;
+
+# droplet input
+input(d1,1,1,1.0);
+input(d2,4,4,0.5);
+input(d3,10,10,3.2);
+
+# move
+move(d1,3,3);
+move(d2,7,7);
+move(d3,9,9);
+
+# split 
+# d3-> d4, d5
+droplet d4;
+droplet d5;
+split(d4,d5,d3,12,12,15,15,0.5);
+
+# merging
+# d4,d5->d3
+merge(d3,d4,d5,5,9);
+
+# mixing
+mix(d3,2,2,2,2,5);
+
+# store
+store(d3,5,5,2.0);
+
+# output
+output(d1,0,0);
+output(d2,0,0);
+output(d3,0,0);
 ```
 
-output demo:
+Output demo:
 
-```xml
-
+```json
+[
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d1",
+    "line": 4
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d2",
+    "line": 5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d3",
+    "line": 6
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 9,
+    "name": "d1",
+    "xValue": 1,
+    "yValue": 1,
+    "size": 1.0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 10,
+    "name": "d2",
+    "xValue": 4,
+    "yValue": 4,
+    "size": 0.5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 11,
+    "name": "d3",
+    "xValue": 10,
+    "yValue": 10,
+    "size": 3.2
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 14,
+    "name": "d1",
+    "xDest": 3,
+    "yDest": 3
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 15,
+    "name": "d2",
+    "xDest": 7,
+    "yDest": 7
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 16,
+    "name": "d3",
+    "xDest": 9,
+    "yDest": 9
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d4",
+    "line": 20
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d5",
+    "line": 21
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletSplitter, Executor",
+    "line": 22,
+    "outDestName1": "d4",
+    "outDestName2": "d5",
+    "inDropletName": "d3",
+    "outDest1X": 12,
+    "outDest1Y": 12,
+    "outDest2X": 15,
+    "outDest2Y": 15,
+    "ratio": 0.5,
+    "_order_id": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMerger, Executor",
+    "line": 26,
+    "outDropletName": "d3",
+    "inDroplet1Name": "d4",
+    "inDroplet2Name": "d5",
+    "xDest": 5,
+    "yDest": 9
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMixer, Executor",
+    "line": 29,
+    "name": "d3",
+    "xMix": 2,
+    "yMix": 2,
+    "xDistance": 2,
+    "yDistance": 2,
+    "repeatTimes": 5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletStorer, Executor",
+    "line": 32,
+    "name": "d3",
+    "xValue": 5,
+    "yValue": 5,
+    "latency": 2.0,
+    "time": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 35,
+    "name": "d1",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 36,
+    "name": "d2",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 37,
+    "name": "d3",
+    "xValue": 0,
+    "yValue": 0
+  }
+]
 ```
 
 ### Syntax 
@@ -43,58 +208,82 @@ output demo:
 #### Declaration 
 
 ``` java
+/// <summary>
+/// droplet <name>;
+///         string
+/// </summary>
 droplet <name>;
-// 		string
 ```
 
 #### Input
 
 ```java
+/// <summary>
+/// input(       <droplet_name>, x,   y,   size);
+/// member type:      string,   int, int, float
+/// </summary>
 input(<droplet_name>, x,y, size);
-//      string, int, int, float
 ```
 
 #### Move
 
 ``` java
+/// <summary>
+/// move(<droplet_name>, x_dest, y_dest);
+///         string, int ,int 
+/// </summary>
 move(<droplet_name>, x_dest, y_dest);
-//		string, int ,int 
 ```
 
 #### Merge
 
 ```java
+/// <summary>
+/// merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_dest
+///         string, string, string, int, int 
+/// </summary>
 merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_dest);
-// 		string, string, string, int, int 
 ```
 
 #### Split
 
 ```java
+/// <summary>
+/// split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
+/// string, string, strig, int, int ,int, int, real
+/// note: ratio is D1/(D1+D2)
+/// </summary>
 split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
-// string, string, strig, int, int ,int, int, real
-// note: ratio is D1/(D1+D2)
 ```
 
 #### Mix
 
 ```java
+/// <summary>
+/// mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
+///             string, int ,int ,int ,int int
+/// </summary>
 mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
-// 	string, int ,int ,int ,int int
 ```
 
 #### Output
 
 ``` java
+/// <summary>
+/// output(<droplet_name>, x, y)
+///         string, int ,int 
+/// </summary>
 output(<droplet_name>, x, y)
-// string, int ,int 
 ```
 
 ### Store
 
 ```java
+/// <summary>
+/// store(<droplet_name>,x,y, latency)
+///     string, int, int , float
+/// </summary>
 store(<droplet_name>,x,y, time)
-// string, int, int , float
 ```
 
 ## Syntax checker
