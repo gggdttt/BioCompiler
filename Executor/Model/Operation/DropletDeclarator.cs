@@ -50,7 +50,7 @@ namespace Executor.Model.Operation
         }
 
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets) 
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         { 
             // nothing happen
         }

@@ -13,27 +13,29 @@ namespace Executor.Model
 
         int yLength;
 
-        public OperationManager manager { get; set; }
+        public OperationManager operationManager { get; set; }
+
+        public MovementManager movementManager { get; set; }
 
         public Chip(List<CompilerOperation> operations, int x, int y)
         {
             this.xLength = x;
             this.yLength = y;
-            manager = new OperationManager(operations, x, y);
+            operationManager = new OperationManager(operations, x, y);
+            // TODO support init option
+            movementManager = new MovementManager(x, y, Router.RouterOption.SimpleXY);
         }
 
-        public void DoNextStep()
+        public void StartOpearions()
         {
             int i = 0;
-            while (!manager.AllTasksCompleted() && i < 20)
+            while (!operationManager.AllTasksCompleted())
             {
-                manager.BeforeExecuting();
-                manager.Executing();
-                manager.AfterExecute();
+                operationManager.BeforeExecuting();
+                operationManager.Executing(movementManager);
+                operationManager.AfterExecute();
                 i++;
-                Console.WriteLine("i=" + i);
             }
-            Console.WriteLine("Executing completed!");
         }
 
     }

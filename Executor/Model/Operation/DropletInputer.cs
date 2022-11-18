@@ -67,7 +67,7 @@ namespace Executor.Model.Operation
         }
 
 
-        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             Droplet d = RecordDroplets.Where(droplet => droplet.name.Equals(name)).First();
             RecordDroplets.Remove(d);
