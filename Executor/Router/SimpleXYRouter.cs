@@ -3,7 +3,7 @@ using Executor.Model;
 
 namespace Executor.Router
 {
-    internal class SimpleXYRouter : RouterInter
+    internal class SimpleXYRouter : RouterInterface
     {
         int width;
         int height;
