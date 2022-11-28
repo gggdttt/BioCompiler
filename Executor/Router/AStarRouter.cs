@@ -3,162 +3,135 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using System.Numerics;
+using Roy_T.AStar.Grids;
+using Roy_T.AStar.Primitives;
+using Roy_T.AStar.Paths;
 using Executor.Model;
+using Roy_T.AStar.Graphs;
 
 namespace Executor.Router
 {
-    public class Node
+
+    public class AStarRouter : RouterInterface
     {
-        public static int NODE_SIZE = 32;
-        public Node Parent;
-        public Vector2 Position;
-        public Vector2 Center
+
+        public int gridColumn { get; set; }
+        public int gridRow { get; set; }
+
+        public AStarRouter(int columns, int rows)
         {
-            get
-            {
-                return new Vector2(Position.X + NODE_SIZE / 2, Position.Y + NODE_SIZE / 2);
-            }
-        }
-        public float DistanceToTarget;
-        public float Cost;
-        public float Weight;
-        public float F
-        {
-            get
-            {
-                if (DistanceToTarget != -1 && Cost != -1)
-                    return DistanceToTarget + Cost;
-                else
-                    return -1;
-            }
-        }
-        public bool Walkable;
-
-        public Node(Vector2 pos, bool walkable, float weight = 1)
-        {
-            Parent = null;
-            Position = pos;
-            DistanceToTarget = -1;
-            Cost = 1;
-            Weight = weight;
-            Walkable = walkable;
-        }
-    }
-
-    public class AStarRouter : RouterInter
-    {
-        List<List<Node>> Grid;
-        int GridRows
-        {
-            get
-            {
-                return Grid[0].Count;
-            }
-        }
-        int GridCols
-        {
-            get
-            {
-                return Grid.Count;
-            }
-        }
-
-        public AStarRouter(List<List<Node>> grid)
-        {
-            Grid = grid;
-        }
-
-        public Stack<Node> FindPath(Vector2 Start, Vector2 End)
-        {
-            Node start = new Node(new Vector2((int)(Start.X / Node.NODE_SIZE), (int)(Start.Y / Node.NODE_SIZE)), true);
-            Node end = new Node(new Vector2((int)(End.X / Node.NODE_SIZE), (int)(End.Y / Node.NODE_SIZE)), true);
-
-            Stack<Node> Path = new Stack<Node>();
-            PriorityQueue<Node, float> OpenList = new PriorityQueue<Node, float>();
-            List<Node> ClosedList = new List<Node>();
-            List<Node> adjacencies;
-            Node current = start;
-
-            // add start node to Open List
-            OpenList.Enqueue(start, start.F);
-
-            while (OpenList.Count != 0 && !ClosedList.Exists(x => x.Position == end.Position))
-            {
-                current = OpenList.Dequeue();
-                ClosedList.Add(current);
-                adjacencies = GetAdjacentNodes(current);
-
-                foreach (Node n in adjacencies)
-                {
-                    if (!ClosedList.Contains(n) && n.Walkable)
-                    {
-                        bool isFound = false;
-                        foreach (var oLNode in OpenList.UnorderedItems)
-                        {
-                            if (oLNode.Element == n)
-                            {
-                                isFound = true;
-                            }
-                        }
-                        if (!isFound)
-                        {
-                            n.Parent = current;
-                            n.DistanceToTarget = Math.Abs(n.Position.X - end.Position.X) + Math.Abs(n.Position.Y - end.Position.Y);
-                            n.Cost = n.Weight + n.Parent.Cost;
-                            OpenList.Enqueue(n, n.F);
-                        }
-                    }
-                }
-            }
-
-            // construct path, if end was not closed return null
-            if (!ClosedList.Exists(x => x.Position == end.Position))
-            {
-                return null;
-            }
-
-            // if all good, return path
-            Node temp = ClosedList[ClosedList.IndexOf(current)];
-            if (temp == null) return null;
-            do
-            {
-                Path.Push(temp);
-                temp = temp.Parent;
-            } while (temp != start && temp != null);
-            return Path;
-        }
-
-        private List<Node> GetAdjacentNodes(Node n)
-        {
-            List<Node> temp = new List<Node>();
-
-            int row = (int)n.Position.Y;
-            int col = (int)n.Position.X;
-
-            if (row + 1 < GridRows)
-            {
-                temp.Add(Grid[col][row + 1]);
-            }
-            if (row - 1 >= 0)
-            {
-                temp.Add(Grid[col][row - 1]);
-            }
-            if (col - 1 >= 0)
-            {
-                temp.Add(Grid[col - 1][row]);
-            }
-            if (col + 1 < GridCols)
-            {
-                temp.Add(Grid[col + 1][row]);
-            }
-
-            return temp;
+            this.gridColumn = columns;
+            this.gridRow = rows;
         }
 
         public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
-            throw new NotImplementedException();
+            List<IEdge> path = FindPath(d, destx, desty, activeDrplets, busyDroplets);
+            if (path != null && path.Count() >= 1)
+            {
+                Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
+                // has not complete move
+                temp.xValue = (int)(path.First().End.Position.X - d.gridDiameter / 2);
+                temp.yValue = (int)(path.First().End.Position.Y - d.gridDiameter / 2);
+            }
+            else
+            {
+                // has arrived or can not find path
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="destx"></param>
+        /// <param name="desty"></param>
+        /// <param name="activeDrplets"></param>
+        /// <param name="busyDroplets"></param>
+        public List<IEdge> FindPath(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
+        {
+            //init 
+            var gridSize = new GridSize(columns: this.gridColumn, rows: this.gridRow);
+            var cellSize = new Size(Distance.FromMeters(1), Distance.FromMeters(1));
+            var traversalVelocity = Velocity.FromMetersPerSecond(1);
+
+            // Create a new grid, each cell is laterally connected (like how a rook moves over a chess board, other options are available)
+            var grid = Grid.CreateGridWithLateralConnections(gridSize, cellSize, traversalVelocity);
+            DisConnectAllNode(grid, d, activeDrplets, busyDroplets);
+
+            int movingDropletCenterX = -1;
+            int movingDropletCenterY = -1;
+            if (d.gridDiameter % 2 != 0)
+            {
+                // could find a center cell
+
+                if (d.gridDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
+                movingDropletCenterX = d.xValue + (int)(d.gridDiameter - 1) / 2;
+                movingDropletCenterY = d.yValue + (int)(d.gridDiameter - 1) / 2;
+            }
+            else
+            {
+                // no center cell, choose the right bottom one as center cell.
+                if (d.gridDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
+                movingDropletCenterX = d.xValue + (int)d.gridDiameter / 2;
+                movingDropletCenterY = d.yValue + (int)d.gridDiameter / 2;
+            }
+
+            var pathFinder = new PathFinder();
+            var path = pathFinder.FindPath(new GridPosition(movingDropletCenterX, movingDropletCenterY), new GridPosition(destx, desty), grid);
+
+            Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
+
+            // Use path.Edges to get the actual path
+            return path.Edges.ToList();
+        }
+
+        public Grid DisConnectAllNode(Grid g, Droplet d, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
+        {
+
+            foreach (var droplet in activeDrplets)
+            {
+                if (!droplet.name.Equals(d.name))
+                {
+                    DisconnectOneNode(g, d, droplet);
+                }
+            }
+
+            foreach (var droplet in busyDroplets)
+            {
+                if (!droplet.name.Equals(d.name))
+                {
+                    DisconnectOneNode(g, d, droplet);
+                }
+            }
+            return g;
+        }
+
+        public Grid DisconnectOneNode(Grid g, Droplet movingDroplet, Droplet blockedDroplet)
+        {
+            double rangeToDisconnect = 0;
+
+            if (movingDroplet.gridDiameter % 2 != 0)
+            {
+                // could find a center cell
+                double additionalDiameter = movingDroplet.gridDiameter - 1;
+                if (additionalDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
+                rangeToDisconnect = (blockedDroplet.gridDiameter + additionalDiameter);
+            }
+            else
+            {
+                // no center cell, choose the right bottom one as center cell.
+                double additionalDiameter = movingDroplet.gridDiameter;
+                if (additionalDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
+                rangeToDisconnect = (blockedDroplet.gridDiameter + additionalDiameter);
+            }
+
+            for (int i = 0; i < rangeToDisconnect; i++)
+                for (int j = 0; j < rangeToDisconnect; j++)
+                {
+                    g.DisconnectNode(new GridPosition(blockedDroplet.xValue + i, blockedDroplet.yValue + j));
+                }
+            return g;
         }
     }
 }

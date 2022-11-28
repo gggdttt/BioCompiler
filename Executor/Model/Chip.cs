@@ -23,7 +23,8 @@ namespace Executor.Model
             this.yLength = y;
             operationManager = new OperationManager(operations, x, y);
             // TODO support init option
-            movementManager = new MovementManager(x, y, Router.RouterOption.SimpleXY);
+            //movementManager = new MovementManager(x, y, Router.RouterOption.SimpleXY);
+            movementManager = new MovementManager(x, y, Router.RouterOption.AStar);
         }
 
         public void StartOpearions()

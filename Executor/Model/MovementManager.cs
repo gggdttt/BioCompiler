@@ -5,15 +5,15 @@ namespace Executor.Model
     public class MovementManager
     {
 
-        RouterInter router { get; }
+        RouterInterface router { get; }
 
-        public MovementManager(int width, int height, RouterOption option)
+        public MovementManager(int columns, int rows, RouterOption option)
         { 
             switch (option)
             {
                 case RouterOption.SimpleXY:
                     {
-                        router = new SimpleXYRouter(width, height);
+                        router = new SimpleXYRouter(columns, rows);
                         break;
                     }
                 case RouterOption.ConflictBased:
@@ -22,7 +22,8 @@ namespace Executor.Model
                     }
                 case RouterOption.AStar:
                     {
-                        throw new NotImplementedException();
+                        router = new AStarRouter(columns, rows);
+                        break;
                     }
                 default:
                     throw new NotImplementedException();

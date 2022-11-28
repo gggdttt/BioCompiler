@@ -32,7 +32,7 @@ namespace Executor
             {
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
-                Chip c = new Chip(GetOperationsListFromJSON(fileContent), 20, 20);
+                Chip c = new Chip(GetOperationsListFromJSON(fileContent), 36, 20);
                 c.StartOpearions();
                 return 0;
             }

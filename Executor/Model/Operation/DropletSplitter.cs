@@ -139,8 +139,8 @@ namespace Executor.Model.Operation
                 List<Droplet> l1 = busyDroplets.Where(droplet => droplet.name.Equals(inDropletName)).ToList();
                 busyDroplets.Remove(l1.First());
                 // TODO: need to check the position
-                busyDroplets.Add(new Droplet(outDestName1, l1.First().xValue, l1.First().yValue, l1.First().size * ratio));
-                busyDroplets.Add(new Droplet(outDestName2, l1.First().xValue + 1, l1.First().yValue, l1.First().size * (1 - ratio)));
+                busyDroplets.Add(new Droplet(outDestName1, l1.First().xValue, l1.First().yValue, l1.First().volume * ratio));
+                busyDroplets.Add(new Droplet(outDestName2, l1.First().xValue + 1, l1.First().yValue, l1.First().volume * (1 - ratio)));
                 firstTimeFlag = false;
                 return;
             }

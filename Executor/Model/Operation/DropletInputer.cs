@@ -7,7 +7,7 @@
 namespace Executor.Model.Operation
 {
     /// <summary>
-    /// input(       <droplet_name>, x,   y,   size);
+    /// input(       <droplet_name>, x,   y,   volume);
     /// member type:      string,   int, int, float
     /// </summary>
     public class DropletInputer : CompilerOperation
@@ -80,7 +80,7 @@ namespace Executor.Model.Operation
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1
                 && d.xValue == xValue
                 && d.yValue == yValue
-                && d.size ==size;
+                && d.volume ==size;
         }
 
         public override string ToString()

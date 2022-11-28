@@ -10,15 +10,19 @@ namespace Executor.Model
         public string name { get; set; }
         public int xValue { get; set; }
         public int yValue { get; set; }
-        public double size { get; set; }
+        public double volume { get; set; }
+        public int gridDiameter { get; set; }
 
+        // the grid is 2mm * 2mm
+        static int GRID_LENGTH = 2;
         // redefine 
         public Droplet(string name, int xValue, int yValue, double size)
         {
             this.name = name;
             this.xValue = xValue;
             this.yValue = yValue;
-            this.size = size;
+            this.volume = size;
+            this.gridDiameter = RoundUpVolumeToGridDiameter(size);
         }
 
         public Droplet(string name)
@@ -26,7 +30,8 @@ namespace Executor.Model
             this.name = name;
             this.xValue = 0;
             this.yValue = 0;
-            this.size = 0;
+            this.volume = 0;
+            this.gridDiameter = 0;
         }
 
         public override bool Equals(Object? obj)
@@ -45,12 +50,27 @@ namespace Executor.Model
 
         public override string ToString()
         {
-            return "Droplet: " + name + " xValue:" + xValue + " yValue:" + yValue + " size:" + size;
+            return "Droplet: " + name + " xValue:" + xValue + " yValue:" + yValue + " volume:" + volume;
         }
 
         public override int GetHashCode()
         {
             return name.GetHashCode();
+        }
+
+        /// <summary>
+        /// Translate the volume of the droplet from ml to how many grids it will occupy.
+        /// </summary>
+        /// <param name="volume">how many ml this droplet is </param>
+        /// <returns></returns>
+        private int RoundUpVolumeToGridDiameter(double volume)
+        {
+            // the gap between chip and glass is 0.1 mm.
+            double h = 0.1;
+
+            // V = Pi* r^2 * h , convert it from cm to mm (10/2 =5)
+            double radius = Math.Sqrt(volume / (h * Math.PI)) * (10 / GRID_LENGTH);
+            return (int)Math.Round(radius*2, MidpointRounding.AwayFromZero);
         }
     }
 }

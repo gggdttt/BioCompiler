@@ -58,7 +58,7 @@ namespace Executor.Model
                 op.ExecuteOperation(activeDroplets, busyDroplets, manager);
             }
 
-/*            Console.WriteLine("\n\n\n executing");
+/*          Console.WriteLine("\n\n\n executing");
             DebugPrint();*/
         }
 

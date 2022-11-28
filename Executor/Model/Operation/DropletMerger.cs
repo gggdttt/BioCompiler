@@ -131,8 +131,8 @@ namespace Executor.Model.Operation
             {
                 busyDroplets.Remove(d1);
                 busyDroplets.Remove(d2);
-                activeDroplets.Add(new Droplet(outDropletName, xDest, xDest, d1.size + d2.size));
-                mergedSize = d1.size + d2.size;
+                activeDroplets.Add(new Droplet(outDropletName, xDest, xDest, d1.volume + d2.volume));
+                mergedSize = d1.volume + d2.volume;
             }
             else
             {
@@ -152,7 +152,7 @@ namespace Executor.Model.Operation
                 && activeDroplets.Where(droplet => droplet.name.Equals(outDropletName)).Count() == 1
                 && tempList.First().xValue == xDest
                 && tempList.First().yValue == yDest
-                && tempList.First().size == mergedSize;
+                && tempList.First().volume == mergedSize;
         }
 
         public override string ToString()
