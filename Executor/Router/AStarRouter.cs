@@ -31,8 +31,8 @@ namespace Executor.Router
             {
                 Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 // has not complete move
-                temp.xValue = (int)(path.First().End.Position.X - d.gridDiameter / 2);
-                temp.yValue = (int)(path.First().End.Position.Y - d.gridDiameter / 2);
+                temp.xValue = (int)(path.First().End.Position.X);
+                temp.yValue = (int)(path.First().End.Position.Y);
             }
             else
             {
@@ -59,26 +59,9 @@ namespace Executor.Router
             var grid = Grid.CreateGridWithLateralConnections(gridSize, cellSize, traversalVelocity);
             /*DisConnectAllNode(grid, d, activeDrplets, busyDroplets);*/
 
-            int movingDropletCenterX = -1;
-            int movingDropletCenterY = -1;
-            if (d.gridDiameter % 2 != 0)
-            {
-                // could find a center cell
-                if (d.gridDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
-                movingDropletCenterX = d.xValue + (int)(d.gridDiameter - 1) / 2;
-                movingDropletCenterY = d.yValue + (int)(d.gridDiameter - 1) / 2;
-            }
-            else
-            {
-                // no center cell, choose the right bottom one as center cell.
-                if (d.gridDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
-                movingDropletCenterX = d.xValue + (int)d.gridDiameter / 2;
-                movingDropletCenterY = d.yValue + (int)d.gridDiameter / 2;
-            }
-
             var pathFinder = new PathFinder();
-            Console.WriteLine($"is trying to find path from ({movingDropletCenterX},{movingDropletCenterY}) to ({destx},{desty})");
-            var path = pathFinder.FindPath(new GridPosition(movingDropletCenterX, movingDropletCenterY), new GridPosition(destx, desty), grid);
+            Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
+            var path = pathFinder.FindPath(new GridPosition(d.xValue, d.yValue), new GridPosition(destx, desty), grid);
 
             Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
 
@@ -94,7 +77,7 @@ namespace Executor.Router
             {
                 if (!droplet.name.Equals(d.name))
                 {
-                    DisconnectOneNode(g, d, droplet);
+                    DisconnectOneDroplet(g, d, droplet);
                     Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
@@ -103,50 +86,62 @@ namespace Executor.Router
             {
                 if (!droplet.name.Equals(d.name))
                 {
-                    DisconnectOneNode(g, d, droplet);
+                    DisconnectOneDroplet(g, d, droplet);
                     Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
             // disconnect the area of boundray
-            for (int i = 0; i < gridColumn; i++)
-            {
-                DisconnectOneNode(g, d, new Droplet("temp", i, 0, 1));
-                DisconnectOneNode(g, d, new Droplet("temp", i, gridRow, 1));
-            }
-            for (int j = 0; j < gridColumn; j++)
-            {
-                DisconnectOneNode(g, d, new Droplet("temp", 0, j, 1));
-                DisconnectOneNode(g, d, new Droplet("temp", gridColumn, j, 1));
-            }
+            DisconnectBoundry(g, d);
             return g;
         }
 
-        public Grid DisconnectOneNode(Grid g, Droplet movingDroplet, Droplet blockedDroplet)
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="g"></param>
+/// <param name="movingDroplet"></param>
+/// <returns></returns>
+        public Grid DisconnectBoundry(Grid g, Droplet movingDroplet)
         {
-            double rangeToDisconnect = 0;
 
-            if (movingDroplet.gridDiameter % 2 != 0)
-            {
-                // could find a center cell
-                double additionalDiameter = movingDroplet.gridDiameter - 1;
-                if (additionalDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
-                rangeToDisconnect = (blockedDroplet.gridDiameter + additionalDiameter);
-            }
-            else
-            {
-                // no center cell, choose the right bottom one as center cell.
-                double additionalDiameter = movingDroplet.gridDiameter;
-                if (additionalDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
-                rangeToDisconnect = (blockedDroplet.gridDiameter + additionalDiameter);
-            }
-
-            for (int i = 0; i < rangeToDisconnect; i++)
-                for (int j = 0; j < rangeToDisconnect; j++)
+            for (int i = 0; i < gridColumn; i++)
+                for (int j = gridRow - movingDroplet.gridDiameter; j < gridRow; j++)
                 {
-                    Console.WriteLine();
+                    g.DisconnectNode(new GridPosition(i, j));
+                }
+            for (int i = gridColumn - movingDroplet.gridDiameter; i < gridColumn; i++)
+                for (int j = 0; j < gridRow; j++)
+                {
+                    g.DisconnectNode(new GridPosition(i, j));
+                }
+            return g;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="movingDroplet"></param>
+        /// <param name="blockedDroplet"></param>
+        /// <returns></returns>
+        public Grid DisconnectOneDroplet(Grid g, Droplet movingDroplet, Droplet blockedDroplet)
+        {
+            int newTopLeftPointX = blockedDroplet.xValue - movingDroplet.gridDiameter;
+            int newTopLeftPointY = blockedDroplet.yValue - movingDroplet.gridDiameter;
+
+            for (int i = newTopLeftPointX; i < blockedDroplet.xValue + blockedDroplet.gridDiameter; i++)
+                for (int j = newTopLeftPointY; j < blockedDroplet.xValue + blockedDroplet.gridDiameter; j++)
+                {
+                    /*                    
+                     *                  ********        *******0
+                                        ********   ->   ***00**0
+                                        **00*0**        **000**0
+                                        **00****        *******0
+                                        ********        00000000*/
                     g.DisconnectNode(new GridPosition(
-                        Math.Min(gridColumn - 1, blockedDroplet.xValue + i),
-                        Math.Min(gridRow - 1, blockedDroplet.yValue + j)));
+                        Math.Max(0, Math.Min(gridColumn - 1, i)),
+                        Math.Max(0, Math.Min(gridRow - 1, j))));
                 }
             return g;
         }
