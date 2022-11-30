@@ -57,14 +57,13 @@ namespace Executor.Router
 
             // Create a new grid, each cell is laterally connected (like how a rook moves over a chess board, other options are available)
             var grid = Grid.CreateGridWithLateralConnections(gridSize, cellSize, traversalVelocity);
-            DisConnectAllNode(grid, d, activeDrplets, busyDroplets);
+            /*DisConnectAllNode(grid, d, activeDrplets, busyDroplets);*/
 
             int movingDropletCenterX = -1;
             int movingDropletCenterY = -1;
             if (d.gridDiameter % 2 != 0)
             {
                 // could find a center cell
-
                 if (d.gridDiameter <= 0) throw new Exception("Diameter is smaller than 0!");
                 movingDropletCenterX = d.xValue + (int)(d.gridDiameter - 1) / 2;
                 movingDropletCenterY = d.yValue + (int)(d.gridDiameter - 1) / 2;
@@ -78,6 +77,7 @@ namespace Executor.Router
             }
 
             var pathFinder = new PathFinder();
+            Console.WriteLine($"is trying to find path from ({movingDropletCenterX},{movingDropletCenterY}) to ({destx},{desty})");
             var path = pathFinder.FindPath(new GridPosition(movingDropletCenterX, movingDropletCenterY), new GridPosition(destx, desty), grid);
 
             Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
@@ -89,20 +89,34 @@ namespace Executor.Router
         public Grid DisConnectAllNode(Grid g, Droplet d, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
 
+            // disconnect all the droplets in activeDroplets
             foreach (var droplet in activeDrplets)
             {
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneNode(g, d, droplet);
+                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
-
+            // disconnect all the droplets in busyDroplets
             foreach (var droplet in busyDroplets)
             {
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneNode(g, d, droplet);
+                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
+            }
+            // disconnect the area of boundray
+            for (int i = 0; i < gridColumn; i++)
+            {
+                DisconnectOneNode(g, d, new Droplet("temp", i, 0, 1));
+                DisconnectOneNode(g, d, new Droplet("temp", i, gridRow, 1));
+            }
+            for (int j = 0; j < gridColumn; j++)
+            {
+                DisconnectOneNode(g, d, new Droplet("temp", 0, j, 1));
+                DisconnectOneNode(g, d, new Droplet("temp", gridColumn, j, 1));
             }
             return g;
         }
@@ -129,7 +143,10 @@ namespace Executor.Router
             for (int i = 0; i < rangeToDisconnect; i++)
                 for (int j = 0; j < rangeToDisconnect; j++)
                 {
-                    g.DisconnectNode(new GridPosition(blockedDroplet.xValue + i, blockedDroplet.yValue + j));
+                    Console.WriteLine();
+                    g.DisconnectNode(new GridPosition(
+                        Math.Min(gridColumn - 1, blockedDroplet.xValue + i),
+                        Math.Min(gridRow - 1, blockedDroplet.yValue + j)));
                 }
             return g;
         }

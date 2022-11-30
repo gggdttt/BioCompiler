@@ -1,10 +1,10 @@
 namespace TestExecutor
 {
     [TestClass]
-    public class ReadJSON
+    public class TestReadJSON
     {
         [TestMethod]
-        public void TestReadJSON()
+        public void TestReadJSON1()
         {
             
         }

@@ -13,8 +13,10 @@ namespace Executor.Model
         public double volume { get; set; }
         public int gridDiameter { get; set; }
 
+        // the gap between chip and glass is 0.1 mm.
+        static readonly double H = 1;
         // the grid is 2mm * 2mm
-        static int GRID_LENGTH = 2;
+        static readonly int GRID_LENGTH = 2;
         // redefine 
         public Droplet(string name, int xValue, int yValue, double size)
         {
@@ -65,11 +67,10 @@ namespace Executor.Model
         /// <returns></returns>
         private int RoundUpVolumeToGridDiameter(double volume)
         {
-            // the gap between chip and glass is 0.1 mm.
-            double h = 0.1;
 
             // V = Pi* r^2 * h , convert it from cm to mm (10/2 =5)
-            double radius = Math.Sqrt(volume / (h * Math.PI)) * (10 / GRID_LENGTH);
+            double radius = Math.Sqrt(volume / (H * Math.PI)) * (10 / GRID_LENGTH);
+            Console.WriteLine((int)Math.Round(radius * 2, MidpointRounding.AwayFromZero));
             return (int)Math.Round(radius*2, MidpointRounding.AwayFromZero);
         }
     }
