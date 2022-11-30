@@ -8,6 +8,6 @@ namespace BioCompiler.BioException
 {
     internal class BioException:Exception
     {
-
+       
     }
 }

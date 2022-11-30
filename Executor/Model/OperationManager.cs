@@ -18,9 +18,9 @@ namespace Executor.Model
 
         List<CompilerOperation> executingOperations;
 
-        List<Droplet> activeDroplets;
+        public List<Droplet> activeDroplets { get; set; }
 
-        List<Droplet> busyDroplets;
+        public List<Droplet> busyDroplets { get; set; }
 
 
         public OperationManager(List<CompilerOperation> operations, int x, int y)
