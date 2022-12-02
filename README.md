@@ -22,20 +22,190 @@ Our project's basic structure looks like:
 
 ##  Compiler
 
-Input : Source code of `cdmf` file.
+Input : Source code of `sc` file.
 
 Output: JSON format 
 
-> input demo:
+> input example:
 
-``` 
+``` java
+# this is a demo
+
+# droplet declaration
+droplet d1;
+droplet d2;
+droplet d3;
+
+# droplet input
+input(d1,1,1,1.0);
+input(d2,4,4,0.5);
+input(d3,10,10,3.2);
+
+# move
+move(d1,3,3);
+move(d2,7,7);
+move(d3,9,9);
+
+# split 
+# d3-> d4, d5
+droplet d4;
+droplet d5;
+split(d4,d5,d3,12,12,15,15,0.5);
+
+# merging
+# d4,d5->d3
+merge(d3,d4,d5,5,9);
+
+# mixing
+mix(d3,2,2,2,2,5);
+
+# store
+store(d3,5,5,2.0);
+
+# output
+output(d1,0,0);
+output(d2,0,0);
+output(d3,0,0);
 
 ```
 
-output demo:
+output example:
 
-```xml
-
+```json
+[
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d1",
+    "line": 4
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d2",
+    "line": 5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d3",
+    "line": 6
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 9,
+    "name": "d1",
+    "xValue": 1,
+    "yValue": 1,
+    "size": 1.0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 10,
+    "name": "d2",
+    "xValue": 4,
+    "yValue": 4,
+    "size": 0.5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 11,
+    "name": "d3",
+    "xValue": 10,
+    "yValue": 10,
+    "size": 3.2
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 14,
+    "name": "d1",
+    "xDest": 3,
+    "yDest": 3
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 15,
+    "name": "d2",
+    "xDest": 7,
+    "yDest": 7
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 16,
+    "name": "d3",
+    "xDest": 9,
+    "yDest": 9
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d4",
+    "line": 20
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d5",
+    "line": 21
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletSplitter, Executor",
+    "line": 22,
+    "outDestName1": "d4",
+    "outDestName2": "d5",
+    "inDropletName": "d3",
+    "outDest1X": 12,
+    "outDest1Y": 12,
+    "outDest2X": 15,
+    "outDest2Y": 15,
+    "ratio": 0.5,
+    "_order_id": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMerger, Executor",
+    "line": 26,
+    "outDropletName": "d3",
+    "inDroplet1Name": "d4",
+    "inDroplet2Name": "d5",
+    "xDest": 5,
+    "yDest": 9
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMixer, Executor",
+    "line": 29,
+    "name": "d3",
+    "xMix": 2,
+    "yMix": 2,
+    "xDistance": 2,
+    "yDistance": 2,
+    "repeatTimes": 5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletStorer, Executor",
+    "line": 32,
+    "name": "d3",
+    "xValue": 5,
+    "yValue": 5,
+    "latency": 2.0,
+    "time": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 35,
+    "name": "d1",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 36,
+    "name": "d2",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 37,
+    "name": "d3",
+    "xValue": 0,
+    "yValue": 0
+  }
+]
 ```
 
 ### Syntax 
@@ -119,10 +289,6 @@ droplet d1;
 droplet d1;
 ```
 
-
-
-
-
 ### Exception/Errors
 
 > The exception is not throwed by compiler, it is throwed by executor
@@ -139,10 +305,26 @@ droplet d1;
 * Invalid 1: droplet is not defined before
 * Invalid 2: position is out of bound *(should this be handled as exception?)*
 
+### Path-finding algorithm
 
-
-### Route-finding algorithm
-
-> I will use a* firstly.
+> Now only Astar and Simple XY supported.
 >
-> This step will be done in executor.
+> Conflict-based searching?
+
+#### AStar
+
+For example, there is a red droplet (2x2) wants to move to the white space. 
+
+<img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202212020157764.png" alt="image-20221202015710641" style="zoom:50%;" />
+
+Our astar router will use its left-top position as the moving element. And at the same time, all other droplets (and the right-bottom bounds) will be reckoned as block elements.
+
+<img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202212020157797.png" alt="image-20221202015755720" style="zoom:50%;" />
+
+Assume there is a red droplet(3x3) wants to move to the white space:
+
+<img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202212020157121.png" alt="image-20221202015735058" style="zoom:50%;" />
+
+The moving element is shown in the following image:
+
+<img src="https://raw.githubusercontent.com/gggdttt/ImageBeds/master/img202212020158163.png" alt="image-20221202015804096" style="zoom:50%;" />
