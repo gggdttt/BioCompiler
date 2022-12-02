@@ -6,14 +6,20 @@ using CommandLine;
 
 namespace Executor
 
-{
+{ 
     public class ExecutorLaunchOption
     {
         [Option('s', "source", Required = true, HelpText = ".input file")]
         public string? Source { get; set; }
 
-/*        [Option('o', "output", Required = true, HelpText = ".output path")]
-        public string? Output { get; set; }*/
+        [Option('r', "router", Default = "astar", HelpText = ".output path")]
+        public string Router { get; set; }
+
+        [Option('c', "column", Default = 36, HelpText = ".output path")]
+        public int Column { get; set; }
+
+        [Option('w', "row", Default = 20, HelpText = ".output path")]
+        public int Row { get; set; }
 
     }
 

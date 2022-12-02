@@ -2,14 +2,11 @@
   "profiles": {
     "Executor": {
       "commandName": "Project",
-      "commandLineArgs": "--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json"
-    },
-    "Profile 2": {
-      "commandName": "Project"
+      "commandLineArgs": "--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--router astar\r\n--column 36\r\n--row 20"
     },
     "Executor_WinServer": {
       "commandName": "Project",
-      "commandLineArgs": "--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json"
+      "commandLineArgs": "--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json\r\n--router astar\r\n--column 36\r\n--row 20"
     }
   }
 }

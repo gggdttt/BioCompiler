@@ -32,7 +32,7 @@ namespace Executor
             {
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
-                Chip c = new Chip(GetOperationsListFromJSON(fileContent), 36, 20);
+                Chip c = new Chip(GetOperationsListFromJSON(fileContent), option.Column, option.Row);
                 c.StartOpearions();
                 return 0;
             }
@@ -46,12 +46,9 @@ namespace Executor
 
         public List<CompilerOperation> GetOperationsListFromJSON(string fileContent)
         {
-
             JsonConverter[] converters = { new CompilerOperation2JSONConverter() };
             return JsonConvert.DeserializeObject<List<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
         }
-
-
     }
 
 }
