@@ -44,6 +44,12 @@ public interface ISyntaxVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitStat([NotNull] SyntaxParser.StatContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="SyntaxParser.repeat"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRepeat([NotNull] SyntaxParser.RepeatContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="SyntaxParser.declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

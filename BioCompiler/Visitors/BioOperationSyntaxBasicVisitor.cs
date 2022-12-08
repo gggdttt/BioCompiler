@@ -6,13 +6,19 @@ using static SyntaxParser;
 using Executor.Model.Operation;
 using static System.Formats.Asn1.AsnWriter;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace BioCompiler.Compiler
 {
     public class BioOperationSyntaxBasicVisitor : SyntaxBaseVisitor<CompilerOperation>
     {
         public List<CompilerOperation> Lines = new List<CompilerOperation>();
+
         public override CompilerOperation VisitStat(StatContext context)
+        {
+            return VisitStatByLevel(context, Lines);
+        }
+        private CompilerOperation VisitStatByLevel(StatContext context, List<CompilerOperation> tempLines)
         {
             InputContext input = context.input();
             DeclarationContext declaration = context.declaration();
@@ -22,6 +28,7 @@ namespace BioCompiler.Compiler
             MixContext mix = context.mix();
             OutputContext output = context.output();
             StoreContext store = context.store();
+            RepeatContext repeat = context.repeat();
 
             CompilerOperation? line = null;
 
@@ -32,12 +39,10 @@ namespace BioCompiler.Compiler
                     , int.Parse(input.INT(1).GetText())
                     , double.Parse(input.FLOAT().GetText())
                     , input.Start.Line);
-                Lines.Add(line);
             }
             else if (declaration != null)
             {
                 line = new DropletDeclarator(declaration.ID().GetText(), declaration.Start.Line);
-                Lines.Add(line);
             }
             else if (move != null)
             {
@@ -45,7 +50,6 @@ namespace BioCompiler.Compiler
                     , int.Parse(move.INT(0).GetText())
                     , int.Parse(move.INT(1).GetText())
                     , move.Start.Line);
-                Lines.Add(line);
             }
             else if (merge != null)
             {
@@ -55,7 +59,6 @@ namespace BioCompiler.Compiler
                     , int.Parse(merge.INT(0).GetText())
                     , int.Parse(merge.INT(1).GetText())
                     , merge.Start.Line);
-                Lines.Add(line);
             }
             else if (split != null)
             {
@@ -68,7 +71,6 @@ namespace BioCompiler.Compiler
                     , int.Parse(split.INT(3).GetText())
                     , double.Parse(split.FLOAT().GetText())
                     , split.Start.Line);
-                Lines.Add(line);
             }
             else if (mix != null)
             {
@@ -79,7 +81,6 @@ namespace BioCompiler.Compiler
                     , int.Parse(mix.INT(3).GetText())
                     , int.Parse(mix.INT(4).GetText())
                     , mix.Start.Line);
-                Lines.Add(line);
             }
             else if (output != null)
             {
@@ -87,7 +88,6 @@ namespace BioCompiler.Compiler
                     , int.Parse(output.INT(0).GetText())
                     , int.Parse(output.INT(1).GetText())
                     , output.Start.Line);
-                Lines.Add(line);
             }
             else if (store != null)
             {
@@ -96,9 +96,20 @@ namespace BioCompiler.Compiler
                     , int.Parse(store.INT(1).GetText())
                     , double.Parse(store.FLOAT().GetText())
                     , store.Start.Line);
-                Lines.Add(line);
             }
-
+            else if(repeat != null)
+            {
+                List<CompilerOperation> repeatOperations = new List<CompilerOperation>();
+                foreach (StatContext child in repeat.stat())
+                {
+                    // recursively add operations to list
+                    repeatOperations.Add(VisitStatByLevel(child, repeatOperations));
+                }
+                line = new RepeatOperation(repeat.Start.Line
+                    , int.Parse(repeat.INT().GetText())
+                    , repeatOperations); 
+            }
+            tempLines.Add(line);
             return line;
         }
     }

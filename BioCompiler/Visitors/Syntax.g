@@ -6,7 +6,8 @@ program
     ;
 
 stat
-    : input
+    : repeat
+    | input
     | declaration
     | move
     | merge
@@ -14,6 +15,10 @@ stat
     | mix
     | output
     | store
+    ;
+
+repeat
+    : 'repeat' INT 'times{' stat* '}'
     ;
 
 declaration

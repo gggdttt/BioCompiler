@@ -19,6 +19,10 @@
     "Server_BioCompilerProgram03": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json\r\n--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\InputProgram\\program3.sc"
+    },
+    "BioCompilerRepeat01": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program_repeat1.sc"
     }
   }
 }
