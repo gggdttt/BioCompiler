@@ -8,7 +8,6 @@ droplet d2;
 input(d1,1,1,1.0);
 input(d2,4,4,0.5);
 
-
 repeat 10 times{
 move(d1,3,3);
 move(d2,7,7);
