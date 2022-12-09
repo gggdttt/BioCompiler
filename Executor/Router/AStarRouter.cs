@@ -127,16 +127,18 @@ namespace Executor.Router
         /// <returns></returns>
         public Grid DisconnectOneDroplet(Grid g, Droplet movingDroplet, Droplet blockedDroplet)
         {
-            int newTopLeftPointX = blockedDroplet.xValue - movingDroplet.gridDiameter;
-            int newTopLeftPointY = blockedDroplet.yValue - movingDroplet.gridDiameter;
+            // two droplet need at least one grid distance!!!
+            int newTopLeftPointX = blockedDroplet.xValue - movingDroplet.gridDiameter-1;
+            int newTopLeftPointY = blockedDroplet.yValue - movingDroplet.gridDiameter-1;
 
-            for (int i = newTopLeftPointX; i < blockedDroplet.xValue + blockedDroplet.gridDiameter; i++)
-                for (int j = newTopLeftPointY; j < blockedDroplet.xValue + blockedDroplet.gridDiameter; j++)
+            // two droplet need at least one grid distance!!!
+            for (int i = newTopLeftPointX; i < blockedDroplet.xValue + blockedDroplet.gridDiameter+1; i++)
+                for (int j = newTopLeftPointY; j < blockedDroplet.xValue + blockedDroplet.gridDiameter+1; j++)
                 {
                     /*                    
                      *                  ********        *******0
-                                        ********   ->   ***00**0
-                                        **00*0**        **000**0
+                                        ********   ->   ****00*0
+                                        **00*0**        **0*00*0
                                         **00****        *******0
                                         ********        00000000*/
                     g.DisconnectNode(new GridPosition(
