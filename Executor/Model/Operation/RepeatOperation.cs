@@ -20,6 +20,8 @@ namespace Executor.Model.Operation
 
         public List<CompilerOperation> repeatOperations { get; set; }
 
+        //public List<CompilerOperation> thisRoundExecutingOperations { get; set; }
+
         public RepeatOperation(int line, int repeatTimes, List<CompilerOperation> repeatOperations)
         {
             this.line = line;

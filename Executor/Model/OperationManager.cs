@@ -27,10 +27,30 @@ namespace Executor.Model
         {
             this.x = x;
             this.y = y;
-            this.operations = operations;
+            this.operations = this.GetOperationsWithoutRepeat(operations);
             executingOperations = new List<CompilerOperation>();
             activeDroplets = new List<Droplet>();
             busyDroplets = new List<Droplet>();
+        }
+
+        /// <summary>
+        /// filter operations
+        /// </summary>
+        /// <param name="operations"></param>
+        /// <returns></returns>
+        private List<CompilerOperation> GetOperationsWithoutRepeat(List<CompilerOperation> operations)
+        {
+            List<CompilerOperation> compilerOperations= new List<CompilerOperation>();
+            foreach (CompilerOperation operation in operations)
+            {
+                if(operation is RepeatOperation)
+                {
+                    compilerOperations.AddRange(GetOperationsWithoutRepeat(((RepeatOperation)operation).repeatOperations));
+                }
+                else 
+                    compilerOperations.Add(operation);
+            }
+            return compilerOperations;
         }
 
         /// <summary>
