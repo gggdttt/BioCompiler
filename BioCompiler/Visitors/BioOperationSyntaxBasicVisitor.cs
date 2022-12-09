@@ -103,7 +103,7 @@ namespace BioCompiler.Compiler
                 foreach (StatContext child in repeat.stat())
                 {
                     // recursively add operations to list
-                    repeatOperations.Add(VisitStatByLevel(child, repeatOperations));
+                    repeatOperations.Add(VisitStatByLevel(child, new List<CompilerOperation>()));
                 }
                 line = new RepeatOperation(repeat.Start.Line
                     , int.Parse(repeat.INT().GetText())
