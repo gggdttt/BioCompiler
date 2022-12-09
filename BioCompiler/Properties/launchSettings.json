@@ -23,6 +23,10 @@
     "BioCompilerRepeat01": {
       "commandName": "Project",
       "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program_repeat1.sc"
+    },
+    "BioCompilerRepeat02": {
+      "commandName": "Project",
+      "commandLineArgs": "--output C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\Output\\\\result.json\r\n--source C:\\\\Users\\\\Wenjie\\\\OneDrive\\\\MasterThesis\\\\VisionBasedCompiler\\\\BioCompiler\\\\Source\\\\InputProgram\\\\program_repeat2.sc"
     }
   }
 }

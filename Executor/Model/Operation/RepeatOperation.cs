@@ -3,6 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using Newtonsoft.Json;
 using System.Collections.Immutable;
 
 namespace Executor.Model.Operation
@@ -17,13 +18,20 @@ namespace Executor.Model.Operation
         public int line { get; }
         public int repeatTimes { get; set; }
 
-        public List<CompilerOperation> repeatOperations { get; }
+        public List<CompilerOperation> repeatOperations { get; set; }
 
         public RepeatOperation(int line, int repeatTimes, List<CompilerOperation> repeatOperations)
         {
             this.line = line;
             this.repeatTimes = repeatTimes;
             this.repeatOperations = repeatOperations;
+        }
+
+        public RepeatOperation(int line, int repeatTimes)
+        {
+            this.line = line;
+            this.repeatTimes = repeatTimes;
+            this.repeatOperations = new List<CompilerOperation>();
         }
 
         public int GetLine()
