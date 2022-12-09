@@ -107,10 +107,6 @@ namespace TestCompiler
             Assert.AreEqual(expect, result);
         }
 
-        [TestMethod]
-        public void TestWithRepeat()
-        {
-            // TODO: Add test for repeat
-        }
+
     }
 }

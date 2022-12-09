@@ -32,20 +32,18 @@ namespace Executor.Model.Operation
         }
 
         /// <summary>
-        /// If its name is not in declaredSet, add and return true
-        /// If it has been included in any set, return false
+        /// Traverse all the operations to check if it satisfy declaration rule
         /// </summary>
         /// <param name="declaredSet">Declared Variables</param>
         /// <param name="occupiedSet">Variables are occupied</param>
-        /// <returns> return true if it's added successfully, otherwise return false</returns>
+        /// <returns> return true if all repeat opeations statisfy checking rule</returns>
         public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-/*                        if (!declaredSet.Contains(name) && !occupiedSet.Contains(name))
-                        {
-                            declaredSet.Add(name);
-                            return true;
-                        }
-                        else return false;*/
+            foreach(CompilerOperation operation in repeatOperations)
+            {
+                if(!operation.DeclarationCheck(declaredSet, occupiedSet))
+                    return false;
+            }
             return true;
         }
 

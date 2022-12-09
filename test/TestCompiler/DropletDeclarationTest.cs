@@ -19,5 +19,13 @@ namespace TestCompiler
             Assert.AreEqual(expect, result);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void ErrorDeclarationInputTest()
+        {
+            string origin = "droplet d1;\r\ndroplet d1;";
+            string result = new Runner().DoCompile(origin);
+        }
+
     }
 }
