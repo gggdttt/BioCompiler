@@ -3,6 +3,9 @@ using Executor.Model;
 
 namespace Executor.Router
 {
+    /// <summary>
+    /// This is the demo XY Router, but I do not test its boundry. Just a demo to show how to add a new Router.
+    /// </summary>
     internal class SimpleXYRouter : RouterInterface
     {
         int width;

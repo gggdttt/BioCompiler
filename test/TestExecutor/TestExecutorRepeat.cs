@@ -73,7 +73,5 @@ namespace TestExecutor
             Chip c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
-
-
     }
 }

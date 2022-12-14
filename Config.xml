@@ -2,12 +2,17 @@
 <!--
 Sample license text.
 -->
-<System>
-	<Runtime>
-		<ip-address>192.168.0.1</ip-address>
-		<platform> true </platform>
-	</Runtime>
-
-	<Compiler>
-	</Compiler>
-</System>
+<BioSystemConfig>
+	<BioCompilerConfig>
+		<!--
+		For compiler, what we should config is 
+		-->
+		<width>32</width>
+		<height>20</height>
+	</BioCompilerConfig>
+	<BioExecutorConfig>
+		<width>32</width>
+		<height>20</height>
+		<router>AStar</router>
+	</BioExecutorConfig>
+</BioSystemConfig>
