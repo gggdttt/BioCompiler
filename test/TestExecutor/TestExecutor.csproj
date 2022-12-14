@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BioCompiler\BioCompiler.csproj" />
-    <ProjectReference Include="..\Executor\Executor.csproj" />
+    <ProjectReference Include="..\..\BioCompiler\BioCompiler.csproj" />
+    <ProjectReference Include="..\..\Executor\Executor.csproj" />
   </ItemGroup>
 
 </Project>
