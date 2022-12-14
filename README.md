@@ -22,11 +22,84 @@ Our project's basic structure looks like:
 
 ##  Compiler
 
+### Syntax 
+
+#### Declaration 
+
+``` java
+droplet <name>;
+// 		string
+```
+
+#### Input
+
+```java
+input(<droplet_name>, x,y, size);
+//      string, int, int, float
+```
+
+#### Move
+
+``` java
+move(<droplet_name>, x_dest, y_dest);
+//		string, int ,int 
+```
+
+#### Merge
+
+```java
+merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_dest);
+// 		string, string, string, int, int 
+```
+
+#### Split
+
+```java
+split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
+// string, string, strig, int, int ,int, int, real
+// note: ratio is D1/(D1+D2)
+```
+
+#### Mix
+
+```java
+mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
+// 	string, int ,int ,int ,int int
+```
+
+#### Output
+
+``` java
+output(<droplet_name>, x, y)
+// string, int ,int 
+```
+
+#### Store
+
+```java
+store(<droplet_name>,x,y, time)
+// string, int, int , float
+```
+
+#### *Repeat
+
+```java
+repeat <N> times{ <operation1>; <operation2>; ... <operation_N>;}
+// example:
+repeat 10 times{
+move(d1,3,3);
+move(d2,7,7);
+move(d1,5,5);
+move(d2,10,10);
+}
+```
+### Input and Output
+
 Input : Source code of `sc` file.
 
 Output: JSON format 
 
-> input example:
+#### Input example:
 
 ``` java
 # this is a demo
@@ -69,7 +142,7 @@ output(d3,0,0);
 
 ```
 
-output example:
+#### output example:
 
 ```json
 [
@@ -207,79 +280,6 @@ output example:
   }
 ]
 ```
-
-### Syntax 
-
-#### Declaration 
-
-``` java
-droplet <name>;
-// 		string
-```
-
-#### Input
-
-```java
-input(<droplet_name>, x,y, size);
-//      string, int, int, float
-```
-
-#### Move
-
-``` java
-move(<droplet_name>, x_dest, y_dest);
-//		string, int ,int 
-```
-
-#### Merge
-
-```java
-merge(<out_dest_droplet_name>,<in_1_droplet_name>,<in_2_droplet_name>,x_dest,y_dest);
-// 		string, string, string, int, int 
-```
-
-#### Split
-
-```java
-split(<out_dest_name1>,<out_dest_name2>,<in_droplet_name>,left_x_dest, left_y_dest, right_x_dest, right_y_dest, ratio);
-// string, string, strig, int, int ,int, int, real
-// note: ratio is D1/(D1+D2)
-```
-
-#### Mix
-
-```java
-mix(<droplet_name>,x_mix,y_mix,size_x,size_y,repeat_times)
-// 	string, int ,int ,int ,int int
-```
-
-#### Output
-
-``` java
-output(<droplet_name>, x, y)
-// string, int ,int 
-```
-
-#### Store
-
-```java
-store(<droplet_name>,x,y, time)
-// string, int, int , float
-```
-
-#### *Repeat
-
-```java
-repeat <N> times{ <operation1>; <operation2>; ... <operation_N>;}
-// example:
-repeat 10 times{
-move(d1,3,3);
-move(d2,7,7);
-move(d1,5,5);
-move(d2,10,10);
-}
-```
-
 
 
 ## Syntax checker
