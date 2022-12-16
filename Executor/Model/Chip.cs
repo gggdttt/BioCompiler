@@ -17,14 +17,25 @@ namespace Executor.Model
 
         public MovementManager movementManager { get; set; }
 
-        public Chip(List<CompilerOperation> operations, int x, int y)
+        public Chip(List<CompilerOperation> operations, int x, int y , string router)
         {
             this.xLength = x;
             this.yLength = y;
             operationManager = new OperationManager(operations, x, y);
-            // TODO support init option
-            //movementManager = new MovementManager(x, y, Router.RouterOption.SimpleXY);
-            movementManager = new MovementManager(x, y, Router.RouterOption.AStar);
+
+            if(router.ToLower().Equals("astar"))
+            {
+                movementManager = new MovementManager(x, y, Router.RouterOption.AStar);
+            }
+            else if (router.ToLower().Equals("simplexy"))
+            {
+                movementManager = new MovementManager(x, y, Router.RouterOption.SimpleXY);
+            }
+            else
+            {
+                // default is AStar
+                movementManager = new MovementManager(x, y, Router.RouterOption.AStar);
+            }
         }
 
         public void StartOpearions()

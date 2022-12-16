@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 
-class ConfigReader
+public class ConfigReader
 {
     public static BioSystemConfig GetConfig(string pathToXml)
     {
@@ -72,19 +72,19 @@ public class BioSystemConfig
 
 public class BioCompilerConfig
 {
-    [XmlElementAttribute("width", IsNullable = false)]
-    public int width;
-    [XmlElementAttribute("height", IsNullable = false)]
-    public int height;
+    [XmlElementAttribute("column", IsNullable = false)]
+    public int column;
+    [XmlElementAttribute("row", IsNullable = false)]
+    public int row;
 }
 
 
 public class BioExecutorConfig
 {
-    [XmlElementAttribute("width", IsNullable = false)]
-    public int width;
-    [XmlElementAttribute("height", IsNullable = false)]
-    public int height;
+    [XmlElementAttribute("column", IsNullable = false)]
+    public int column;
+    [XmlElementAttribute("row", IsNullable = false)]
+    public int row;
     [XmlElementAttribute(IsNullable = false)]
     public string router;
 }

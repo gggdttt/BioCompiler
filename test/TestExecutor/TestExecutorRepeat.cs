@@ -12,7 +12,7 @@ namespace TestExecutor
         {
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
-            Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length);
+            Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length, "astar");
             c.StartOpearions();
             return c;
         }

@@ -14,7 +14,7 @@ namespace TestExecutor
         {
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
-            Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length);
+            Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length, "astar");
             c.StartOpearions();
             return c;
         }
@@ -74,7 +74,7 @@ namespace TestExecutor
         }
 
         [TestMethod]
-         public void TestMultiInputAndOuput()
+        public void TestMultiInputAndOuput()
         {
             string origin =
                 "droplet d1;\r\n" +
@@ -83,7 +83,7 @@ namespace TestExecutor
                 "input(d2,4,4,0.5);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n" +
-                "input(d1,1,1,1.0);\r\n" + 
+                "input(d1,1,1,1.0);\r\n" +
                 "input(d2,4,4,0.5);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
@@ -248,7 +248,7 @@ namespace TestExecutor
 
 
         [TestMethod]
-         public void TestAllSpecialCase1()
+        public void TestAllSpecialCase1()
         {
             // containing d1,d2-> d1
             string origin =
@@ -296,7 +296,7 @@ namespace TestExecutor
                 "store(d3,5,5,1.0);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n" +
-                "output(d3,0,0);\r\n"+
+                "output(d3,0,0);\r\n" +
                 "input(d3,10,10,3.2);\r\n" +
                 "output(d3,0,0);\r\n";
 

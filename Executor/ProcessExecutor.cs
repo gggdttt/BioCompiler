@@ -30,9 +30,11 @@ namespace Executor
         {
             try
             {
+                BioExecutorConfig bioExecutorConfig = ConfigReader.GetConfig(option.Config!).bioExecutorConfig;
+                
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
-                Chip c = new Chip(GetOperationsListFromJSON(fileContent), option.Column, option.Row);
+                Chip c = new Chip(GetOperationsListFromJSON(fileContent), bioExecutorConfig.column, bioExecutorConfig.row, bioExecutorConfig.router);
                 c.StartOpearions();
                 return 0;
             }

@@ -7,12 +7,12 @@ Sample license text.
 		<!--
 		For compiler, what we should config is 
 		-->
-		<width>32</width>
-		<height>20</height>
+		<column>32</column>
+		<row>20</row>
 	</BioCompilerConfig>
 	<BioExecutorConfig>
-		<width>32</width>
-		<height>20</height>
+		<column>32</column>
+		<row>20</row>
 		<router>AStar</router>
 	</BioExecutorConfig>
 </BioSystemConfig>
