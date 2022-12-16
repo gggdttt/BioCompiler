@@ -87,10 +87,14 @@ public class BioExecutorConfig
     public int row;
     [XmlElementAttribute(IsNullable = false)]
     public string router;
-    [XmlElementAttribute("template", IsNullable = false)]
-    public string template;
-    [XmlElementAttribute("output", IsNullable = false)]
-    public string output;
+    [XmlElementAttribute("json_template", IsNullable = false)]
+    public string jsonTemplate;
+    [XmlElementAttribute("basm_template", IsNullable = false)]
+    public string basmTemplate;
+    [XmlElementAttribute("json_output", IsNullable = false)]
+    public string jsonOutput;
+    [XmlElementAttribute("basm_output", IsNullable = false)]
+    public string basmOutput;
 }
 
 

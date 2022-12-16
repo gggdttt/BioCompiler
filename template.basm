@@ -1,0 +1,15 @@
+.data
+DEF zero_addr 0
+zero: INT zero_addr 0
+
+.text
+main:
+
+
+# Bio-Virtual-Machine configuration
+.configuration
+data_memory_size -1
+private_data_memory_start_address 1000
+debug_log_data_types_for_print_formatting true
+debug_keep_all_private_data_memories false
+

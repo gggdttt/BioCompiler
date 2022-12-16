@@ -15,8 +15,8 @@ namespace Executor.Simulator
             return $" \"name\": \"{droplet.name}\",\r\n" +
                 $"\"ID\": {i++},\r\n" +
                 "\"substance_name\": \"h20\",\r\n" +
-                $"\"positionX\": {droplet.xValue * 20},\r\n" +
-                $"\"positionY\": {droplet.yValue * 20},\r\n" +
+                $"\"positionX\": {110 + droplet.xValue * 20 + droplet.gridDiameter * 20/2},\r\n" +
+                $"\"positionY\": {droplet.yValue * 20 + droplet.gridDiameter * 20 / 2},\r\n" +
                 $"\"sizeX\": {droplet.gridDiameter * 20},\r\n" +
                 $"\"sizeY\": {droplet.gridDiameter * 20},\r\n" +
                 "\"color\": \"#FFB00B\",\r\n" +

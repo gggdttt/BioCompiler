@@ -17,8 +17,11 @@ namespace Executor.Router
             this.height = height;
         }
 
-        public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
+        public int[] MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
+            int[] result = new int[4];
+            result[0] = d.xValue;
+            result[1] = d.yValue;
             if (!busyDroplets.Contains(d))
             {
                 throw new ArgumentException("There is no such droplet in busy Droplets!");
@@ -31,38 +34,35 @@ namespace Executor.Router
                 throw new ArgumentException("The grid is out of bound!");
             }
 
+            Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
             // move right
             if (d.xValue < destx && FindConflict(d, d.xValue + 1, d.yValue, activeDrplets, busyDroplets))
             {
-                Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 temp.xValue++;
             }
-
             // move left
             else if (d.xValue > destx && FindConflict(d, d.xValue - 1, d.yValue, activeDrplets, busyDroplets))
             {
-                Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 temp.xValue--;
             }
-
             // move up
             else if (d.yValue < desty && FindConflict(d, d.xValue, d.yValue + 1, activeDrplets, busyDroplets))
             {
-                Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 temp.yValue++;
             }
-
             // move down
             else if (d.yValue > desty && FindConflict(d, d.xValue, d.yValue - 1, activeDrplets, busyDroplets))
             {
-                Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 temp.yValue--;
             }
-
             else
             {
                 // can not move or has arrived dest
+                return null;
             }
+            result[2] = temp.xValue;
+            result[3] = temp.yValue;
+            return result;
         }
 
         /// <summary>

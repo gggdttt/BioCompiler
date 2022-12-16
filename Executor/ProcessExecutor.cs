@@ -37,10 +37,11 @@ namespace Executor
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
                 List<CompilerOperation> operations = GetOperationsListFromJSON(fileContent);
 
-                WriteOriginPositionToJsonSimulator(operations, bioExecutorConfig.output, bioExecutorConfig.template, bioExecutorConfig.column);
+                WriteOriginPositionToJsonSimulator(operations, bioExecutorConfig.jsonOutput, bioExecutorConfig.jsonTemplate, bioExecutorConfig.column);
 
                 Chip c = new Chip(operations, bioExecutorConfig.column, bioExecutorConfig.row, bioExecutorConfig.router);
-                c.StartOpearions();
+                string executeRecord = c.StartOpearions();
+                SimulatorFileGenerator.SimulatorBasmFileGenerator(bioExecutorConfig.basmOutput, bioExecutorConfig.basmTemplate, executeRecord);
                 return 0;
             }
             catch (Exception ex)

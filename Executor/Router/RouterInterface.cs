@@ -15,6 +15,6 @@ namespace Executor.Router
         /// <param name="desty">The final destination of droplet</param>
         /// <param name="activeDrplets">Current active droplet</param>
         /// <param name="busyDroplets">The current busy droplets</param>
-        public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets);
+        public int[] MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets);
     }
 }

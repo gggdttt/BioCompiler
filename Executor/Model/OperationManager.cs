@@ -63,8 +63,7 @@ namespace Executor.Model
             // remove all executable operations and add them to executingOperations
             operations = operations.Except(executalbeOperations).ToList();
             executingOperations.AddRange(executalbeOperations);
-/*            Console.WriteLine("\n\n\n before executing");
-            DebugPrint();*/
+
         }
 
         /// <summary>
@@ -77,9 +76,6 @@ namespace Executor.Model
             {
                 op.ExecuteOperation(activeDroplets, busyDroplets, manager);
             }
-
-/*          Console.WriteLine("\n\n\n executing");
-            DebugPrint();*/
         }
 
         /// <summary>
@@ -90,9 +86,6 @@ namespace Executor.Model
             List<CompilerOperation> executedOperations = executingOperations.Where(t => t.HasExecuted(activeDroplets, busyDroplets)).ToList();
             // remove executed 
             executingOperations = executingOperations.Except(executedOperations).ToList();
-
-            Console.WriteLine("\n\n\n after executing");
-            DebugPrint();
         }
 
         public bool AllTasksCompleted()

@@ -14,7 +14,9 @@ Sample license text.
 		<column>32</column>
 		<row>20</row>
 		<router>AStar</router>
-		<template>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\template.json</template>
-		<output>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\out\test1.json</output>
+		<basm_template>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\template.basm</basm_template>
+		<json_template>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\template.json</json_template>
+		<json_output>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\out\test1.json</json_output>
+		<basm_output>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\out\test1.basm</basm_output>
 	</BioExecutorConfig>
 </BioSystemConfig>

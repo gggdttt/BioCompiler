@@ -24,20 +24,39 @@ namespace Executor.Router
             this.gridRow = rows;
         }
 
-        public void MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="destx"></param>
+        /// <param name="desty"></param>
+        /// <param name="activeDrplets"></param>
+        /// <param name="busyDroplets"></param>
+        /// <returns></returns>
+        public int[] MoveOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
+            int[] result = new int[4];
+            // record origin position
+            result[0] = d.xValue;
+            result[1] = d.yValue;
             List<IEdge> path = FindPath(d, destx, desty, activeDrplets, busyDroplets);
             if (path != null && path.Count() >= 1)
             {
+                
                 Droplet temp = busyDroplets.Where(t => t.name.Equals(d.name)).First();
                 // has not complete move
                 temp.xValue = (int)(path.First().End.Position.X);
                 temp.yValue = (int)(path.First().End.Position.Y);
+                result[2] = temp.xValue;
+                result[3] = temp.yValue;
+                return result;
             }
             else
             {
                 // has arrived or can not find path
+                return null;
             }
+
         }
 
         /// <summary>
@@ -60,10 +79,10 @@ namespace Executor.Router
             /*DisConnectAllNode(grid, d, activeDrplets, busyDroplets);*/
 
             var pathFinder = new PathFinder();
-            Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
+            //Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
             var path = pathFinder.FindPath(new GridPosition(d.xValue, d.yValue), new GridPosition(destx, desty), grid);
 
-            Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
+            //Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
 
             // Use path.Edges to get the actual path
             return path.Edges.ToList();
@@ -78,7 +97,7 @@ namespace Executor.Router
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneDroplet(g, d, droplet);
-                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
+                    //Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
             // disconnect all the droplets in busyDroplets
@@ -87,7 +106,7 @@ namespace Executor.Router
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneDroplet(g, d, droplet);
-                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
+                    //Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
             // disconnect the area of boundray
@@ -96,12 +115,12 @@ namespace Executor.Router
         }
 
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="g"></param>
-/// <param name="movingDroplet"></param>
-/// <returns></returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="movingDroplet"></param>
+        /// <returns></returns>
         public Grid DisconnectBoundry(Grid g, Droplet movingDroplet)
         {
 
@@ -128,12 +147,12 @@ namespace Executor.Router
         public Grid DisconnectOneDroplet(Grid g, Droplet movingDroplet, Droplet blockedDroplet)
         {
             // two droplet need at least one grid distance!!!
-            int newTopLeftPointX = blockedDroplet.xValue - movingDroplet.gridDiameter-1;
-            int newTopLeftPointY = blockedDroplet.yValue - movingDroplet.gridDiameter-1;
+            int newTopLeftPointX = blockedDroplet.xValue - movingDroplet.gridDiameter - 1;
+            int newTopLeftPointY = blockedDroplet.yValue - movingDroplet.gridDiameter - 1;
 
             // two droplet need at least one grid distance!!!
-            for (int i = newTopLeftPointX; i < blockedDroplet.xValue + blockedDroplet.gridDiameter+1; i++)
-                for (int j = newTopLeftPointY; j < blockedDroplet.xValue + blockedDroplet.gridDiameter+1; j++)
+            for (int i = newTopLeftPointX; i < blockedDroplet.xValue + blockedDroplet.gridDiameter + 1; i++)
+                for (int j = newTopLeftPointY; j < blockedDroplet.xValue + blockedDroplet.gridDiameter + 1; j++)
                 {
                     /*                    
                      *                  ********        *******0

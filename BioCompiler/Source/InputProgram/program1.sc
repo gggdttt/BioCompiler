@@ -6,9 +6,9 @@ droplet d2;
 droplet d3;
 
 # droplet input
-input(d1,1,1,1.0);
-input(d2,4,4,0.5);
-input(d3,10,10,3.2);
+input(d1,15,15,0.1);
+input(d2,4,4,0.1);
+input(d3,10,10,0.1);
 
 # move
 move(d1,3,3);
