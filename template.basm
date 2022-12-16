@@ -3,7 +3,6 @@ DEF zero_addr 0
 zero: INT zero_addr 0
 
 .text
-main:
 
 
 # Bio-Virtual-Machine configuration

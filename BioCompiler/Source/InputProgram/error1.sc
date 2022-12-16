@@ -8,7 +8,7 @@ droplet d1;
 input(d1,10,10,0.025);
 
 # move
-move(d1,9,9);
+move(d1,9,10);
 
 # output
 output(d1,0,0);
