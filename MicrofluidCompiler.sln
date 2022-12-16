@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE64ABE3-2DB4-4EA4-ACE1-1A7B29A9A682}"
 	ProjectSection(SolutionItems) = preProject
 		Config.xml = Config.xml
+		template.json = template.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestExecutor", "test\TestExecutor\TestExecutor.csproj", "{57B2AA03-716B-42FE-B396-761C7E79805F}"
