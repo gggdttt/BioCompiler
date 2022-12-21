@@ -7,7 +7,7 @@ using Roy_T.AStar.Graphs;
 namespace TestExecutor
 {
     [TestClass]
-    public class TestAstar
+    public class AstarFunctionalityTest
     {
         [TestMethod]
         public void TestAstarSingleLine()
