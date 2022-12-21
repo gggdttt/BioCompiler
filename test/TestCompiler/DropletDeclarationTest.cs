@@ -23,8 +23,10 @@ namespace TestCompiler
         [ExpectedException(typeof(Exception))]
         public void ErrorDeclarationInputTest()
         {
-            string origin = "droplet d1;\r\ndroplet d1;";
-            string result = new Runner().DoCompile(origin);
+            string origin = 
+                "droplet d1;\r\n" +
+                "droplet d1;";
+            new Runner().DoCompile(origin);
         }
 
     }

@@ -19,7 +19,7 @@ namespace Executor
 
         public ProcessExecutor()
         {
-            option = new ExecutorLaunchOption();
+            this.option = new ExecutorLaunchOption();
         }
 
         public ProcessExecutor(ExecutorLaunchOption option)
@@ -60,14 +60,12 @@ namespace Executor
 
         private void WriteOriginPositionToJsonSimulator(List<CompilerOperation> operations, string outputPath, string templatePath, int width)
         {
-            HashSet<Droplet> dropletsBeforeExecuting = new HashSet<Droplet>();
+            HashSet<Droplet> dropletsBeforeExecuting = new();
             foreach (CompilerOperation operation in operations)
             {
-                if (operation is DropletInputer)
+                if (operation is DropletInputer inputer)
                 {
-
-                    DropletInputer inputer = (DropletInputer)operation;
-                    Droplet d = new Droplet(inputer.name, inputer.xValue, inputer.yValue, inputer.size);
+                    Droplet d = new(inputer.name, inputer.xValue, inputer.yValue, inputer.size);
                     if (!dropletsBeforeExecuting.Contains(d))
                         dropletsBeforeExecuting.Add(d);
                 }

@@ -281,28 +281,145 @@ output(d3,0,0);
 ]
 ```
 
+## Exception Diagnostics
 
-## Syntax checker
+### Exceptions of Compiler 
 
-### Invalid Source Code1
+#### 1.'{0}' is not declared
+
+Exception message: C_DROPLET_NOT_DECLARED
+
+Exception code: 00001
+
+Code example1:
 
 ```apl
-# droplet declaration
+# the beginning of file
 droplet d1;
 droplet d2;
 
-# droplet input
 input(d3,10,10,3.2);
-
 ```
 
-### Invalid Source Code2
+Code example2:
 
-```api
-# droplet declaration
+```apl
+# the beginning of file
+input(d1000,10,10,3.2);
+```
+
+#### 2.'{0}' is declared more than once
+
+Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
+
+Exception code: 00002
+
+Code example:
+
+```apl
 droplet d1;
 droplet d1;
 ```
+
+#### 3.Incorrect syntax
+
+Exception message: C_INCORRECT_SYNTAX
+
+Exception code: 00003
+
+Code example1:
+
+```apl
+droplet; d1#
+inputtt();
+```
+
+#### 4. Illegal position value
+
+Exception message: C_ILLEGAL_POSITION
+
+Exception code: 00004
+
+Code example1:
+
+```apl
+in setting, the chip is 32x20
+droplet d1;
+input(d1, 33, 10) # x value bigger than chip's width
+input(d1, -1, 10) # x value smaller than 0
+input(d1, 10, 21) # y value bigger than chip's width
+input(d1, 10, -1) # y value smaller than 0
+```
+
+#### 5.Illegal droplet's size value
+
+Exception message: C_ILLEGAL_DROPLET_SIZE
+
+Exception code: 00005
+
+Code example:
+
+```apl
+
+```
+
+### Exceptions of Executer
+
+Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
+
+Exception code: 00002
+
+Code example:
+
+```apl
+
+```
+
+
+
+
+
+Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
+
+Exception code: 00002
+
+Code example:
+
+```apl
+
+```
+
+
+
+
+
+Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
+
+Exception code: 00002
+
+Code example:
+
+```apl
+
+```
+
+
+
+
+
+Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
+
+Exception code: 00002
+
+Code example:
+
+```apl
+
+```
+
+
+
+
 
 ### Exception/Errors
 
@@ -319,6 +436,10 @@ droplet d1;
 
 * Invalid 1: droplet is not defined before
 * Invalid 2: position is out of bound *(should this be handled as exception?)*
+
+
+
+
 
 ### Path-finding algorithm
 
