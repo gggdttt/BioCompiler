@@ -3,6 +3,8 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
+using ToolSupporter.BioExceptions;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -27,20 +29,27 @@ namespace Executor.Model.Operation
         }
 
         /// <summary>
-        /// If its name is not in declaredSet, add and return true
-        /// If it has been included in any set, return false
+        /// If its name has been in dec set, it has been declared
+        /// If its name has been in occ set, it has been initialized
+        /// It its name not in dec or occ, add it to dec
         /// </summary>
         /// <param name="declaredSet">Declared Variables</param>
         /// <param name="occupiedSet">Variables are occupied</param>
-        /// <returns> return true if it's added successfully, otherwise return false</returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-            if (!declaredSet.Contains(name) && !occupiedSet.Contains(name))
+            if (declaredSet.Contains(name))
+            {
+                throw new DropletDeclaredMoreThanOnceException(line);
+            }
+            else if (occupiedSet.Contains(name))
+            {
+                throw new DropletDeclaredMoreThanOnceException(line);
+            }
+            else
             {
                 declaredSet.Add(name);
-                return true;
             }
-            else return false;
+
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
@@ -51,12 +60,12 @@ namespace Executor.Model.Operation
 
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
-        { 
+        {
             // nothing happen
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
-        { 
+        {
             // don't need to execute 
             return true;
         }

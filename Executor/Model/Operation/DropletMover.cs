@@ -4,6 +4,8 @@
 // DTU(Technical University of Denmark)
 
 
+using ToolSupporter.BioExceptions;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -32,15 +34,19 @@ namespace Executor.Model.Operation
         }
 
         /// <summary>
-        /// If its name is not in declaredSet, return false 
-        /// If it has been included in, return true and move it from declared Set to occupiedSet
+        /// If occ and dec both not have the droplet, the droplet is not declared
+        /// If occ contains but dec does not, the droplet is declared but not input, so not assigned
         /// </summary>
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
         /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-            return occupiedSet.Contains(name);
+            if (!occupiedSet.Contains(name) && !declaredSet.Contains(name))
+                throw new DropletNotDeclaredException(line);
+            else if(!occupiedSet.Contains(name) && declaredSet.Contains(name))
+                throw new VariableNotAssignedValueException(line);
+            
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

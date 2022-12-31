@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--
-Sample license text.
--->
 <BioSystemConfig>
 	<BioCompilerConfig>
-		<!--
-		For compiler, what we should config is 
-		-->
 		<column>32</column>
 		<row>20</row>
 	</BioCompilerConfig>

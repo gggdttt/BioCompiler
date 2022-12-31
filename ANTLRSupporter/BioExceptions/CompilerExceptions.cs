@@ -6,42 +6,55 @@ namespace ToolSupporter.BioExceptions
         C_DROPLET_NOT_DECLARED = 1,
         C_DROPLET_DECLRATED_MORE_THAN_ONCE = 2,
         C_INCORRECT_SYNTAX = 3,
-        C_ILLEGAL_POSITION = 4,
-        C_ILLEGAL_DROPLET_SIZE = 5
+        C_VARIABLE_NOT_RELEASED = 4,
+        C_VARIABLE_NOT_ASSIGNED_VALUE = 5
     }
 
+    /// <summary>
+    /// # d3 is not declared
+    ///     droplet d1;
+    ///     droplet d2; 
+    ///     input(d3,10,10,3.2);
+    /// </summary>
     public class DropletNotDeclaredException : BioException
     {
-        public DropletNotDeclaredException()
-            : base(CompilerExceptionMsgEnum.C_DROPLET_NOT_DECLARED.ToString(), (int)CompilerExceptionMsgEnum.C_DROPLET_NOT_DECLARED)
+        public DropletNotDeclaredException(int line)
+            : base(CompilerExceptionMsgEnum.C_DROPLET_NOT_DECLARED.ToString(), (int)CompilerExceptionMsgEnum.C_DROPLET_NOT_DECLARED, line)
         { }
     }
 
+    /// <summary>
+    /// droplet d1;
+    /// droplet d1;
+    /// </summary>
     public class DropletDeclaredMoreThanOnceException : BioException
     {
-        public DropletDeclaredMoreThanOnceException()
-            : base(CompilerExceptionMsgEnum.C_DROPLET_DECLRATED_MORE_THAN_ONCE.ToString(), (int)CompilerExceptionMsgEnum.C_DROPLET_DECLRATED_MORE_THAN_ONCE)
+        public DropletDeclaredMoreThanOnceException(int line)
+            : base(CompilerExceptionMsgEnum.C_DROPLET_DECLRATED_MORE_THAN_ONCE.ToString(), (int)CompilerExceptionMsgEnum.C_DROPLET_DECLRATED_MORE_THAN_ONCE, line)
         { }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class IncorrectSyntaxException : BioException
     {
-        public IncorrectSyntaxException()
-            : base(CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX.ToString(), (int)CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX)
+        public IncorrectSyntaxException(int line)
+            : base(CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX.ToString(), (int)CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX, line)
         { }
     }
 
-    public class IllegalPositionException : BioException
+    public class VariableNotReleasedException : BioException
     {
-        public IllegalPositionException()
-            : base(CompilerExceptionMsgEnum.C_ILLEGAL_POSITION.ToString(), (int)CompilerExceptionMsgEnum.C_ILLEGAL_POSITION)
+        public VariableNotReleasedException(int line)
+            : base(CompilerExceptionMsgEnum.C_VARIABLE_NOT_RELEASED.ToString(), (int)CompilerExceptionMsgEnum.C_VARIABLE_NOT_RELEASED, line)
         { }
     }
 
-    public class IllegalDropletSizeException : BioException
+    public class VariableNotAssignedValueException : BioException
     {
-        public IllegalDropletSizeException()
-            : base(CompilerExceptionMsgEnum.C_ILLEGAL_DROPLET_SIZE.ToString(), (int)CompilerExceptionMsgEnum.C_ILLEGAL_DROPLET_SIZE)
+        public VariableNotAssignedValueException(int line)
+            : base(CompilerExceptionMsgEnum.C_VARIABLE_NOT_ASSIGNED_VALUE.ToString(), (int)CompilerExceptionMsgEnum.C_VARIABLE_NOT_ASSIGNED_VALUE, line)
         { }
     }
 }

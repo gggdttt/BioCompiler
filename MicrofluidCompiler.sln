@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicrofluidSimulator", "MicrofluidSimulator\MicrofluidSimulator.csproj", "{9D517FF9-1195-43FF-AE24-6DED184126E5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BioCompiler", "BioCompiler\BioCompiler.csproj", "{CB95BB79-E0FA-44FF-8335-0D9F2C9BDD0E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Executor", "Executor\Executor.csproj", "{3C23E2FE-A800-440A-8313-C63E6ED674FD}"
@@ -28,10 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D517FF9-1195-43FF-AE24-6DED184126E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D517FF9-1195-43FF-AE24-6DED184126E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D517FF9-1195-43FF-AE24-6DED184126E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D517FF9-1195-43FF-AE24-6DED184126E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB95BB79-E0FA-44FF-8335-0D9F2C9BDD0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB95BB79-E0FA-44FF-8335-0D9F2C9BDD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB95BB79-E0FA-44FF-8335-0D9F2C9BDD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU

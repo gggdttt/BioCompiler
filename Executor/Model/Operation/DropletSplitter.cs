@@ -6,6 +6,7 @@
 
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation
 {
@@ -53,7 +54,7 @@ namespace Executor.Model.Operation
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
         /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
             if (declaredSet.Contains(outDestName1)
                 && declaredSet.Contains(outDestName2)
@@ -66,7 +67,7 @@ namespace Executor.Model.Operation
 
                 occupiedSet.Remove(inDropletName);
                 declaredSet.Add(inDropletName);
-                return true;
+                return;
             }
 
             else if (occupiedSet.Contains(outDestName1)
@@ -76,7 +77,7 @@ namespace Executor.Model.Operation
             {
                 declaredSet.Remove(outDestName2);
                 occupiedSet.Add(outDestName2);
-                return true;
+                return;
             }
 
             else if (declaredSet.Contains(outDestName1)
@@ -86,9 +87,15 @@ namespace Executor.Model.Operation
             {
                 declaredSet.Remove(outDestName1);
                 occupiedSet.Add(outDestName1);
-                return true;
+                return;
             }
-            else return false;
+            else if (!occupiedSet.Contains(inDropletName) && !declaredSet.Contains(inDropletName)
+                || !occupiedSet.Contains(outDestName1) && !declaredSet.Contains(outDestName1)
+                || !occupiedSet.Contains(outDestName2) && !declaredSet.Contains(outDestName2))
+            {
+                throw new DropletNotDeclaredException(line);
+            }
+            else { throw new VariableNotAssignedValueException(line); }
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
@@ -161,7 +168,7 @@ namespace Executor.Model.Operation
             {
                 manager.MoveByOneStep(droplet2, outDest2X, outDest2Y, activeDroplets, busyDroplets);
             }
-            if(droplet1.xValue == outDest1X && droplet1.yValue == outDest1Y
+            if (droplet1.xValue == outDest1X && droplet1.yValue == outDest1Y
                 && droplet2.xValue == outDest2X && droplet2.yValue == outDest2Y)
             {// have arrived in the dest
                 busyDroplets.Remove(droplet1);

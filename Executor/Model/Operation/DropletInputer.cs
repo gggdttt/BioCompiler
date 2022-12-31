@@ -4,6 +4,8 @@
 // DTU(Technical University of Denmark)
 
 
+using ToolSupporter.BioExceptions;
+
 namespace Executor.Model.Operation
 {
     /// <summary>
@@ -35,30 +37,38 @@ namespace Executor.Model.Operation
         }
 
         /// <summary>
-        /// If its name is not in declaredSet, return false 
-        /// If it has been included in, return true and move it from declared Set to occupiedSet
+        /// If the name is in declared Set and not in occupied set, execute input
+        /// If its name is not in declaredSet and not in occupied set, the droplet has not been declared 
+        /// If its name is in occupied set, the droplet has not been released
         /// </summary>
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
-        /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-            if (declaredSet.Count() == 0) return false;
+
             if (declaredSet.Contains(name))
             {
                 declaredSet.Remove(name);
                 occupiedSet.Add(name);
-                return true;
             }
-            else return false;
+            else if (occupiedSet.Contains(name))
+            {
+                throw new VariableNotReleasedException(line);
+            }
+            else if (!declaredSet.Contains(name) && !occupiedSet.Contains(name))
+            {
+                throw new DropletNotDeclaredException(line);
+            }
+            else throw new Exception();
+
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             // the droplet has not been initialized
-            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
-                &&busyDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
-                && RecordDroplets.Where(droplet => droplet.name.Equals(name)).Count()==0)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
+                && busyDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0
+                && RecordDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 0)
             {
                 RecordDroplets.Add(new Droplet(name, xValue, yValue, size));
                 return true;
@@ -80,7 +90,7 @@ namespace Executor.Model.Operation
             return activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1
                 && d.xValue == xValue
                 && d.yValue == yValue
-                && d.volume ==size;
+                && d.volume == size;
         }
 
         public override string ToString()

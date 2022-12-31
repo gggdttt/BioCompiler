@@ -10,6 +10,7 @@ using static SyntaxParser;
 using System.Text;
 using System.Collections.Immutable;
 using ToolSupporter.FileOperator;
+using ToolSupporter.BioExceptions;
 
 namespace BioCompiler
 
@@ -34,15 +35,21 @@ namespace BioCompiler
             {
                 // start to read source file
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
+                // start to compile
                 string result = DoCompile(fileContent);
+                // write result to file 
                 BioFileWriter.Write(option.Output!, result);
                 return 0;
             }
+            catch (BioException ex)
+            {
+                Console.WriteLine("Compiler Error: " + ex.Message);
+                return -1;
+            }
             catch (Exception ex)
             {
-                //TODO: create more exception
                 Console.WriteLine("Error: " + ex.Message);
-                return -1;
+                return -2;
             }
         }
 

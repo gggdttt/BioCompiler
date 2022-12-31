@@ -6,6 +6,7 @@
 
 using System.Net.NetworkInformation;
 using System.Xml.Linq;
+using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation
 {
@@ -48,15 +49,25 @@ namespace Executor.Model.Operation
         }
 
         /// <summary>
-        /// If its name is not in declaredSet, return false 
+        /// If its name is not in declaredSet, return 
         /// If it has been included in, return true and move it from declared Set to occupiedSet
         /// </summary>
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
-        /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
-            return occupiedSet.Contains(name);
+            if(occupiedSet.Contains(name))
+            {
+                return;
+            }    
+            else if(declaredSet.Contains(name))
+            {
+                throw new VariableNotAssignedValueException(line);
+            }
+            else if(!occupiedSet.Contains(name)&&!declaredSet.Contains(name))
+            {
+                throw new DropletNotDeclaredException(line);
+            }
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

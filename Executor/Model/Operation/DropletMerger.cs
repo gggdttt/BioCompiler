@@ -6,6 +6,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation
 {
@@ -46,8 +47,7 @@ namespace Executor.Model.Operation
         /// </summary>
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
-        /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
 
             if (declaredSet.Contains(outDropletName)
@@ -62,7 +62,6 @@ namespace Executor.Model.Operation
 
                 occupiedSet.Remove(inDroplet2Name);
                 declaredSet.Add(inDroplet2Name);
-                return true;
             }
             else if (occupiedSet.Contains(outDropletName)
                 && occupiedSet.Contains(inDroplet1Name)
@@ -70,9 +69,15 @@ namespace Executor.Model.Operation
                 && (outDropletName.Equals(inDroplet1Name) || outDropletName.Equals(inDroplet2Name))
                 && !inDroplet1Name.Equals(inDroplet2Name))
             { //merge(d1,d2,d1,....) d1,d2 ->d1
-                return true;
+              // do nothing
             }
-            else return false;
+            else if (!occupiedSet.Contains(inDroplet1Name) && declaredSet.Contains(inDroplet1Name)
+                || !occupiedSet.Contains(inDroplet2Name) && declaredSet.Contains(inDroplet2Name))
+            {
+                throw new VariableNotAssignedValueException(line);
+            }
+            // TODO: need to check the logic here carefully.
+            else throw new DropletNotDeclaredException(line);
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

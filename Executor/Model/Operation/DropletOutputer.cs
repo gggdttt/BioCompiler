@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Xml.Linq;
+using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation
 {
@@ -43,21 +44,28 @@ namespace Executor.Model.Operation
         /// <param name="declaredSet"></param>
         /// <param name="occupiedSet"></param>
         /// <returns></returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
 
             if (occupiedSet.Contains(name))
             {
                 occupiedSet.Remove(name);
                 declaredSet.Add(name);
-                return true;
             }
-            else return false;
+            else if (declaredSet.Contains(name))
+            {
+                throw new VariableNotAssignedValueException(line);
+            }
+            else
+            {
+                throw new DropletNotDeclaredException(line);
+            }
+
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
-            if(activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
+            if (activeDroplets.Where(droplet => droplet.name.Equals(name)).Count() == 1)
             {
                 Active2Busy(activeDroplets, busyDroplets);
                 return true;
@@ -73,7 +81,7 @@ namespace Executor.Model.Operation
             busyDroplets.Add(d1);
         }
 
-        public void ExecuteOperation(List <Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
+        public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             List<Droplet> temp = busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList();
             // if it has not moved to dest

@@ -1,6 +1,6 @@
+using System.Data;
 using BioCompiler;
-
-
+using ToolSupporter.BioExceptions;
 
 namespace TestCompiler
 {
@@ -9,16 +9,102 @@ namespace TestCompiler
     {
 
 
+        //===========================================================================================//
+        //                                                                                           //
+        //                                    Test for COMMEN  OPERATION                             //
+        //                                                                                           //
+        //===========================================================================================//
+
+        //========================================
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void ErrorDeclarationInputTest()
+        [ExpectedException(typeof(DropletNotDeclaredException))]
+        public void DropletNotDeclaredTest1()
         {
             string origin = 
-                "droplet d1;\r\n" +
-                "droplet d1;";
+                "droplet d1;" +
+                "droplet d2;" +
+                "input(d3,10,10,3.2);";
             new Runner().DoCompile(origin);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(DropletNotDeclaredException))]
+        public void DropletNotDeclaredTest2()
+        {
+            string origin =
+                "input(d1000,10,10,3.2);";
+            new Runner().DoCompile(origin);
+        }
+        //===========================================
+
+        //===========================================
+        [TestMethod]
+        [ExpectedException(typeof(DropletDeclaredMoreThanOnceException))]
+        public void DropletDeclaredMoreThanOnceTest()
+        {
+            string origin =
+                "droplet d1;" +
+                "droplet d1;";
+            new Runner().DoCompile(origin);
+        }
+        //===========================================
+
+        //===========================================
+        [TestMethod]
+        [ExpectedException(typeof(IncorrectSyntaxException))]
+        public void IncorrectSyntaxTest1()
+        {
+            string origin =
+                "droplet; d1#";
+            new Runner().DoCompile(origin);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IncorrectSyntaxException))]
+        public void IncorrectSyntaxTest2()
+        {
+            string origin =
+                "droplet d1;" +
+                "inputt(d1,10,10,3.2);";
+            new Runner().DoCompile(origin);
+        }
+
+
+        //===========================================
+
+        //===========================================
+
+        [TestMethod]
+        [ExpectedException(typeof(VariableNotReleasedException))]
+        public void VariableNotReleasedTest1()
+        {
+            string origin =
+                "droplet d1;\r\n" +
+                "input(d1,3,3,3);\r\n" +
+                "input(d1,3,3,3);";
+            new Runner().DoCompile(origin);
+        }
+
+        //===========================================
+
+        //===========================================
+
+        [TestMethod]
+        [ExpectedException(typeof(VariableNotAssignedValueException))]
+        public void ErrorDeclarationInputTest()
+        {
+            string origin =
+                "droplet d1;" +
+                "move(d1,3,3);";
+            new Runner().DoCompile(origin);
+        }
+
+
+        //===========================================================================================//
+        //                                                                                           //
+        //                                    Test for REPEAT                                        //
+        //                                                                                           //
+        //===========================================================================================//
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestCheckRepeatWithUndeclaredDroplets()
@@ -40,7 +126,7 @@ namespace TestCompiler
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(BioException))]
         public void TestCheckRepeatError2()
         {
             string origin =

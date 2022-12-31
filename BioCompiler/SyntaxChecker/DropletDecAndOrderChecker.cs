@@ -1,6 +1,7 @@
 ﻿using Executor.Model;
 using Executor.Model.Operation;
 using System.Collections.Immutable;
+using ToolSupporter.BioExceptions;
 
 namespace BioCompiler.Checker
 {
@@ -18,13 +19,9 @@ namespace BioCompiler.Checker
 
             foreach (CompilerOperation operation in operations)
             {
-                if (!operation.DeclarationCheck(declaredSet, occupiedSet))
-                {
-                    /*                    Console.WriteLine("declaredSet"+string.Join("", declaredSet.ToArray()));
-                                        Console.WriteLine("occupiedSet:"+string.Join("", occupiedSet.ToArray()));*/
-                    // TODO, throw Exception formally
-                    throw new Exception("Calling an undeclared droplet or this droplet is occupied in line:" + operation.GetLine());
-                }
+
+                operation.DeclarationCheck(declaredSet, occupiedSet);
+                   // throw new DropletDeclaredMoreThanOnceException("Calling an undeclared droplet or this droplet is occupied in line:" + operation.GetLine());
             }
             return true;
         }

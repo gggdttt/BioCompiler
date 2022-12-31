@@ -11,14 +11,17 @@ namespace ToolSupporter.BioExceptions
     public class BioException : ApplicationException
     {
         private int code;
+        private int line;
         public BioException()
         {
             code = 0;
+            line = -1;
         }
-        public BioException(string message, int code)
+        public BioException(string message, int code, int line)
             : base(message)
         {
             this.code = code;
+            this.line = line;
         }
 
         public int GetCode()
@@ -26,9 +29,13 @@ namespace ToolSupporter.BioExceptions
             return code;
         }
 
+        public int GetLine()
+        {
+            return line;
+        }
         public string GetMessage()
         {
-            return base.Message;
+            return $"exception at line{line} in source file:{base.Message}";
         }
     }
 }

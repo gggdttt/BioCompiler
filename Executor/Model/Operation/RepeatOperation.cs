@@ -47,14 +47,12 @@ namespace Executor.Model.Operation
         /// <param name="declaredSet">Declared Variables</param>
         /// <param name="occupiedSet">Variables are occupied</param>
         /// <returns> return true if all repeat opeations statisfy checking rule</returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet)
         {
             foreach(CompilerOperation operation in repeatOperations)
             {
-                if(!operation.DeclarationCheck(declaredSet, occupiedSet))
-                    return false;
+                operation.DeclarationCheck(declaredSet, occupiedSet);
             }
-            return true;
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

@@ -15,12 +15,11 @@ namespace Executor.Model.Operation
         public int GetLine();
 
         /// <summary>
-        /// Check if the droplet declaration is well defined
+        /// Check if the droplet declaration is well defined. If there is something wrong, throw an exception
         /// </summary>
         /// <param name="declaredSet"> The droplet declared </param>
         /// <param name="occupiedSet"> The droplet is being used</param>
-        /// <returns>true if there is no syntax error, false if current operation contains any syntax error </returns>
-        public bool DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet);
+        public void DeclarationCheck(HashSet<string> declaredSet, HashSet<string> occupiedSet);
 
 
         ///============================================================================================================

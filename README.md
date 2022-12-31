@@ -334,7 +334,40 @@ droplet; d1#
 inputtt();
 ```
 
-#### 4. Illegal position value
+#### 4. Occupied variable has not been released
+
+Exception message: C_VARIABLE_NOT_RELEASED
+
+Exception code: 00004
+
+Code example:
+
+```apl
+droplet d1;
+input(d1,3,3,3);
+input(d1,3,3,3);
+```
+
+#### 5. Variable does not assign a value
+
+Exception message: C_VARIABLE_NOT_ASSIGN_VALUE
+
+Exception code: 00005
+
+Code example:
+
+```apl
+droplet d1;
+move(d1,3,3);
+```
+
+
+
+### Exceptions of Executer
+
+
+
+#### 1. Illegal position value
 
 Exception message: C_ILLEGAL_POSITION
 
@@ -351,7 +384,7 @@ input(d1, 10, 21) # y value bigger than chip's width
 input(d1, 10, -1) # y value smaller than 0
 ```
 
-#### 5.Illegal droplet's size value
+#### 2.Illegal droplet's size value
 
 Exception message: C_ILLEGAL_DROPLET_SIZE
 
@@ -363,7 +396,7 @@ Code example:
 
 ```
 
-### Exceptions of Executer
+
 
 Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
 
