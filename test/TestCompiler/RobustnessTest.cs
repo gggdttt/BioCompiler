@@ -78,7 +78,25 @@ namespace TestCompiler
             }
         }
 
-
+        /// <summary>
+        /// The expected value is double, but input is int.
+        /// TIP: Antlr will throw a nullReference Exception because of the its inner exception handler.
+        /// It is a bit different from the KeyWord error.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void IncorrectSyntaxTest3()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetError(sw);
+                string origin =
+                    "droplet d1;" +
+                    "input(d1,10,10,3);";
+                new Runner().DoCompile(origin);
+                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
+            }
+        }
         //===========================================
 
         //===========================================
@@ -89,8 +107,8 @@ namespace TestCompiler
         {
             string origin =
                 "droplet d1;\r\n" +
-                "input(d1,3,3,3);\r\n" +
-                "input(d1,3,3,3);";
+                "input(d1,3,3,3.2);\r\n" +
+                "input(d1,3,3,3.2);";
             new Runner().DoCompile(origin);
         }
 
@@ -115,7 +133,7 @@ namespace TestCompiler
         //                                                                                           //
         //===========================================================================================//
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(VariableNotAssignedValueException))]
         public void TestCheckRepeatWithUndeclaredDroplets()
         {
             string origin =
@@ -135,7 +153,7 @@ namespace TestCompiler
 
 
         [TestMethod]
-        [ExpectedException(typeof(BioException))]
+        [ExpectedException(typeof(VariableNotAssignedValueException))]
         public void TestCheckRepeatError2()
         {
             string origin =
@@ -152,7 +170,7 @@ namespace TestCompiler
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(VariableNotAssignedValueException))]
         public void TestCheckRepeatError3()
         {
             string origin =

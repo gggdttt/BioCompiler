@@ -70,8 +70,6 @@ namespace BioCompiler
 
         private BioOperationSyntaxBasicVisitor GetVisitor(string str)
         {
-            try
-            {
                 AntlrInputStream inputStream = new AntlrInputStream(str);
                 SyntaxLexer speakLexer = new SyntaxLexer(inputStream);
                 CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
@@ -82,12 +80,6 @@ namespace BioCompiler
                 visitor.Visit(programContext);
 
                 return visitor;
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine("syntax error!");
-                throw new IncorrectSyntaxException(ex.Message);
-            }
         }
     }
 
