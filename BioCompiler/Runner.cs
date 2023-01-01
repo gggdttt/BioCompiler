@@ -70,16 +70,24 @@ namespace BioCompiler
 
         private BioOperationSyntaxBasicVisitor GetVisitor(string str)
         {
-            AntlrInputStream inputStream = new AntlrInputStream(str);
-            SyntaxLexer speakLexer = new SyntaxLexer(inputStream);
-            CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
-            SyntaxParser syntaxParser = new SyntaxParser(commonTokenStream);
+            try
+            {
+                AntlrInputStream inputStream = new AntlrInputStream(str);
+                SyntaxLexer speakLexer = new SyntaxLexer(inputStream);
+                CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
+                SyntaxParser syntaxParser = new SyntaxParser(commonTokenStream);
 
-            ProgramContext programContext = syntaxParser.program();
-            BioOperationSyntaxBasicVisitor visitor = new BioOperationSyntaxBasicVisitor();
-            visitor.Visit(programContext);
+                ProgramContext programContext = syntaxParser.program();
+                BioOperationSyntaxBasicVisitor visitor = new BioOperationSyntaxBasicVisitor();
+                visitor.Visit(programContext);
 
-            return visitor;
+                return visitor;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("syntax error!");
+                throw new IncorrectSyntaxException(ex.Message);
+            }
         }
     }
 

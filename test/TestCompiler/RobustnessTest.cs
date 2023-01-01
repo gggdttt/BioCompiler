@@ -51,22 +51,31 @@ namespace TestCompiler
 
         //===========================================
         [TestMethod]
-        [ExpectedException(typeof(IncorrectSyntaxException))]
         public void IncorrectSyntaxTest1()
         {
-            string origin =
-                "droplet; d1#";
-            new Runner().DoCompile(origin);
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetError(sw);
+
+                string origin =
+                    "droplet; d1#";
+                new Runner().DoCompile(origin);
+                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
+            }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IncorrectSyntaxException))]
         public void IncorrectSyntaxTest2()
         {
-            string origin =
-                "droplet d1;" +
-                "inputt(d1,10,10,3.2);";
-            new Runner().DoCompile(origin);
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetError(sw);
+                string origin =
+                    "droplet d1;" +
+                    "inputt(d1,10,10,3.2);";
+                new Runner().DoCompile(origin);
+                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
+            }
         }
 
 

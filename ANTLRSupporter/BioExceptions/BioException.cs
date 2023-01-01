@@ -17,6 +17,14 @@ namespace ToolSupporter.BioExceptions
             code = 0;
             line = -1;
         }
+
+        public BioException(int code, string msg)
+            : base(msg)
+        {
+            this.code = code;
+            line = -1;
+        }
+
         public BioException(string message, int code, int line)
             : base(message)
         {

@@ -2,7 +2,7 @@
 # Sytanx checker shoud find them
 
 # droplet declaration
-droplet d1;
+droplet; d1#
 
 # droplet input
 input(d1,10,10,0.025);

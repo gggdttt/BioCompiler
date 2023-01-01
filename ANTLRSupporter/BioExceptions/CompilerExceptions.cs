@@ -42,6 +42,10 @@ namespace ToolSupporter.BioExceptions
         public IncorrectSyntaxException(int line)
             : base(CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX.ToString(), (int)CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX, line)
         { }
+
+        public IncorrectSyntaxException(string msg)
+            : base((int)CompilerExceptionMsgEnum.C_INCORRECT_SYNTAX, msg)
+        { }
     }
 
     public class VariableNotReleasedException : BioException
