@@ -15,15 +15,18 @@ namespace Executor.Model
 
         public string SETELIRecord { get; set; }
         public string CLRELIRecord { get; set; }
+
+        public string FinalRecord { get; set; }
         int column { get; }
-        int rows { get; }
+        int row { get; }
 
         public MovementManager(int columns, int rows, RouterOption option)
         {
             this.column = columns;
-            this.rows = rows;
+            this.row = rows;
             SETELIRecord = string.Empty;
             CLRELIRecord = string.Empty;
+            FinalRecord = string.Empty;
             switch (option)
             {
                 case RouterOption.SimpleXY:
@@ -65,6 +68,18 @@ namespace Executor.Model
             CLRELIRecord = string.Empty;
         }
 
+        public void WriteCurrentRecordToFinalRecord()
+        {
+            if (!string.IsNullOrEmpty(CLRELIRecord) && !string.IsNullOrEmpty(SETELIRecord))
+            {
+                // get record
+                FinalRecord += SETELIRecord + "\r\n" + "TICK;\r\n";
+                FinalRecord += CLRELIRecord + "\r\n" + "TICK;\r\n";
+            }
+            // clear record for next round
+            ClearRecord();
+        }
 
+        public string GetFinalMovementRecord() { return FinalRecord + "  TSTOP;\r\n  TICK;\r\n  TICK; \r\n"; }
     }
 }

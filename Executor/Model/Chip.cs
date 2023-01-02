@@ -44,23 +44,16 @@ namespace Executor.Model
 
         public string StartOpearions()
         {
-            string result = string.Empty;
+            
             while (!operationManager.AllTasksCompleted())
             {
                 operationManager.BeforeExecuting();
                 operationManager.Executing(movementManager);
                 operationManager.AfterExecute();
 
-                if (!string.IsNullOrEmpty(movementManager.CLRELIRecord) && !string.IsNullOrEmpty(movementManager.SETELIRecord))
-                {
-                    // get record
-                    result += movementManager.SETELIRecord + "\r\n" + "TICK;\r\n";
-                    result += movementManager.CLRELIRecord + "\r\n" + "TICK;\r\n";
-                }
-                // clear record for next round
-                movementManager.ClearRecord();
+                movementManager.WriteCurrentRecordToFinalRecord();
             }
-            return result + "  TSTOP;\r\n  TICK;\r\n  TICK; \r\n";
+            return movementManager.GetFinalMovementRecord();
         }
 
     }

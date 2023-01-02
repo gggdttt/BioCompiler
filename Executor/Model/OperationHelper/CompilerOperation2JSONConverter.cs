@@ -8,6 +8,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Executor.Model.OperationHelper
 {
+    /// <summary>
+    /// This JsonConverter convert the JSON format operations to C# object
+    /// </summary>
     public class CompilerOperation2JSONConverter : JsonConverter
     {
         public override bool CanConvert(Type typeToConvert)
@@ -37,7 +40,6 @@ namespace Executor.Model.OperationHelper
                 {
                     repeatOperation.repeatOperations.Add((CompilerOperation)GetOperation(JObject.Parse(temp.ToString())));
                 }
-                //((RepeatOperation)repeatOperation).repeatOperations = result;
                 return repeatOperation;
             }
             else
@@ -51,27 +53,6 @@ namespace Executor.Model.OperationHelper
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             serializer.Serialize(writer, value);
-        }
-
-
-        void WalkNode(JToken node, Action<JObject> action)
-        {
-            if (node.Type == JTokenType.Object)
-            {
-                action((JObject)node);
-
-                foreach (JProperty child in node.Children<JProperty>())
-                {
-                    WalkNode(child.Value, action);
-                }
-            }
-            else if (node.Type == JTokenType.Array)
-            {
-                foreach (JToken child in node.Children())
-                {
-                    WalkNode(child, action);
-                }
-            }
         }
 
     }
