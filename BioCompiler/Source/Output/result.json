@@ -10,43 +10,23 @@
     "line": 2
   },
   {
-    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
-    "name": "d3",
-    "line": 3
-  },
-  {
     "$type": "Executor.Model.Operation.DropletInputer, Executor",
-    "line": 5,
-    "name": "d1",
-    "xValue": 15,
-    "yValue": 15,
-    "size": 0.1
-  },
-  {
-    "$type": "Executor.Model.Operation.DropletInputer, Executor",
-    "line": 6,
+    "line": 3,
     "name": "d2",
-    "xValue": 4,
-    "yValue": 4,
+    "xValue": 10,
+    "yValue": 10,
     "size": 0.1
   },
   {
-    "$type": "Executor.Model.Operation.DropletMerger, Executor",
-    "line": 8,
-    "outDropletName": "d3",
-    "inDroplet1Name": "d1",
-    "inDroplet2Name": "d2",
-    "xDest": 5,
-    "yDest": 9
-  },
-  {
-    "$type": "Executor.Model.Operation.DropletMixer, Executor",
-    "line": 10,
-    "name": "d3",
-    "xMix": 2,
-    "yMix": 2,
-    "xDistance": 2,
-    "yDistance": 2,
-    "repeatTimes": 5
+    "$type": "Executor.Model.Operation.DropletSplitter, Executor",
+    "line": 4,
+    "outDestName1": "d1",
+    "outDestName2": "d2",
+    "inDropletName": "d2",
+    "outDest1X": 12,
+    "outDest1Y": 12,
+    "outDest2X": 15,
+    "outDest2Y": 15,
+    "ratio": 0.5
   }
 ]

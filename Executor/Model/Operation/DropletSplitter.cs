@@ -95,7 +95,11 @@ namespace Executor.Model.Operation
             {
                 throw new DropletNotDeclaredException(line);
             }
-            else { throw new VariableNotAssignedValueException(line); }
+            else if (!occupiedSet.Contains(inDropletName))
+            { 
+                throw new VariableNotAssignedValueException(line); 
+            }
+            else { throw new VariableNotReleasedException(line); }
         }
 
         public bool IsExecutable(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

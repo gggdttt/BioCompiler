@@ -26,7 +26,7 @@ namespace ToolSupporter.BioExceptions
         }
 
         public BioException(string message, int code, int line)
-            : base(message)
+            : base($"in source file line {line}:{message}")
         {
             this.code = code;
             this.line = line;

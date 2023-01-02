@@ -192,7 +192,7 @@ namespace TestCompiler.SignleOperationTest
         /// D3 has not been released
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(DropletNotDeclaredException))]
+        [ExpectedException(typeof(VariableNotReleasedException))]
         public void D3HasNotBeenReleased()
         {
             string origin =

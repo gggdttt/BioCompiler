@@ -76,6 +76,10 @@ namespace Executor.Model.Operation
             {
                 throw new VariableNotAssignedValueException(line);
             }
+            else if(occupiedSet.Contains(outDropletName))
+            {
+                throw new VariableNotReleasedException(line);
+            }
             // TODO: need to check the logic here carefully.
             else throw new DropletNotDeclaredException(line);
         }

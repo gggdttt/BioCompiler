@@ -3,9 +3,7 @@
 
 namespace Executor.Model
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class Chip
     {
 
