@@ -1,7 +1,11 @@
-﻿using Executor.Model;
-using System.Collections.Generic;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
+using Executor.Model;
 using System.Runtime.CompilerServices;
-using ToolSupporter.FileOperator;
 
 [assembly: InternalsVisibleTo("MyCode.UnitTests")]
 namespace Executor.Simulator

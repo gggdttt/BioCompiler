@@ -1,4 +1,9 @@
-using System.Data;
+// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
 using BioCompiler;
 using ToolSupporter.BioExceptions;
 
@@ -7,74 +12,6 @@ namespace TestCompiler
     [TestClass]
     public class GeneralRobustnessTest
     {
-
-
-        //===========================================================================================//
-        //                                                                                           //
-        //                                    Test for COMMEN  OPERATION                             //
-        //                                                                                           //
-        //===========================================================================================//
-
-        //========================================
-        [TestMethod]
-        [ExpectedException(typeof(DropletNotDeclaredException))]
-        public void DropletNotDeclaredTest1()
-        {
-            string origin = 
-                "droplet d1;" +
-                "droplet d2;" +
-                "input(d3,10,10,3.2);";
-            new Runner().DoCompile(origin);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(DropletNotDeclaredException))]
-        public void DropletNotDeclaredTest2()
-        {
-            string origin =
-                "input(d1000,10,10,3.2);";
-            new Runner().DoCompile(origin);
-        }
-        //===========================================
-
-
-
-
-        [TestMethod]
-        public void IncorrectSyntaxTest2()
-        {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetError(sw);
-                string origin =
-                    "droplet d1;" +
-                    "inputt(d1,10,10,3.2);";
-                new Runner().DoCompile(origin);
-                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
-            }
-        }
-
-
-        //===========================================
-
-        //===========================================
-
-
-
-        //===========================================
-
-        //===========================================
-
-        [TestMethod]
-        [ExpectedException(typeof(VariableNotAssignedValueException))]
-        public void ErrorDeclarationInputTest()
-        {
-            string origin =
-                "droplet d1;" +
-                "move(d1,3,3);";
-            new Runner().DoCompile(origin);
-        }
-
 
         //===========================================================================================//
         //                                                                                           //

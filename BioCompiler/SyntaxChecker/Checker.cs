@@ -1,11 +1,5 @@
-﻿using Executor.Model;
-using Executor.Model.Operation;
-using System;
-using System.Collections.Generic;
+﻿using Executor.Model.Operation;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BioCompiler.Checker
 {

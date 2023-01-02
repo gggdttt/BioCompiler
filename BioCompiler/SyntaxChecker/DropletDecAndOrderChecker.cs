@@ -1,7 +1,5 @@
-﻿using Executor.Model;
-using Executor.Model.Operation;
+﻿using Executor.Model.Operation;
 using System.Collections.Immutable;
-using ToolSupporter.BioExceptions;
 
 namespace BioCompiler.Checker
 {

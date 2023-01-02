@@ -3,8 +3,6 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using Newtonsoft.Json;
-using System.Collections.Immutable;
 
 namespace Executor.Model.Operation
 {

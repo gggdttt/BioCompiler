@@ -70,7 +70,7 @@ namespace BioCompiler
 
                 return tempString.ToString();
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 throw new IncorrectSyntaxException(ex.Message);
             }

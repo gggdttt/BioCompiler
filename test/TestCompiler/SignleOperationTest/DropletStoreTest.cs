@@ -1,4 +1,10 @@
-﻿using BioCompiler;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
+using BioCompiler;
 using ToolSupporter.BioExceptions;
 
 namespace TestCompiler.SignleOperationTest
@@ -17,7 +23,7 @@ namespace TestCompiler.SignleOperationTest
         /// Basic use of Store
         /// </summary>
         [TestMethod]
-        public void OutputFunctionalityTest1()
+        public void StoreFunctionalityTest1()
         {
             string origin =
                 "droplet d1;\r\n" +

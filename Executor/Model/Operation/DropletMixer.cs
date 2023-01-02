@@ -4,8 +4,6 @@
 // DTU(Technical University of Denmark)
 
 
-using System.Net.NetworkInformation;
-using System.Xml.Linq;
 using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation

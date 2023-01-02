@@ -1,4 +1,10 @@
-﻿using Executor.Model.Operation;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
+using Executor.Model.Operation;
 
 
 namespace Executor.Model

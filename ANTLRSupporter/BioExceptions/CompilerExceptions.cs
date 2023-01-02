@@ -1,4 +1,9 @@
-﻿
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
 namespace ToolSupporter.BioExceptions
 {
     enum CompilerExceptionMsgEnum : int

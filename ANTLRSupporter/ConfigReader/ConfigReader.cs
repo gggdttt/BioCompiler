@@ -1,8 +1,10 @@
-﻿using System;
-using System.Xml;
+﻿// Project:  MicroFluidCompiler  
+// Author: Wenjie Fan (s210310)
+// Department: Applied Mathematics and Computer Science
+// DTU(Technical University of Denmark)
+
+
 using System.Xml.Serialization;
-using System.IO;
-using static System.Net.Mime.MediaTypeNames;
 
 public class ConfigReader
 {

@@ -3,9 +3,7 @@
 // Department: Applied Mathematics and Computer Science
 // DTU(Technical University of Denmark)
 
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Xml.Linq;
+
 using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation

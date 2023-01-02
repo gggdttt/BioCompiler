@@ -4,8 +4,6 @@
 // DTU(Technical University of Denmark)
 
 
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using ToolSupporter.BioExceptions;
 
 namespace Executor.Model.Operation

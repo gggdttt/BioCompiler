@@ -4,9 +4,7 @@
 // DTU(Technical University of Denmark)
 using static SyntaxParser;
 using Executor.Model.Operation;
-using static System.Formats.Asn1.AsnWriter;
-using System.Xml.Linq;
-using System.Collections.Generic;
+
 
 namespace BioCompiler.Compiler
 {
