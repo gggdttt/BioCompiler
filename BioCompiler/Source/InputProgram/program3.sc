@@ -1,28 +1,10 @@
-# this is a simple demo
-
-# droplet declaration
 droplet d1;
 droplet d2;
+droplet d3;
 
-# droplet input
-input(d1,1,1,1.0);
-input(d2,4,4,0.5);
+input(d1,15,15,0.1);
+input(d2,4,4,0.1);
 
+merge(d3,d1,d2,5,9);
 
-# move
-move(d1,3,3);
-move(d2,7,7);
-
-# move
-move(d1,3,3);
-move(d2,7,7);
-
-
-# move
-move(d1,3,3);
-move(d2,7,7);
-
-
-# output
-output(d1,0,0);
-output(d2,0,0);
+mix(d3,2,2,2,2,5);

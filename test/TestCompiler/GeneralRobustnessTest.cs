@@ -5,7 +5,7 @@ using ToolSupporter.BioExceptions;
 namespace TestCompiler
 {
     [TestClass]
-    public class RobustnessTest
+    public class GeneralRobustnessTest
     {
 
 
@@ -37,32 +37,8 @@ namespace TestCompiler
         }
         //===========================================
 
-        //===========================================
-        [TestMethod]
-        [ExpectedException(typeof(DropletDeclaredMoreThanOnceException))]
-        public void DropletDeclaredMoreThanOnceTest()
-        {
-            string origin =
-                "droplet d1;" +
-                "droplet d1;";
-            new Runner().DoCompile(origin);
-        }
-        //===========================================
 
-        //===========================================
-        [TestMethod]
-        public void IncorrectSyntaxTest1()
-        {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetError(sw);
 
-                string origin =
-                    "droplet; d1#";
-                new Runner().DoCompile(origin);
-                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
-            }
-        }
 
         [TestMethod]
         public void IncorrectSyntaxTest2()
@@ -78,39 +54,12 @@ namespace TestCompiler
             }
         }
 
-        /// <summary>
-        /// The expected value is double, but input is int.
-        /// TIP: Antlr will throw a nullReference Exception because of the its inner exception handler.
-        /// It is a bit different from the KeyWord error.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void IncorrectSyntaxTest3()
-        {
-            using (StringWriter sw = new StringWriter())
-            {
-                Console.SetError(sw);
-                string origin =
-                    "droplet d1;" +
-                    "input(d1,10,10,3);";
-                new Runner().DoCompile(origin);
-                Assert.IsFalse(string.IsNullOrEmpty(sw.ToString()));
-            }
-        }
+
         //===========================================
 
         //===========================================
 
-        [TestMethod]
-        [ExpectedException(typeof(VariableNotReleasedException))]
-        public void VariableNotReleasedTest1()
-        {
-            string origin =
-                "droplet d1;\r\n" +
-                "input(d1,3,3,3.2);\r\n" +
-                "input(d1,3,3,3.2);";
-            new Runner().DoCompile(origin);
-        }
+
 
         //===========================================
 

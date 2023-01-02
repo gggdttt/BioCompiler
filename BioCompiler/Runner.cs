@@ -56,30 +56,39 @@ namespace BioCompiler
 
         public string DoCompile(string fileContent)
         {
-            BioOperationSyntaxBasicVisitor visitor = GetVisitor(fileContent);
 
-            StringBuilder tempString = new StringBuilder();
-            DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
+            try
+            {
+                BioOperationSyntaxBasicVisitor visitor = GetVisitor(fileContent);
 
-            checker.DoCheck(visitor.Lines.ToImmutableArray());
+                StringBuilder tempString = new StringBuilder();
+                DropletDecAndOrderChecker checker = new DropletDecAndOrderChecker();
 
-            tempString.Append(JsonConvert.SerializeObject(visitor.Lines, Formatting.Indented, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                checker.DoCheck(visitor.Lines.ToImmutableArray());
 
-            return tempString.ToString();
+                tempString.Append(JsonConvert.SerializeObject(visitor.Lines, Formatting.Indented, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+
+                return tempString.ToString();
+            }
+            catch(NullReferenceException ex)
+            {
+                throw new IncorrectSyntaxException(ex.Message);
+            }
+
         }
 
         private BioOperationSyntaxBasicVisitor GetVisitor(string str)
         {
-                AntlrInputStream inputStream = new AntlrInputStream(str);
-                SyntaxLexer speakLexer = new SyntaxLexer(inputStream);
-                CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
-                SyntaxParser syntaxParser = new SyntaxParser(commonTokenStream);
+            AntlrInputStream inputStream = new AntlrInputStream(str);
+            SyntaxLexer speakLexer = new SyntaxLexer(inputStream);
+            CommonTokenStream commonTokenStream = new CommonTokenStream(speakLexer);
+            SyntaxParser syntaxParser = new SyntaxParser(commonTokenStream);
 
-                ProgramContext programContext = syntaxParser.program();
-                BioOperationSyntaxBasicVisitor visitor = new BioOperationSyntaxBasicVisitor();
-                visitor.Visit(programContext);
+            ProgramContext programContext = syntaxParser.program();
+            BioOperationSyntaxBasicVisitor visitor = new BioOperationSyntaxBasicVisitor();
+            visitor.Visit(programContext);
 
-                return visitor;
+            return visitor;
         }
     }
 
