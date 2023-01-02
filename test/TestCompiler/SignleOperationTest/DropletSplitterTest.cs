@@ -97,7 +97,7 @@ namespace TestCompiler.SignleOperationTest
         }
 
         /// <summary>
-        /// D3 is not declared and not input
+        /// D2 is not declared and not input
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(DropletNotDeclaredException))]
@@ -128,15 +128,13 @@ namespace TestCompiler.SignleOperationTest
             }
         }
 
-
         /// <summary>
-        /// D1 is occupied
+        /// D3 is occupied
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(VariableNotReleasedException))]
         public void DropletNotReleased()
         {
-
             string origin =
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
@@ -145,7 +143,6 @@ namespace TestCompiler.SignleOperationTest
                 "input(d3,10,10,0.1);\r\n" +
                 "split(d1,d2,d3,12,12,15,15,0.5);";
             new Runner().DoCompile(origin);
-
         }
 
     }

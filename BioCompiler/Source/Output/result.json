@@ -5,28 +5,19 @@
     "line": 1
   },
   {
-    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
-    "name": "d2",
-    "line": 2
-  },
-  {
     "$type": "Executor.Model.Operation.DropletInputer, Executor",
-    "line": 3,
-    "name": "d2",
+    "line": 2,
+    "name": "d1",
     "xValue": 10,
     "yValue": 10,
     "size": 0.1
   },
   {
-    "$type": "Executor.Model.Operation.DropletSplitter, Executor",
-    "line": 4,
-    "outDestName1": "d1",
-    "outDestName2": "d2",
-    "inDropletName": "d2",
-    "outDest1X": 12,
-    "outDest1Y": 12,
-    "outDest2X": 15,
-    "outDest2Y": 15,
-    "ratio": 0.5
+    "$type": "Executor.Model.Operation.DropletStorer, Executor",
+    "line": 3,
+    "name": "d1",
+    "xValue": 5,
+    "yValue": 5,
+    "latency": 2.0
   }
 ]
