@@ -37,7 +37,7 @@ namespace Executor
                 string fileContent = BioFileReader.ReadFileAsString(option.Source!);
                 List<CompilerOperation> operations = GetOperationsListFromJSON(fileContent);
 
-                WriteOriginPositionToJsonSimulator(operations, bioExecutorConfig.jsonOutput, bioExecutorConfig.jsonTemplate, bioExecutorConfig.column);
+                WriteOriginPositionToSimulatorJsonFile(operations, bioExecutorConfig.jsonOutput, bioExecutorConfig.jsonTemplate, bioExecutorConfig.column);
 
                 Chip c = new Chip(operations, bioExecutorConfig.column, bioExecutorConfig.row, bioExecutorConfig.router);
                 string executeRecord = c.StartOpearions();
@@ -58,7 +58,7 @@ namespace Executor
             return JsonConvert.DeserializeObject<List<CompilerOperation>>(fileContent, new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.Auto, Converters = converters })!;
         }
 
-        private void WriteOriginPositionToJsonSimulator(List<CompilerOperation> operations, string outputPath, string templatePath, int width)
+        private void WriteOriginPositionToSimulatorJsonFile(List<CompilerOperation> operations, string outputPath, string templatePath, int width)
         {
             HashSet<Droplet> dropletsBeforeExecuting = new();
             foreach (CompilerOperation operation in operations)
