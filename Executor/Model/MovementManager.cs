@@ -23,7 +23,6 @@ namespace Executor.Model
         public string FirstStepRecord { get; set; }
         public string SecondStepRecord { get; set; }
         public string ThirdStepRecord { get; set; }
-        public string ForthStepRecord { get; set; }
 
         public string FinalRecord { get; set; }
         int column { get; }
@@ -36,7 +35,6 @@ namespace Executor.Model
             FirstStepRecord = string.Empty;
             SecondStepRecord = string.Empty;
             ThirdStepRecord = string.Empty;
-            ForthStepRecord = string.Empty;
             FinalRecord = string.Empty;
             switch (option)
             {
@@ -70,7 +68,6 @@ namespace Executor.Model
                 FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
                 SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
                 ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
-                ForthStepRecord += $"  CLRELI {finalGridIndex};\r\n";
             }
         }
 
@@ -83,21 +80,18 @@ namespace Executor.Model
             FirstStepRecord = string.Empty;
             SecondStepRecord = string.Empty;
             ThirdStepRecord = string.Empty;
-            ForthStepRecord= string.Empty;
         }
 
         public void WriteCurrentRecordToFinalRecord()
         {
             if (!string.IsNullOrEmpty(FirstStepRecord)
                 && !string.IsNullOrEmpty(SecondStepRecord)
-                && !string.IsNullOrEmpty(ThirdStepRecord)
-                && !string.IsNullOrEmpty(ForthStepRecord))
+                && !string.IsNullOrEmpty(ThirdStepRecord))
             {
                 // get record
                 FinalRecord += FirstStepRecord + "\r\n" + "  TICK;\r\n";
                 FinalRecord += SecondStepRecord + "\r\n" + "  TICK;\r\n";
                 FinalRecord += ThirdStepRecord + "\r\n" + "  TICK;\r\n";
-                FinalRecord += ForthStepRecord + "\r\n" + "  TICK;\r\n";
             }
             // clear record for next round
             ClearRecord();

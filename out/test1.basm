@@ -13,13 +13,13 @@ main:
   CLRELI 144;
 
   TICK;
+  SETELI 145;
+
+  TICK;
   SETELI 146;
 
   TICK;
   CLRELI 145;
-
-  TICK;
-  CLRELI 146;
 
   TICK;
   SETELI 146;
@@ -34,10 +34,6 @@ main:
   CLRELI 336;
 
   TICK;
-  CLRELI 147;
-  CLRELI 304;
-
-  TICK;
   SETELI 147;
   SETELI 304;
 
@@ -50,10 +46,6 @@ main:
   CLRELI 304;
 
   TICK;
-  CLRELI 179;
-  CLRELI 303;
-
-  TICK;
   SETELI 179;
   SETELI 303;
 
@@ -64,10 +56,6 @@ main:
   TICK;
   CLRELI 179;
   CLRELI 303;
-
-  TICK;
-  CLRELI 180;
-  CLRELI 302;
 
   TICK;
   SETELI 496;
@@ -85,11 +73,6 @@ main:
   CLRELI 302;
 
   TICK;
-  CLRELI 464;
-  CLRELI 212;
-  CLRELI 301;
-
-  TICK;
   SETELI 464;
   SETELI 212;
   SETELI 301;
@@ -105,11 +88,6 @@ main:
   CLRELI 301;
 
   TICK;
-  CLRELI 432;
-  CLRELI 213;
-  CLRELI 300;
-
-  TICK;
   SETELI 432;
   SETELI 213;
   SETELI 300;
@@ -125,11 +103,6 @@ main:
   CLRELI 300;
 
   TICK;
-  CLRELI 400;
-  CLRELI 245;
-  CLRELI 299;
-
-  TICK;
   SETELI 400;
   SETELI 299;
   SETELI 245;
@@ -145,11 +118,6 @@ main:
   CLRELI 245;
 
   TICK;
-  CLRELI 368;
-  CLRELI 298;
-  CLRELI 244;
-
-  TICK;
   SETELI 368;
   SETELI 298;
   SETELI 244;
@@ -165,11 +133,6 @@ main:
   CLRELI 244;
 
   TICK;
-  CLRELI 336;
-  CLRELI 297;
-  CLRELI 243;
-
-  TICK;
   SETELI 336;
   SETELI 297;
   SETELI 243;
@@ -185,11 +148,6 @@ main:
   CLRELI 243;
 
   TICK;
-  CLRELI 304;
-  CLRELI 265;
-  CLRELI 242;
-
-  TICK;
   SETELI 265;
   SETELI 242;
 
@@ -202,10 +160,6 @@ main:
   CLRELI 242;
 
   TICK;
-  CLRELI 264;
-  CLRELI 210;
-
-  TICK;
   SETELI 264;
   SETELI 210;
 
@@ -218,10 +172,6 @@ main:
   CLRELI 210;
 
   TICK;
-  CLRELI 232;
-  CLRELI 209;
-
-  TICK;
   SETELI 232;
   SETELI 209;
 
@@ -234,10 +184,6 @@ main:
   CLRELI 209;
 
   TICK;
-  CLRELI 231;
-  CLRELI 208;
-
-  TICK;
   SETELI 231;
   SETELI 208;
 
@@ -250,10 +196,6 @@ main:
   CLRELI 208;
 
   TICK;
-  CLRELI 199;
-  CLRELI 207;
-
-  TICK;
   SETELI 199;
   SETELI 207;
 
@@ -264,10 +206,6 @@ main:
   TICK;
   CLRELI 199;
   CLRELI 207;
-
-  TICK;
-  CLRELI 198;
-  CLRELI 206;
 
   TICK;
   SETELI 304;
@@ -282,10 +220,6 @@ main:
   CLRELI 198;
 
   TICK;
-  CLRELI 272;
-  CLRELI 166;
-
-  TICK;
   SETELI 272;
   SETELI 166;
 
@@ -298,10 +232,6 @@ main:
   CLRELI 166;
 
   TICK;
-  CLRELI 240;
-  CLRELI 165;
-
-  TICK;
   SETELI 240;
   SETELI 165;
 
@@ -314,10 +244,6 @@ main:
   CLRELI 165;
 
   TICK;
-  CLRELI 208;
-  CLRELI 133;
-
-  TICK;
   SETELI 208;
   SETELI 133;
 
@@ -330,10 +256,6 @@ main:
   CLRELI 133;
 
   TICK;
-  CLRELI 176;
-  CLRELI 132;
-
-  TICK;
   SETELI 176;
   SETELI 132;
 
@@ -346,10 +268,6 @@ main:
   CLRELI 132;
 
   TICK;
-  CLRELI 144;
-  CLRELI 100;
-
-  TICK;
   SETELI 144;
   SETELI 100;
 
@@ -362,10 +280,6 @@ main:
   CLRELI 100;
 
   TICK;
-  CLRELI 112;
-  CLRELI 99;
-
-  TICK;
   SETELI 112;
   SETELI 99;
 
@@ -378,10 +292,6 @@ main:
   CLRELI 99;
 
   TICK;
-  CLRELI 111;
-  CLRELI 67;
-
-  TICK;
   SETELI 111;
   SETELI 67;
 
@@ -394,10 +304,6 @@ main:
   CLRELI 67;
 
   TICK;
-  CLRELI 110;
-  CLRELI 66;
-
-  TICK;
   SETELI 110;
   SETELI 66;
 
@@ -408,10 +314,6 @@ main:
   TICK;
   CLRELI 110;
   CLRELI 66;
-
-  TICK;
-  CLRELI 109;
-  CLRELI 34;
 
   TICK;
   SETELI 109;
@@ -429,11 +331,6 @@ main:
   CLRELI 206;
 
   TICK;
-  CLRELI 108;
-  CLRELI 33;
-  CLRELI 174;
-
-  TICK;
   SETELI 33;
   SETELI 174;
 
@@ -446,10 +343,6 @@ main:
   CLRELI 174;
 
   TICK;
-  CLRELI 1;
-  CLRELI 142;
-
-  TICK;
   SETELI 142;
 
   TICK;
@@ -459,9 +352,6 @@ main:
   CLRELI 142;
 
   TICK;
-  CLRELI 110;
-
-  TICK;
   SETELI 110;
 
   TICK;
@@ -471,9 +361,6 @@ main:
   CLRELI 110;
 
   TICK;
-  CLRELI 78;
-
-  TICK;
   SETELI 78;
 
   TICK;
@@ -483,9 +370,6 @@ main:
   CLRELI 78;
 
   TICK;
-  CLRELI 46;
-
-  TICK;
   SETELI 46;
 
   TICK;
@@ -495,9 +379,6 @@ main:
   CLRELI 46;
 
   TICK;
-  CLRELI 14;
-
-  TICK;
   SETELI 14;
 
   TICK;
@@ -507,9 +388,6 @@ main:
   CLRELI 14;
 
   TICK;
-  CLRELI 13;
-
-  TICK;
   SETELI 13;
 
   TICK;
@@ -519,9 +397,6 @@ main:
   CLRELI 13;
 
   TICK;
-  CLRELI 12;
-
-  TICK;
   SETELI 12;
 
   TICK;
@@ -531,9 +406,6 @@ main:
   CLRELI 12;
 
   TICK;
-  CLRELI 11;
-
-  TICK;
   SETELI 11;
 
   TICK;
@@ -543,9 +415,6 @@ main:
   CLRELI 11;
 
   TICK;
-  CLRELI 10;
-
-  TICK;
   SETELI 10;
 
   TICK;
@@ -553,9 +422,6 @@ main:
 
   TICK;
   CLRELI 10;
-
-  TICK;
-  CLRELI 9;
 
   TICK;
   SETELI 108;
@@ -570,10 +436,6 @@ main:
   CLRELI 9;
 
   TICK;
-  CLRELI 107;
-  CLRELI 8;
-
-  TICK;
   SETELI 8;
   SETELI 107;
 
@@ -586,10 +448,6 @@ main:
   CLRELI 107;
 
   TICK;
-  CLRELI 7;
-  CLRELI 106;
-
-  TICK;
   SETELI 7;
   SETELI 106;
 
@@ -602,10 +460,6 @@ main:
   CLRELI 106;
 
   TICK;
-  CLRELI 6;
-  CLRELI 105;
-
-  TICK;
   SETELI 6;
   SETELI 105;
 
@@ -618,10 +472,6 @@ main:
   CLRELI 105;
 
   TICK;
-  CLRELI 5;
-  CLRELI 104;
-
-  TICK;
   SETELI 5;
   SETELI 104;
 
@@ -634,10 +484,6 @@ main:
   CLRELI 104;
 
   TICK;
-  CLRELI 4;
-  CLRELI 103;
-
-  TICK;
   SETELI 4;
   SETELI 103;
 
@@ -650,10 +496,6 @@ main:
   CLRELI 103;
 
   TICK;
-  CLRELI 3;
-  CLRELI 102;
-
-  TICK;
   SETELI 3;
   SETELI 102;
 
@@ -666,10 +508,6 @@ main:
   CLRELI 102;
 
   TICK;
-  CLRELI 2;
-  CLRELI 101;
-
-  TICK;
   SETELI 2;
   SETELI 101;
 
@@ -682,10 +520,6 @@ main:
   CLRELI 101;
 
   TICK;
-  CLRELI 1;
-  CLRELI 100;
-
-  TICK;
   SETELI 100;
 
   TICK;
@@ -695,9 +529,6 @@ main:
   CLRELI 100;
 
   TICK;
-  CLRELI 99;
-
-  TICK;
   SETELI 99;
 
   TICK;
@@ -707,9 +538,6 @@ main:
   CLRELI 99;
 
   TICK;
-  CLRELI 67;
-
-  TICK;
   SETELI 67;
 
   TICK;
@@ -719,9 +547,6 @@ main:
   CLRELI 67;
 
   TICK;
-  CLRELI 66;
-
-  TICK;
   SETELI 66;
 
   TICK;
@@ -731,9 +556,6 @@ main:
   CLRELI 66;
 
   TICK;
-  CLRELI 34;
-
-  TICK;
   SETELI 34;
 
   TICK;
@@ -743,9 +565,6 @@ main:
   CLRELI 34;
 
   TICK;
-  CLRELI 33;
-
-  TICK;
   SETELI 33;
 
   TICK;
@@ -753,9 +572,6 @@ main:
 
   TICK;
   CLRELI 33;
-
-  TICK;
-  CLRELI 1;
 
   TICK;
   TSTOP;
