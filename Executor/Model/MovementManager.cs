@@ -13,8 +13,17 @@ namespace Executor.Model
 
         RouterInterface router { get; }
 
-        public string SETELIRecord { get; set; }
-        public string CLRELIRecord { get; set; }
+        /// <summary>
+        /// Every movement can be recorded with 3 steps: 
+        /// 1.enable the current cell where the droplet is on
+        /// 2. enable the current cell and its next cell to move
+        /// 3. disable the previous cell
+        /// 4. disable current cell
+        /// </summary>
+        public string FirstStepRecord { get; set; }
+        public string SecondStepRecord { get; set; }
+        public string ThirdStepRecord { get; set; }
+        public string ForthStepRecord { get; set; }
 
         public string FinalRecord { get; set; }
         int column { get; }
@@ -24,8 +33,10 @@ namespace Executor.Model
         {
             this.column = columns;
             this.row = rows;
-            SETELIRecord = string.Empty;
-            CLRELIRecord = string.Empty;
+            FirstStepRecord = string.Empty;
+            SecondStepRecord = string.Empty;
+            ThirdStepRecord = string.Empty;
+            ForthStepRecord = string.Empty;
             FinalRecord = string.Empty;
             switch (option)
             {
@@ -56,25 +67,37 @@ namespace Executor.Model
                 int finalGridIndex = result[2] + 1 + result[3] * column;
 
                 // find a path and move the droplet 
-                SETELIRecord += $"  SETELI {originGridIndex};\r\n";
-                SETELIRecord += $"  SETELI {finalGridIndex};\r\n";
-                CLRELIRecord += $"  CLRELI {originGridIndex};\r\n";
-                CLRELIRecord += $"  CLRELI {finalGridIndex};\r\n";
+                FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
+                SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
+                ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
+                ForthStepRecord += $"  CLRELI {finalGridIndex};\r\n";
             }
         }
+
+
+        /// <summary>
+        /// Clear all the records
+        /// </summary>
         public void ClearRecord()
         {
-            SETELIRecord = string.Empty;
-            CLRELIRecord = string.Empty;
+            FirstStepRecord = string.Empty;
+            SecondStepRecord = string.Empty;
+            ThirdStepRecord = string.Empty;
+            ForthStepRecord= string.Empty;
         }
 
         public void WriteCurrentRecordToFinalRecord()
         {
-            if (!string.IsNullOrEmpty(CLRELIRecord) && !string.IsNullOrEmpty(SETELIRecord))
+            if (!string.IsNullOrEmpty(FirstStepRecord)
+                && !string.IsNullOrEmpty(SecondStepRecord)
+                && !string.IsNullOrEmpty(ThirdStepRecord)
+                && !string.IsNullOrEmpty(ForthStepRecord))
             {
                 // get record
-                FinalRecord += SETELIRecord + "\r\n" + "TICK;\r\n";
-                FinalRecord += CLRELIRecord + "\r\n" + "TICK;\r\n";
+                FinalRecord += FirstStepRecord + "\r\n" + "  TICK;\r\n";
+                FinalRecord += SecondStepRecord + "\r\n" + "  TICK;\r\n";
+                FinalRecord += ThirdStepRecord + "\r\n" + "  TICK;\r\n";
+                FinalRecord += ForthStepRecord + "\r\n" + "  TICK;\r\n";
             }
             // clear record for next round
             ClearRecord();

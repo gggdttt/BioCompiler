@@ -2,22 +2,82 @@
   {
     "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
     "name": "d1",
-    "line": 1
+    "line": 4
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d2",
+    "line": 5
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletDeclarator, Executor",
+    "name": "d3",
+    "line": 6
   },
   {
     "$type": "Executor.Model.Operation.DropletInputer, Executor",
-    "line": 2,
+    "line": 9,
     "name": "d1",
-    "xValue": 10,
-    "yValue": 10,
-    "size": 0.1
+    "xValue": 15,
+    "yValue": 15,
+    "size": 0.05
   },
   {
-    "$type": "Executor.Model.Operation.DropletStorer, Executor",
-    "line": 3,
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 10,
+    "name": "d2",
+    "xValue": 15,
+    "yValue": 4,
+    "size": 0.05
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletInputer, Executor",
+    "line": 11,
+    "name": "d3",
+    "xValue": 15,
+    "yValue": 10,
+    "size": 0.05
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 14,
     "name": "d1",
-    "xValue": 5,
-    "yValue": 5,
-    "latency": 2.0
+    "xDest": 10,
+    "yDest": 3
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 15,
+    "name": "d2",
+    "xDest": 20,
+    "yDest": 7
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletMover, Executor",
+    "line": 16,
+    "name": "d3",
+    "xDest": 15,
+    "yDest": 9
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 19,
+    "name": "d1",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 20,
+    "name": "d2",
+    "xValue": 0,
+    "yValue": 0
+  },
+  {
+    "$type": "Executor.Model.Operation.DropletOutputer, Executor",
+    "line": 21,
+    "name": "d3",
+    "xValue": 0,
+    "yValue": 0
   }
 ]

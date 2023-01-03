@@ -76,13 +76,13 @@ namespace Executor.Router
 
             // Create a new grid, each cell is laterally connected (like how a rook moves over a chess board, other options are available)
             var grid = Grid.CreateGridWithLateralConnections(gridSize, cellSize, traversalVelocity);
-            /*DisConnectAllNode(grid, d, activeDrplets, busyDroplets);*/
+            DisConnectAllNode(grid, d, activeDrplets, busyDroplets);
 
             var pathFinder = new PathFinder();
-            //Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
+            Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
             var path = pathFinder.FindPath(new GridPosition(d.xValue, d.yValue), new GridPosition(destx, desty), grid);
 
-            //Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
+            Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
 
             // Use path.Edges to get the actual path
             return path.Edges.ToList();
@@ -97,7 +97,7 @@ namespace Executor.Router
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneDroplet(g, d, droplet);
-                    //Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
+                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
             // disconnect all the droplets in busyDroplets
@@ -106,7 +106,7 @@ namespace Executor.Router
                 if (!droplet.name.Equals(d.name))
                 {
                     DisconnectOneDroplet(g, d, droplet);
-                    //Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
+                    Console.WriteLine("disconnect {0},{1}", d.xValue, d.yValue);
                 }
             }
             // disconnect the area of boundray
