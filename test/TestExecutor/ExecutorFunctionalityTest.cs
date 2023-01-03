@@ -32,8 +32,8 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
                 "output(d1,0,0);\r\n" +
@@ -49,8 +49,8 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n\r\n\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n\r\n\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n\r\n" +
                 "move(d1,3,3);\r\n" +
@@ -70,8 +70,8 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
@@ -85,12 +85,12 @@ namespace TestExecutor
             string origin =
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
+                "input(d1,10,10,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
+                "input(d1,10,10,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
@@ -105,8 +105,8 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
+                "input(d1,10,10,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
                 "merge(d3,d1,d2,5,9);\r\n" +
                 "output(d3,0,0);\r\n";
 
@@ -140,7 +140,7 @@ namespace TestExecutor
         {
             string origin =
                 "droplet d1;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
                 "mix(d1,3,3,3,3,5);\r\n\r\n" +
                 "output(d1,0,0);\r\n";
 
@@ -153,7 +153,7 @@ namespace TestExecutor
         {
             string origin =
                 "droplet d1;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
+                "input(d1,1,1,0.1);\r\n" +
                 "mix(d1,2,2,2,2,5);\r\n" +
                 "mix(d1,2,2,2,2,5);\r\n" +
                 "mix(d1,2,2,2,2,5);\r\n" +
@@ -169,8 +169,8 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n\r\n" +
-                "input(d1,1,1,2.0);\r\n" +
-                "split(d2,d3,d1,4,4,2,2,0.5);\r\n\r\n" +
+                "input(d1,1,1,0.1);\r\n" +
+                "split(d2,d3,d1,10,10,20,10,0.5);\r\n\r\n" +
                 "output(d2,0,0);\r\n" +
                 "output(d3,0,0);\r\n";
 
@@ -185,7 +185,7 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n\r\n" +
-                "input(d1,1,1,2.0);\r\n" +
+                "input(d1,1,1,0.1);\r\n" +
                 "split(d2,d3,d1,12,12,15,15,0.5);\r\n\r\n" +
                 "droplet d4;\r\n" +
                 "droplet d5;\r\n" +
@@ -232,9 +232,9 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
-                "input(d3,10,10,3.2);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
+                "input(d3,10,10,0.05);\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
                 "move(d3,9,9);\r\n\r\n" +
@@ -261,9 +261,9 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
-                "input(d3,10,10,3.2);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
+                "input(d3,10,10,0.1);\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
                 "move(d3,9,9);\r\n" +
@@ -289,9 +289,9 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n" +
                 "droplet d3;\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n" +
-                "input(d3,10,10,3.2);\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n" +
+                "input(d3,10,10,0.1);\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
                 "move(d3,9,9);\r\n" +
@@ -319,8 +319,8 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
                 "# droplet input\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n\r\n" +
                 "repeat 10 times{\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
@@ -345,8 +345,8 @@ namespace TestExecutor
                 "droplet d1;\r\n" +
                 "droplet d2;\r\n\r\n" +
                 "# droplet input\r\n" +
-                "input(d1,1,1,1.0);\r\n" +
-                "input(d2,4,4,0.5);\r\n\r\n" +
+                "input(d1,1,1,0.05);\r\n" +
+                "input(d2,4,4,0.05);\r\n\r\n" +
                 "repeat 10 times{\r\n" +
                 "move(d1,3,3);\r\n" +
                 "move(d2,7,7);\r\n" +
