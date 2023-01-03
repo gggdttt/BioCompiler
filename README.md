@@ -369,34 +369,34 @@ move(d1,3,3);
 
 #### 1. Illegal position value
 
-Exception message: C_ILLEGAL_POSITION
+Exception message: E_ILLEGAL_POSITION
 
-Exception code: 00004
+Exception code: 00001
 
 Code example1:
 
 ```apl
-in setting, the chip is 32x20
+#in config.xml, the chip is 32x20
 droplet d1;
-input(d1, 33, 10) # x value bigger than chip's width
-input(d1, -1, 10) # x value smaller than 0
-input(d1, 10, 21) # y value bigger than chip's width
-input(d1, 10, -1) # y value smaller than 0
+input(d1, 33, 10, 0.05) # x value bigger than chip's width
+input(d1, -1, 10, 0.05) # x value smaller than 0
+input(d1, 10, 21, 0.05) # y value bigger than chip's width
+input(d1, 10, -1, 0.05) # y value smaller than 0
 ```
 
 #### 2.Illegal droplet's size value
 
-Exception message: C_ILLEGAL_DROPLET_SIZE
+Exception message: E_ILLEGAL_DROPLET_SIZE
 
-Exception code: 00005
+Exception code: 00002
 
 Code example:
 
 ```apl
-
+input(d1, 1, 1, 5.0) # Here the droplet is 3ml, the chip can not contain such size droplet
 ```
 
-
+#### 3.
 
 Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
 
@@ -408,9 +408,7 @@ Code example:
 
 ```
 
-
-
-
+#### 4.
 
 Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
 
@@ -422,9 +420,7 @@ Code example:
 
 ```
 
-
-
-
+#### 5.
 
 Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
 
@@ -436,9 +432,7 @@ Code example:
 
 ```
 
-
-
-
+#### 6.
 
 Exception message: C_DROPLET_DECLRATED_MORE_THAN_ONCE
 
