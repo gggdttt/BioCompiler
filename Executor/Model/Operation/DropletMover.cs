@@ -70,22 +70,19 @@ namespace Executor.Model.Operation
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
             List<Droplet> temp = busyDroplets.Where(droplet => droplet.name.Equals(name)).ToList();
-            // if it has not moved to dest
+            // If it has not moved to dest
             if (temp != null && (temp.First().xValue != xDest || temp.First().yValue != yDest))
             {
                 manager.MoveByOneStep(temp.First(), xDest, yDest, activeDroplets, busyDroplets);
             }
 
-            // check if it has moved to dest after the this movement
-            // if it has moved to dest successfully, remove it from busy droplets and add it to active droplets
+            // Check if it has moved to dest after the this movement
+            // If it has moved to dest successfully, remove it from busy droplets and add it to active droplets
             if (temp != null && temp.First().xValue == xDest && temp.First().yValue == yDest)
             {
-
                 busyDroplets.Remove(temp.First());
                 activeDroplets.Add(temp.First());
             }
-            //int waitTime = Math.Abs(d1.xValue - xDest) + Math.Abs(d1.yValue - yDest);
-
         }
 
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)

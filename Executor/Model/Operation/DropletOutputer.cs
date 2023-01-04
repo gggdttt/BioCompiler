@@ -87,7 +87,6 @@ namespace Executor.Model.Operation
             {
                 manager.MoveByOneStep(temp.First(), xValue, yValue, activeDroplets, busyDroplets);
             }
-
             // check if it has moved to dest after the this movement
             // if it has moved to dest successfully, remove it from busy droplets and set flag to true
             if (temp != null && temp.First().xValue == xValue && temp.First().yValue == yValue)

@@ -18,13 +18,13 @@ namespace Executor.Model
         /// 1.enable the current cell where the droplet is on
         /// 2. enable the current cell and its next cell to move
         /// 3. disable the previous cell
-        /// 4. disable current cell
         /// </summary>
-        public string FirstStepRecord { get; set; }
-        public string SecondStepRecord { get; set; }
-        public string ThirdStepRecord { get; set; }
+        private string FirstStepRecord { get; set; }
+        private string SecondStepRecord { get; set; }
+        private string ThirdStepRecord { get; set; }
 
         public string FinalRecord { get; set; }
+
         int column { get; }
         int row { get; }
 
@@ -56,6 +56,7 @@ namespace Executor.Model
                     throw new NotImplementedException();
             }
         }
+
         public void MoveByOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
             int[] result = this.router!.MoveOneStep(d, destx, desty, activeDrplets, busyDroplets);
@@ -63,19 +64,22 @@ namespace Executor.Model
             {
                 int originGridIndex = result[0] + 1 + result[1] * column;
                 int finalGridIndex = result[2] + 1 + result[3] * column;
-
-                // find a path and move the droplet 
-                FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
-                SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
-                ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
+                RecordOneRound(originGridIndex, finalGridIndex);
             }
         }
 
+        private void RecordOneRound(int originGridIndex, int finalGridIndex)
+        {
+            // find a path and move the droplet 
+            FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
+            SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
+            ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
+        }
 
         /// <summary>
         /// Clear all the records
         /// </summary>
-        public void ClearRecord()
+        private void ClearRecord()
         {
             FirstStepRecord = string.Empty;
             SecondStepRecord = string.Empty;

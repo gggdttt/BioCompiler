@@ -84,6 +84,7 @@ namespace Executor.Model.Operation
             //generate a new droplet
             activeDroplets.Add(d);
         }
+
         public bool HasExecuted(List<Droplet> activeDroplets, List<Droplet> busyDroplets)
         {
             Droplet d = activeDroplets.Where(droplet => droplet.name.Equals(name)).First();
