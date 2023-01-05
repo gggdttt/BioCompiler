@@ -6,7 +6,7 @@
     },
     "Executor_WinServer": {
       "commandName": "Project",
-      "commandLineArgs": "--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json\r\n--router astar\r\n--column 36\r\n--row 20"
+      "commandLineArgs": "--source C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\BioCompiler\\Source\\Output\\result.json\r\n--config C:\\Users\\t-wenjiefan\\Desktop\\VisionBasedCompiler\\Config.xml"
     }
   }
 }

@@ -61,13 +61,7 @@ namespace Executor.Model
             int[] result = this.router!.MoveOneStep(d, destx, desty, activeDrplets, busyDroplets);
             if (result != null)
             {
-                int originGridIndex = result[0] + 1 + result[1] * column;
-                int finalGridIndex = result[2] + 1 + result[3] * column;
-
-                // find a path and move the droplet 
-                FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
-                SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
-                ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
+                WriteDropletMovementToRoundRecord(result[0], result[1], result[2], result[3], d.gridDiameter);
             }
         }
 
@@ -75,7 +69,7 @@ namespace Executor.Model
         /// <summary>
         /// Clear all the records
         /// </summary>
-        public void ClearRecord()
+        private void ClearRecord()
         {
             FirstStepRecord = string.Empty;
             SecondStepRecord = string.Empty;
@@ -84,19 +78,40 @@ namespace Executor.Model
 
         public void WriteCurrentRecordToFinalRecord()
         {
-            if (!string.IsNullOrEmpty(FirstStepRecord)
-                && !string.IsNullOrEmpty(SecondStepRecord)
-                && !string.IsNullOrEmpty(ThirdStepRecord))
-            {
-                // get record
-                FinalRecord += FirstStepRecord + "\r\n" + "  TICK;\r\n";
-                FinalRecord += SecondStepRecord + "\r\n" + "  TICK;\r\n";
-                FinalRecord += ThirdStepRecord + "\r\n" + "  TICK;\r\n";
-            }
+
+            // get record
+            FinalRecord += FirstStepRecord + "\r\n  TICK;\r\n";
+            FinalRecord += SecondStepRecord + "\r\n  TICK;\r\n";
+            FinalRecord += ThirdStepRecord + "\r\n  TICK;\r\n";
+
             // clear record for next round
             ClearRecord();
         }
 
-        public string GetFinalMovementRecord() { return FinalRecord + "  TSTOP;\r\n  TICK;\r\n  TICK; \r\n"; }
+        private void WriteDropletMovementToRoundRecord(int originX, int originY, int finalX, int finalY, int gridDiameter)
+        {
+
+            for (int i = 0; i < gridDiameter; i++)
+            {
+                for (int j = 0; j < gridDiameter; j++)
+                {
+                    int originGridIndex = (originX + i) + 1 + (originY + j) * column;
+                    int finalGridIndex = (finalX + i) + 1 + (finalY + j) * column;
+                    FirstStepRecord += $"  SETELI {originGridIndex};\r\n";
+                    SecondStepRecord += $"  SETELI {finalGridIndex};\r\n";
+                    if (!(originX + i >= finalX && originX + i < finalX + gridDiameter
+                        && originY + j >= finalY && originY + j < finalY + gridDiameter))
+                    {
+                        // not clear all,
+                        ThirdStepRecord += $"  CLRELI {originGridIndex};\r\n";
+                    }
+                }
+            }
+        }
+
+        public string GetFinalMovementRecord()
+        {
+            return FinalRecord + "  TSTOP;\r\n  TICK;\r\n  TICK; \r\n";
+        }
     }
 }
