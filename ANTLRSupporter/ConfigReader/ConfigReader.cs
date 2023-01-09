@@ -97,6 +97,9 @@ public class BioExecutorConfig
     public string jsonOutput;
     [XmlElementAttribute("basm_output", IsNullable = false)]
     public string basmOutput;
+
+    [XmlElementAttribute("target", IsNullable = false)]
+    public string target;
 }
 
 
