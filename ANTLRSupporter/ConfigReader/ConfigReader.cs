@@ -25,9 +25,9 @@ public class ConfigReader
         nodes or attributes, handle them with the
         UnknownNode and UnknownAttribute events.*/
         serializer.UnknownNode += new
-        XmlNodeEventHandler(serializer_UnknownNode);
+        XmlNodeEventHandler(SerializerUnknownNode!);
         serializer.UnknownAttribute += new
-        XmlAttributeEventHandler(serializer_UnknownAttribute);
+        XmlAttributeEventHandler(SerializerUnknownAttribute!);
 
         // A FileStream is needed to read the XML document.
         FileStream fs = new FileStream(filename, FileMode.Open);
@@ -40,13 +40,13 @@ public class ConfigReader
         return bioSystemConfig;
     }
 
-    private void serializer_UnknownNode
+    private void SerializerUnknownNode
     (object sender, XmlNodeEventArgs e)
     {
         Console.WriteLine("Unknown Node:" + e.Name + "\t" + e.Text);
     }
 
-    private void serializer_UnknownAttribute
+    private void SerializerUnknownAttribute
     (object sender, XmlAttributeEventArgs e)
     {
         System.Xml.XmlAttribute attr = e.Attr;
@@ -100,6 +100,16 @@ public class BioExecutorConfig
 
     [XmlElementAttribute("target", IsNullable = false)]
     public string target;
+
+    [XmlElementAttribute("realtime_feedback", IsNullable = false)]
+    public bool enableRealtimeFeedback;
+
+    [XmlElementAttribute("ip_address", IsNullable = true)]
+    public bool ipAddress;
+
+    [XmlElementAttribute("port_number", IsNullable = true)]
+    public bool portNumber;
+
 }
 
 
