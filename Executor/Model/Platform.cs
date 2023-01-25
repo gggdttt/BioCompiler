@@ -25,7 +25,7 @@ namespace Executor.Model
         {
             this.xLength = x;
             this.yLength = y;
-            operationManager = new OperationManager(operations, x, y);
+            operationManager = new OperationManager(operations);
 
             if (router.ToLower().Equals("astar"))
             {

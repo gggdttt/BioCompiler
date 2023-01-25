@@ -10,47 +10,45 @@ namespace Executor.Model
 {
     public class OperationManager
     {
-
-        int x;
-
-        int y;
-
         // Operations from json
         List<CompilerOperation> operations;
 
+        // operations are executing
         List<CompilerOperation> executingOperations;
 
         public List<Droplet> activeDroplets { get; set; }
 
         public List<Droplet> busyDroplets { get; set; }
 
-
-        public OperationManager(List<CompilerOperation> operations, int x, int y)
+        
+        public OperationManager(List<CompilerOperation> operations)
         {
-            this.x = x;
-            this.y = y;
-            this.operations = this.GetOperationsWithoutRepeat(operations);
+            this.operations = GetOperationsWithoutRepeat(operations);
             executingOperations = new List<CompilerOperation>();
             activeDroplets = new List<Droplet>();
             busyDroplets = new List<Droplet>();
         }
 
         /// <summary>
-        /// filter operations
+        /// 1. If one operation is a normal operation, add it to compilerOperation
+        /// 2. If one operation is a repeat opeartion, add the opeartions inside this repeat opeartion to the compilerOperation 
         /// </summary>
         /// <param name="operations"></param>
         /// <returns></returns>
         private List<CompilerOperation> GetOperationsWithoutRepeat(List<CompilerOperation> operations)
         {
-            List<CompilerOperation> compilerOperations= new List<CompilerOperation>();
+            List<CompilerOperation> compilerOperations = new List<CompilerOperation>();
             foreach (CompilerOperation operation in operations)
             {
-                if(operation is RepeatOperation)
+                if (operation is RepeatOperation)
                 {
+                    // add the opreations to the final list of operations recursively
                     compilerOperations.AddRange(GetOperationsWithoutRepeat(((RepeatOperation)operation).repeatOperations));
                 }
-                else 
+                else
+                {
                     compilerOperations.Add(operation);
+                }
             }
             return compilerOperations;
         }
@@ -92,7 +90,6 @@ namespace Executor.Model
 
         public bool AllTasksCompleted()
         {
-
             return operations.Count() == 0 && executingOperations.Count() == 0;
         }
 

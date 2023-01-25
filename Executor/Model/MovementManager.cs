@@ -18,11 +18,10 @@ namespace Executor.Model
         /// 1.enable the current cell where the droplet is on
         /// 2. enable the current cell and its next cell to move
         /// 3. disable the previous cell
-        /// 4. disable current cell
         /// </summary>
-        public string FirstStepRecord { get; set; }
-        public string SecondStepRecord { get; set; }
-        public string ThirdStepRecord { get; set; }
+        private string FirstStepRecord { get; set; }
+        private string SecondStepRecord { get; set; }
+        private string ThirdStepRecord { get; set; }
 
         public string FinalRecord { get; set; }
         int column { get; }
@@ -56,6 +55,7 @@ namespace Executor.Model
                     throw new NotImplementedException();
             }
         }
+
         public void MoveByOneStep(Droplet d, int destx, int desty, List<Droplet> activeDrplets, List<Droplet> busyDroplets)
         {
             int[] result = this.router!.MoveOneStep(d, destx, desty, activeDrplets, busyDroplets);
@@ -64,7 +64,6 @@ namespace Executor.Model
                 WriteDropletMovementToRoundRecord(result[0], result[1], result[2], result[3], d.gridDiameter);
             }
         }
-
 
         /// <summary>
         /// Clear all the records

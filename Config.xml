@@ -12,5 +12,9 @@
 		<json_template>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\template.json</json_template>
 		<json_output>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\out\test1.json</json_output>
 		<basm_output>C:\Users\Wenjie\OneDrive\MasterThesis\VisionBasedCompiler\out\test1.basm</basm_output>
+		<target>simulator</target>
+		<realtime_feedback>false</realtime_feedback>
+		<ip_address></ip_address>
+		<port_number></port_number>
 	</BioExecutorConfig>
 </BioSystemConfig>
