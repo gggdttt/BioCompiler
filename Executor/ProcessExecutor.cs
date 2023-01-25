@@ -40,7 +40,7 @@ namespace Executor
 
                 WriteOriginPositionToSimulatorJsonFile(operations, bioExecutorConfig.jsonOutput, bioExecutorConfig.jsonTemplate, bioExecutorConfig.column);
 
-                Chip c = new Chip(operations, bioExecutorConfig.column, bioExecutorConfig.row, bioExecutorConfig.router);
+                Platform c = new Platform(operations, bioExecutorConfig.column, bioExecutorConfig.row, bioExecutorConfig.router);
                 string executeRecord = c.StartOpearions();
                 SimulatorFileGenerator.SimulatorBasmFileGenerator(bioExecutorConfig.basmOutput, bioExecutorConfig.basmTemplate, executeRecord);
                 return 0;
