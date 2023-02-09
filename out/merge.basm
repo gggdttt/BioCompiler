@@ -1,0 +1,203 @@
+.data
+DEF zero_addr 0
+zero: INT zero_addr 0
+
+.text
+main:
+
+  TICK;
+
+  TICK;
+
+  TICK;
+  SETELI 1;
+  SETELI 6;
+
+  TICK;
+  SETELI 2;
+  SETELI 38;
+
+  TICK;
+  CLRELI 1;
+  CLRELI 6;
+
+  TICK;
+  SETELI 2;
+  SETELI 38;
+
+  TICK;
+  SETELI 34;
+  SETELI 70;
+
+  TICK;
+  CLRELI 2;
+  CLRELI 38;
+
+  TICK;
+  SETELI 34;
+  SETELI 70;
+
+  TICK;
+  SETELI 35;
+  SETELI 102;
+
+  TICK;
+  CLRELI 34;
+  CLRELI 70;
+
+  TICK;
+  SETELI 35;
+  SETELI 102;
+
+  TICK;
+  SETELI 67;
+  SETELI 134;
+
+  TICK;
+  CLRELI 35;
+  CLRELI 102;
+
+  TICK;
+  SETELI 67;
+  SETELI 134;
+
+  TICK;
+  SETELI 68;
+  SETELI 166;
+
+  TICK;
+  CLRELI 67;
+  CLRELI 134;
+
+  TICK;
+  SETELI 68;
+  SETELI 166;
+
+  TICK;
+  SETELI 100;
+  SETELI 167;
+
+  TICK;
+  CLRELI 68;
+  CLRELI 166;
+
+  TICK;
+  SETELI 100;
+  SETELI 167;
+
+  TICK;
+  SETELI 101;
+  SETELI 199;
+
+  TICK;
+  CLRELI 100;
+  CLRELI 167;
+
+  TICK;
+  SETELI 101;
+  SETELI 199;
+
+  TICK;
+  SETELI 133;
+  SETELI 200;
+
+  TICK;
+  CLRELI 101;
+  CLRELI 199;
+
+  TICK;
+  SETELI 133;
+  SETELI 200;
+
+  TICK;
+  SETELI 134;
+  SETELI 232;
+
+  TICK;
+  CLRELI 133;
+  CLRELI 200;
+
+  TICK;
+  SETELI 134;
+  SETELI 232;
+
+  TICK;
+  SETELI 166;
+  SETELI 233;
+
+  TICK;
+  CLRELI 134;
+  CLRELI 232;
+
+  TICK;
+  SETELI 166;
+  SETELI 233;
+
+  TICK;
+  SETELI 167;
+  SETELI 265;
+
+  TICK;
+  CLRELI 166;
+  CLRELI 233;
+
+  TICK;
+  SETELI 167;
+
+  TICK;
+  SETELI 199;
+
+  TICK;
+  CLRELI 167;
+
+  TICK;
+  SETELI 199;
+
+  TICK;
+  SETELI 200;
+
+  TICK;
+  CLRELI 199;
+
+  TICK;
+  SETELI 200;
+
+  TICK;
+  SETELI 232;
+
+  TICK;
+  CLRELI 200;
+
+  TICK;
+  SETELI 232;
+
+  TICK;
+  SETELI 233;
+
+  TICK;
+  CLRELI 232;
+
+  TICK;
+  SETELI 233;
+
+  TICK;
+  SETELI 265;
+
+  TICK;
+  CLRELI 233;
+
+  TICK;
+  TSTOP;
+  TICK;
+  TICK; 
+
+
+
+
+# Bio-Virtual-Machine configuration
+.configuration
+data_memory_size -1
+private_data_memory_start_address 1000
+debug_log_data_types_for_print_formatting true
+debug_keep_all_private_data_memories false
+

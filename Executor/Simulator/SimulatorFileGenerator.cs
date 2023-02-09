@@ -22,6 +22,7 @@ namespace Executor.Simulator
         {
             string text = File.ReadAllText(templatePath);
             File.WriteAllText(outPutpath, text.Replace(".text", ".text\r\nmain:\r\n" + routerResult + "\r\n"));
+            //Console.WriteLine(routerResult);
         }
 
         /// <summary>

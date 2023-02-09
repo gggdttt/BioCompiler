@@ -81,6 +81,8 @@ namespace Executor.Model.Operation
 
         public void ExecuteOperation(List<Droplet> activeDroplets, List<Droplet> busyDroplets, MovementManager manager)
         {
+
+            Console.WriteLine($"Storing time:{(DateTime.Now - startTime).TotalSeconds}");
             if (startTime == DateTime.MinValue)
             {
                 // if startTime is minmum, it means this is the time to start

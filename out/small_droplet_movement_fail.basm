@@ -1,0 +1,146 @@
+.data
+DEF zero_addr 0
+zero: INT zero_addr 0
+
+.text
+main:
+
+  TICK;
+
+  TICK;
+
+  TICK;
+  SETELI 166;
+  SETELI 331;
+  SETELI 496;
+
+  TICK;
+  SETELI 198;
+  SETELI 363;
+  SETELI 464;
+
+  TICK;
+  CLRELI 166;
+  CLRELI 331;
+  CLRELI 496;
+
+  TICK;
+  SETELI 198;
+  SETELI 363;
+  SETELI 464;
+
+  TICK;
+  SETELI 230;
+  SETELI 395;
+  SETELI 432;
+
+  TICK;
+  CLRELI 198;
+  CLRELI 363;
+  CLRELI 464;
+
+  TICK;
+  SETELI 230;
+  SETELI 395;
+  SETELI 432;
+
+  TICK;
+  SETELI 262;
+  SETELI 427;
+  SETELI 400;
+
+  TICK;
+  CLRELI 230;
+  CLRELI 395;
+  CLRELI 432;
+
+  TICK;
+  SETELI 262;
+  SETELI 427;
+  SETELI 400;
+
+  TICK;
+  SETELI 294;
+  SETELI 459;
+  SETELI 368;
+
+  TICK;
+  CLRELI 262;
+  CLRELI 427;
+  CLRELI 400;
+
+  TICK;
+  SETELI 294;
+  SETELI 459;
+  SETELI 368;
+
+  TICK;
+  SETELI 326;
+  SETELI 491;
+  SETELI 336;
+
+  TICK;
+  CLRELI 294;
+  CLRELI 459;
+  CLRELI 368;
+
+  TICK;
+  SETELI 336;
+
+  TICK;
+  SETELI 304;
+
+  TICK;
+  CLRELI 336;
+
+  TICK;
+  SETELI 304;
+
+  TICK;
+  SETELI 272;
+
+  TICK;
+  CLRELI 304;
+
+  TICK;
+  SETELI 272;
+
+  TICK;
+  SETELI 240;
+
+  TICK;
+  CLRELI 272;
+
+  TICK;
+  SETELI 240;
+
+  TICK;
+  SETELI 208;
+
+  TICK;
+  CLRELI 240;
+
+  TICK;
+  SETELI 208;
+
+  TICK;
+  SETELI 176;
+
+  TICK;
+  CLRELI 208;
+
+  TICK;
+  TSTOP;
+  TICK;
+  TICK; 
+
+
+
+
+# Bio-Virtual-Machine configuration
+.configuration
+data_memory_size -1
+private_data_memory_start_address 1000
+debug_log_data_types_for_print_formatting true
+debug_keep_all_private_data_memories false
+

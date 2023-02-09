@@ -16,11 +16,11 @@ namespace TestExecutor
 
         // 0.25 ~ 0.75 mm
 
-        Chip GetChipAndRun(string origin, int width, int length)
+        Platform GetChipAndRun(string origin, int width, int length)
         {
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
-            Chip c = new Chip(executor.GetOperationsListFromJSON(content), width, length, "astar");
+            Platform c = new Platform(executor.GetOperationsListFromJSON(content), width, length, "astar");
             c.StartOpearions();
             return c;
         }
@@ -39,7 +39,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -60,7 +60,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -75,7 +75,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -94,7 +94,7 @@ namespace TestExecutor
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -110,7 +110,7 @@ namespace TestExecutor
                 "merge(d3,d1,d2,5,9);\r\n" +
                 "output(d3,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -130,7 +130,7 @@ namespace TestExecutor
                 "merge(d5,d4,d3,5,9);\r\n\r\n" +
                 "output(d5,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -144,7 +144,7 @@ namespace TestExecutor
                 "mix(d1,3,3,3,3,5);\r\n\r\n" +
                 "output(d1,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -158,7 +158,7 @@ namespace TestExecutor
                 "mix(d1,2,2,2,2,5);\r\n" +
                 "mix(d1,2,2,2,2,5);\r\n" +
                 "output(d1,0,0);\r\n";
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -174,7 +174,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n" +
                 "output(d3,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -194,7 +194,7 @@ namespace TestExecutor
                 "output(d4,0,0);\r\n" +
                 "output(d5,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -207,7 +207,7 @@ namespace TestExecutor
                 "store(d1,5,5,0.5);\r\n" +
                 "output(d1,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -221,7 +221,7 @@ namespace TestExecutor
                 "store(d1,5,5,1.0);\r\n" +
                 "output(d1,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -248,7 +248,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n" +
                 "output(d3,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -276,7 +276,7 @@ namespace TestExecutor
                 "output(d2,0,0);\r\n" +
                 "output(d3,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -306,7 +306,7 @@ namespace TestExecutor
                 "input(d3,10,10,3.2);\r\n" +
                 "output(d3,0,0);\r\n";
 
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -330,7 +330,7 @@ namespace TestExecutor
                 "# output\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n\r\n";
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
 
@@ -362,7 +362,7 @@ namespace TestExecutor
                 "# output\r\n" +
                 "output(d1,0,0);\r\n" +
                 "output(d2,0,0);\r\n\r\n";
-            Chip c = GetChipAndRun(origin, 32, 20);
+            Platform c = GetChipAndRun(origin, 32, 20);
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }
     }

@@ -20,7 +20,7 @@ namespace Executor.Model
 
         public List<Droplet> busyDroplets { get; set; }
 
-        
+
         public OperationManager(List<CompilerOperation> operations)
         {
             this.operations = GetOperationsWithoutRepeat(operations);

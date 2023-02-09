@@ -1,0 +1,464 @@
+.data
+DEF zero_addr 0
+zero: INT zero_addr 0
+
+.text
+main:
+
+  TICK;
+
+  TICK;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  CLRELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  CLRELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  CLRELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  CLRELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  CLRELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  CLRELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  CLRELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  CLRELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  CLRELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  CLRELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  CLRELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  CLRELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  CLRELI 166;
+
+  TICK;
+  SETELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 165;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 132;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  CLRELI 99;
+
+  TICK;
+  SETELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  CLRELI 67;
+
+  TICK;
+  SETELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  CLRELI 68;
+
+  TICK;
+  SETELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  CLRELI 100;
+
+  TICK;
+  SETELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  CLRELI 101;
+
+  TICK;
+  SETELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  CLRELI 133;
+
+  TICK;
+  SETELI 134;
+
+  TICK;
+  SETELI 166;
+
+  TICK;
+  CLRELI 134;
+
+  TICK;
+
+  TICK;
+
+  TICK;
+
+  TICK;
+  TSTOP;
+  TICK;
+  TICK; 
+
+
+
+
+# Bio-Virtual-Machine configuration
+.configuration
+data_memory_size -1
+private_data_memory_start_address 1000
+debug_log_data_types_for_print_formatting true
+debug_keep_all_private_data_memories false
+

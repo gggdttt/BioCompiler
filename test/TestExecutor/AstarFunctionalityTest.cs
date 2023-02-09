@@ -26,7 +26,7 @@ namespace TestExecutor
                     "output(d1,0,0);\r\n";
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
-            Chip c = new Chip(executor.GetOperationsListFromJSON(content), 32, 20, "astar");
+            Platform c = new Platform(executor.GetOperationsListFromJSON(content), 32, 20, "astar");
             c.StartOpearions();
             List<IEdge> path = astar.FindPath(new Droplet("d1", 1, 1, 0.1), 3, 1, c.operationManager.activeDroplets, c.operationManager.busyDroplets);
             Assert.IsNotNull(path);
@@ -42,7 +42,7 @@ namespace TestExecutor
                     "output(d1,0,0);\r\n";
             string content = new Runner().DoCompile(origin);
             ProcessExecutor executor = new ProcessExecutor();
-            Chip c = new Chip(executor.GetOperationsListFromJSON(content), 32, 20, "astar");
+            Platform c = new Platform(executor.GetOperationsListFromJSON(content), 32, 20, "astar");
             c.StartOpearions();
             Assert.AreEqual(true, c.operationManager.AllTasksCompleted());
         }

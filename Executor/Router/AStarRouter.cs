@@ -76,11 +76,13 @@ namespace Executor.Router
 
             // Create a new grid, each cell is laterally connected (like how a rook moves over a chess board, other options are available)
             var grid = Grid.CreateGridWithLateralConnections(gridSize, cellSize, traversalVelocity);
-            DisConnectAllNode(grid, d, activeDrplets, busyDroplets);
+            //DisConnectAllNode(grid, d, activeDrplets, busyDroplets);
 
             var pathFinder = new PathFinder();
             Console.WriteLine($"is trying to find path from ({d.xValue},{d.yValue}) to ({destx},{desty})");
             var path = pathFinder.FindPath(new GridPosition(d.xValue, d.yValue), new GridPosition(destx, desty), grid);
+
+            Console.WriteLine($"Droplet:{d.name}, destination:({destx},{desty})");
 
             Console.WriteLine($"type: {path.Type}, distance: {path.Distance}, duration {path.Duration}");
 

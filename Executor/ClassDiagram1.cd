@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Executor.Model.Platform">
+    <Position X="3" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAMAAAAAAAAAAQAAAAgAAAA=</HashCode>
+      <FileName>Model\Chip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Executor.Model.Droplet">
+    <Position X="5.25" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAABAAACAAAAEgAAAAEAAAAAEAIAAAAAAIEACAAA=</HashCode>
+      <FileName>Model\Droplet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletDeclarator" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAgAAAEAAAAAAAAAAQEAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Operation\DropletDeclarator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletInputer" BaseTypeListCollapsed="true">
+    <Position X="3" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIEAAABAAAAgAAAEAIAAAAAAAAQEAEAAACAAAAAAAAA=</HashCode>
+      <FileName>Model\Operation\DropletInputer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletMerger" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAhAAAEAAAAAAIAIAQAAUAAAAIAAAkAAAA=</HashCode>
+      <FileName>Model\Operation\DropletMerger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletMixer" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIECAAAAAAAgAAAEAAAAAAAgACQEEEAAAAQEAAgMAAE=</HashCode>
+      <FileName>Model\Operation\DropletMixer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletMover" BaseTypeListCollapsed="true">
+    <Position X="7" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAgAAAEAAAAAAAAAAQEAUAAAAIAAAgAAAA=</HashCode>
+      <FileName>Model\Operation\DropletMover.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletOutputer" BaseTypeListCollapsed="true">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAABAAAAgAAAEAAAAAAAAAAQEAEABAAAAAAgAAAA=</HashCode>
+      <FileName>Model\Operation\DropletOutputer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletSplitter" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIkEAAAAACAgAAgEAAAAAAAAAAYAAEAAAAAgAAgAAAA=</HashCode>
+      <FileName>Model\Operation\DropletSplitter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Executor.Model.Operation.DropletStorer" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIEAAABAAAAgAAIEAAAgAAAAAAQEAEAAAAAAAAgAAAI=</HashCode>
+      <FileName>Model\Operation\DropletStorer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.433" />
+  </Class>
+  <Class Name="Executor.Model.Operation.RepeatOperation" BaseTypeListCollapsed="true">
+    <Position X="3" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAgAAEEAAAAAAAAAAQAAEAAAAQAAAAAAAA=</HashCode>
+      <FileName>Model\Operation\RepeatOperation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Executor.Model.Operation.CompilerOperation">
+    <Position X="0.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAgAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Operation\CompilerOperation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

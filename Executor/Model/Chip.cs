@@ -10,7 +10,7 @@ using Executor.Model.Operation;
 namespace Executor.Model
 {
 
-    public class Chip
+    public class Platform
     {
 
         int xLength;
@@ -21,7 +21,7 @@ namespace Executor.Model
 
         public MovementManager movementManager { get; set; }
 
-        public Chip(List<CompilerOperation> operations, int x, int y, string router)
+        public Platform(List<CompilerOperation> operations, int x, int y, string router)
         {
             this.xLength = x;
             this.yLength = y;
